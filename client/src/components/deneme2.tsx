@@ -180,9 +180,9 @@ const Deneme2 = ({
                   onClick={(e: any) => {
                     if (cit.il?.toLowerCase() !== selectedCity?.toLowerCase()) {
                       setSelectedCity(cit.il);
-                      handleCity(e.target.value);
-                      setOpen(!open);
                     }
+                    handleCity(e.target.value);
+                    setOpen(!open);
                   }}
                 >
                   {cit.il}
@@ -234,9 +234,9 @@ const Deneme2 = ({
                     onClick={(e: any) => {
                       if (dis.ilce !== selectedDist) {
                         setSelectedDist(dis.ilce);
-                        handleDistrict(e.target.value);
-                        setOpenDist(!openDist);
                       }
+                      handleDistrict(e.target.value);
+                      setOpenDist(!openDist);
                     }}
                   >
                     {dis.ilce}
@@ -287,8 +287,8 @@ const Deneme2 = ({
                   onClick={() => {
                     if (mah.mahalle !== selectedMahal) {
                       setSelectedMahal(mah.mahalle);
-                      setOpenMahal(!openMahal);
                     }
+                    setOpenMahal(!openMahal);
                   }}
                 >
                   {mah.mahalle}
