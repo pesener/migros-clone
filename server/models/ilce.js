@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const ilceSchema = mongoose.Schema({
   id: {
-    type: String,
+    type: Number,
   },
   il_id: {
     type: String,

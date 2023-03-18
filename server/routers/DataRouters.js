@@ -4,9 +4,10 @@ import Il from "../models/il.js";
 import Ilce from "../models/ilce.js";
 const router = express.Router();
 
-router.get("/dropDown3", async (req, res) => {
+router.post("/dropDown3", async (req, res) => {
   try {
-    const mahalle = await Mahalle.find();
+    const { ilce_id } = req.body;
+    const mahalle = await Mahalle.find({ ilce_id: ilce_id });
     res.status(200).json(mahalle);
   } catch (error) {
     res.status(404).json({ message: error.message });

@@ -24,10 +24,11 @@ const Adres = () => {
           alt=""
         ></img>
 
-        <div className="text-sm mt-4 font-bold  w-[180px] ">
+        <div className="text-sm mt-2 font-bold  w-[180px] ">
           {selectedCity ? (
             <h1>
-              {selectedCity},{selectedDist}
+              {selectedCity}, {selectedDist},<br></br>
+              {selectedMahal}.
             </h1>
           ) : (
             "Teslimat adresini seçiniz"

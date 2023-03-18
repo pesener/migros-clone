@@ -58,7 +58,7 @@ const Deneme2 = ({
 
   const [districts, setDistricts] = useState<any>();
 
-  const [dist, setDist] = useState<string>();
+  const [dist, setDist] = useState<any>();
 
   const [openDist, setOpenDist] = useState<boolean>(false);
 
@@ -76,31 +76,24 @@ const Deneme2 = ({
 
   const [mahalleler2, setMahalleler2] = useState<any>();
 
-  const [mahalleler, setMahalleler] = useState<any>();
-
   const [mahal, setMahal] = useState<string>();
+  const [mid, setMid] = useState<any>();
 
   const [openMahal, setOpenMahal] = useState<boolean>(false);
 
   useEffect(() => {
-    getDataMahalle()
+    getDataMahalle({ ilce_id: mid })
       .then((res) => {
-        setMahalleler(res.data);
+        setMahalleler2(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  });
 
   const handleCity = async (id: any) => {
     const dt: any = districts?.filter((x: any) => x.il_id === id);
     await setDistricts2(dt);
-    console.log(dt);
-  };
-
-  const handleDistrict = async (id: any) => {
-    const dt: any = mahalleler?.filter((x: any) => x.ilce_id === id);
-    await setMahalleler2(dt);
     console.log(dt);
   };
 
@@ -153,7 +146,7 @@ const Deneme2 = ({
             </div>
             <ul
               className={`bg-white  overflow-y-auto w-96 active:border-2 shadow-lg rounded-lg ${
-                open ? "max-h-60 border-2 " : "max-h-0"
+                open ? "max-h-60 border-2 z-index" : "max-h-0"
               }`}
             >
               <div className="flex justify-center items-center   h-8 sticky  bg-white">
@@ -185,7 +178,10 @@ const Deneme2 = ({
                     setOpen(!open);
                   }}
                 >
-                  {cit.il}
+                  {
+                    (cit.il =
+                      cit.il.charAt(0) + cit.il.substring(1).toLowerCase())
+                  }
                 </option>
               ))}
             </ul>
@@ -235,11 +231,15 @@ const Deneme2 = ({
                       if (dis.ilce !== selectedDist) {
                         setSelectedDist(dis.ilce);
                       }
-                      handleDistrict(e.target.value);
                       setOpenDist(!openDist);
+                      setMid(dis.id);
                     }}
                   >
-                    {dis.ilce}
+                    {
+                      (dis.ilce =
+                        dis.ilce.charAt(0) +
+                        dis.ilce.substring(1).toLowerCase())
+                    }
                   </option>
                 ))}
             </ul>
@@ -291,7 +291,11 @@ const Deneme2 = ({
                     setOpenMahal(!openMahal);
                   }}
                 >
-                  {mah.mahalle}
+                  {
+                    (mah.mahalle =
+                      mah.mahalle.charAt(0) +
+                      mah.mahalle.substring(1).toLowerCase())
+                  }
                 </option>
               ))}
             </ul>
