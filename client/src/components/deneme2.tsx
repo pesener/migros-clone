@@ -99,11 +99,11 @@ const Deneme2 = ({
 
   return (
     <div>
-      <div className="fixed  z-4 inset-0  flex justify-center items-center ">
-        <div className="w-[600px] h-[550px]   bg-white rounded  flex flex-col justify-center items-center">
+      <div className="fixed  z-0 inset-0  flex justify-center items-center ">
+        <div className="w-[600px] h-[550px] relative  bg-white rounded  flex flex-col justify-center items-center">
           <div className="bg-white mb-8 w-full font-bold justify-between  flex ">
             <div className="flex flex-col items-center  justify-between ">
-              <h1 className="text-2xl ml-24 p-1 font-bold w-96 justify-center flex items-center text-center ">
+              <h1 className="text-2xl ml-24 p-1  font-bold w-96 justify-center flex items-center text-center ">
                 Adresime Gelsin
               </h1>
               <h1 className="text-xl ml-24 justify-center text-center font-bold ">
@@ -146,7 +146,7 @@ const Deneme2 = ({
             </div>
             <ul
               className={`bg-white  overflow-y-auto w-96 active:border-2  shadow-lg rounded-lg ${
-                open ? "max-h-60 border-2 z-index" : "max-h-0"
+                open ? "max-h-60 border-2 mb-[88px]" : "max-h-0"
               }`}
             >
               <div className="flex  justify-center items-center   h-9 sticky  bg-white">
@@ -217,20 +217,32 @@ const Deneme2 = ({
             </div>
             <ul
               className={`bg-white  overflow-y-auto w-96 shadow-lg  rounded-lg ${
-                openDist ? "max-h-60 border-2  " : "max-h-0"
+                openDist ? "max-h-[228px] border-2  " : "max-h-0"
               }`}
             >
-              <div className="flex justify-center items-center  px-2 sticky top-0 bg-white">
-                <SlMagnifier
-                  size={27}
-                  className="text-gray-400 bg-white  rounded-l-lg"
-                />
-                <input
-                  className=" bg-white  border-b w-96  "
-                  type="text"
-                  value={dist}
-                  onChange={(e) => setDist(e.target.value)}
-                ></input>
+              <div className="flex  justify-center items-center   h-9 sticky  bg-white">
+                <div className="relative">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 text-gray-400 absolute "
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
+                  <input
+                    className=" bg-white rounded pl-6 h-7 w-[372px] outline-offset-2 outline-2  "
+                    type="text"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value?.toLowerCase())}
+                  ></input>
+                </div>
               </div>
 
               {districts2 &&
@@ -260,14 +272,14 @@ const Deneme2 = ({
           </div>
 
           <div
-            className={`flex-col flex  justify-center items-center py-3.5 mb-32 ${
+            className={`flex-col flex z-0 relative justify-center items-center py-3.5 mb-32 ${
               openDist ? "hidden" : ""
-            } `}
+            }  ${open ? "hidden" : ""} `}
           >
             <div
               onClick={() => setOpenMahal(!openMahal)}
               className={`bg-white  w-96    p-1 rounded h-[56px] mb-4 ${
-                openMahal ? " border-2  " : " border"
+                openMahal ? " border-2   " : " border"
               } border-black flex justify-between items-center shadow-lg font-bold cursor-pointer`}
             >
               {selectedMahal ? selectedMahal : "mahalle"}
@@ -275,20 +287,34 @@ const Deneme2 = ({
             </div>
             <ul
               className={`bg-white  overflow-y-auto w-96 shadow-lg  rounded-lg ${
-                openMahal ? "max-h-60 border-2  z-auto" : "max-h-0"
+                openMahal
+                  ? "max-h-[220px] border-2 z-10 overflow-hidden absolute mt-[290px]"
+                  : "max-h-0"
               }`}
             >
-              <div className="flex justify-center items-center  px-2 sticky top-0 bg-white">
-                <SlMagnifier
-                  size={27}
-                  className="text-gray-400 bg-white  rounded-l-lg"
-                />
-                <input
-                  className=" bg-white  border-b w-96  "
-                  type="text"
-                  value={mahal}
-                  onChange={(e) => setMahal(e.target.value)}
-                ></input>
+              <div className="flex  justify-center items-center   h-9 sticky  bg-white">
+                <div className="relative">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 text-gray-400 absolute "
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
+                  <input
+                    className=" bg-white rounded pl-6 h-7 w-[372px] outline-offset-2 outline-2  "
+                    type="text"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value?.toLowerCase())}
+                  ></input>
+                </div>
               </div>
 
               {mahalleler2?.map((mah: any) => (
