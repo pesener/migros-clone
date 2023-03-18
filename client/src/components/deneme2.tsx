@@ -145,21 +145,33 @@ const Deneme2 = ({
               <BiChevronDown size={38} className="text-gray-400" />
             </div>
             <ul
-              className={`bg-white  overflow-y-auto w-96 active:border-2 shadow-lg rounded-lg ${
+              className={`bg-white  overflow-y-auto w-96 active:border-2  shadow-lg rounded-lg ${
                 open ? "max-h-60 border-2 z-index" : "max-h-0"
               }`}
             >
-              <div className="flex justify-center items-center   h-8 sticky  bg-white">
-                <SlMagnifier
-                  size={27}
-                  className="text-gray-400 bg-white  rounded-l-lg"
-                />
-                <input
-                  className=" bg-white border-b  w-96  "
-                  type="text"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value?.toLowerCase())}
-                ></input>
+              <div className="flex  justify-center items-center   h-9 sticky  bg-white">
+                <div className="relative">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 text-gray-400 absolute "
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
+                  <input
+                    className=" bg-white rounded pl-6 h-7 w-[372px] outline-offset-2 outline-2  "
+                    type="text"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value?.toLowerCase())}
+                  ></input>
+                </div>
               </div>
 
               {iller?.map((cit: any) => (
@@ -168,7 +180,9 @@ const Deneme2 = ({
                   className={`p-2  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
                     cit.il
                   }
-                 ${cit.il === selectedCity && "text-orange-400"}  `}
+                 ${cit.il === selectedCity && "text-orange-400"} ${
+                    cit.il?.toLowerCase().startsWith(city) ? "block" : "hidden"
+                  }  `}
                   key={cit.il}
                   onClick={(e: any) => {
                     if (cit.il?.toLowerCase() !== selectedCity?.toLowerCase()) {
@@ -261,7 +275,7 @@ const Deneme2 = ({
             </div>
             <ul
               className={`bg-white  overflow-y-auto w-96 shadow-lg  rounded-lg ${
-                openMahal ? "max-h-60 border-2  " : "max-h-0"
+                openMahal ? "max-h-60 border-2  z-auto" : "max-h-0"
               }`}
             >
               <div className="flex justify-center items-center  px-2 sticky top-0 bg-white">
