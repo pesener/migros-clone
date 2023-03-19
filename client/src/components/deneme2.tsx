@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BiChevronDown } from "react-icons/bi";
-import { SlMagnifier } from "react-icons/sl";
 import { getDataIl, getDataIlce, getDataMahalle } from "../axios/indexAxios";
+import { Select, MenuItem, TextField, FormControl, Box } from "@mui/material";
 
 type Props = {
   isOn: boolean;
@@ -33,6 +33,18 @@ const Deneme2 = ({
     console.log(isActive);
   };
 
+  const handleRemoveItem = (e: any) => {
+    setSelectedCity2(
+      selectedCity2.filter((item: any) => item !== e.target.value)
+    );
+    setSelectedDist2(
+      selectedDist2.filter((item: any) => item !== e.target.value)
+    );
+    setSelectedMahal2(
+      selectedMahal2.filter((item: any) => item !== e.target.value)
+    );
+  };
+
   ///city///
 
   const [iller, setIller] = useState<any>();
@@ -40,6 +52,8 @@ const Deneme2 = ({
   const [city, setCity] = useState<string>();
 
   const [open, setOpen] = useState<boolean>(false);
+
+  const [selectedCity2, setSelectedCity2] = useState<any>();
 
   useEffect(() => {
     getDataIl()
@@ -58,10 +72,9 @@ const Deneme2 = ({
 
   const [districts, setDistricts] = useState<any>();
 
-  const [dist, setDist] = useState<any>();
-
   const [openDist, setOpenDist] = useState<boolean>(false);
 
+  const [selectedDist2, setSelectedDist2] = useState<any>();
   useEffect(() => {
     getDataIlce()
       .then((res) => {
@@ -76,10 +89,11 @@ const Deneme2 = ({
 
   const [mahalleler2, setMahalleler2] = useState<any>();
 
-  const [mahal, setMahal] = useState<string>();
   const [mid, setMid] = useState<any>();
 
   const [openMahal, setOpenMahal] = useState<boolean>(false);
+
+  const [selectedMahal2, setSelectedMahal2] = useState<any>();
 
   useEffect(() => {
     getDataMahalle({ ilce_id: mid })
@@ -133,21 +147,13 @@ const Deneme2 = ({
             </div>
           </div>
 
-          <div className="flex-col flex justify-center items-center py-3.5 ">
-            <div
-              onClick={() => setOpen(!open)}
-              className={`bg-white  w-96   p-1 rounded mb-4  h-[56px] ${
-                open ? " border-2 " : "border"
-              } border-black flex justify-between items-center shadow-lg font-bold cursor-pointer`}
-            >
-              {selectedCity ? selectedCity : "il"}
-
-              <BiChevronDown size={38} className="text-gray-400" />
-            </div>
-            <ul
-              className={`bg-white  overflow-y-auto w-96 active:border-2  shadow-lg rounded-lg ${
-                open ? "max-h-60 border-2 mb-[88px]" : "max-h-0"
-              }`}
+          <Box className="flex-col flex justify-center items-center mb-4 w-96  ">
+            <TextField
+              label="İl"
+              select
+              value={selectedCity2}
+              className={`bg-white  shadow-lg font-bold `}
+              fullWidth
             >
               <div className="flex  justify-center items-center   h-9 sticky  bg-white">
                 <div className="relative">
@@ -175,9 +181,9 @@ const Deneme2 = ({
               </div>
 
               {iller?.map((cit: any) => (
-                <option
+                <MenuItem
                   value={cit.id}
-                  className={`p-2  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
+                  className={`p-2 max-h-60 text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
                     cit.il
                   }
                  ${cit.il === selectedCity && "text-orange-400"} ${
@@ -187,38 +193,27 @@ const Deneme2 = ({
                   onClick={(e: any) => {
                     if (cit.il?.toLowerCase() !== selectedCity?.toLowerCase()) {
                       setSelectedCity(cit.il);
+                      setSelectedCity2(cit.il);
                     }
                     handleCity(e.target.value);
-                    setOpen(!open);
                   }}
                 >
                   {
                     (cit.il =
                       cit.il.charAt(0) + cit.il.substring(1).toLowerCase())
                   }
-                </option>
+                </MenuItem>
               ))}
-            </ul>
-          </div>
+            </TextField>
+          </Box>
 
-          <div
-            className={`flex-col flex  justify-center items-center py-3.5  ${
-              open ? "hidden" : ""
-            } `}
-          >
-            <div
-              onClick={() => setOpenDist(!openDist)}
-              className={`bg-white  w-96    p-1 rounded h-[56px] mb-4 ${
-                openDist ? " border-2  " : " border"
-              } border-black flex justify-between items-center shadow-lg font-bold cursor-pointer`}
-            >
-              {selectedDist ? selectedDist : "İlçe"}
-              <BiChevronDown size={38} className="text-gray-400" />
-            </div>
-            <ul
-              className={`bg-white  overflow-y-auto w-96 shadow-lg  rounded-lg ${
-                openDist ? "max-h-[228px] border-2  " : "max-h-0"
-              }`}
+          <Box className="flex-col flex justify-center items-center mb-4 w-96  ">
+            <TextField
+              label="İlçe"
+              select
+              value={selectedDist2}
+              className={`bg-white     shadow-lg font-bold `}
+              fullWidth
             >
               <div className="flex  justify-center items-center   h-9 sticky  bg-white">
                 <div className="relative">
@@ -256,6 +251,7 @@ const Deneme2 = ({
                     onClick={(e: any) => {
                       if (dis.ilce !== selectedDist) {
                         setSelectedDist(dis.ilce);
+                        setSelectedDist2(dis.ilce);
                       }
                       setOpenDist(!openDist);
                       setMid(dis.id);
@@ -268,29 +264,16 @@ const Deneme2 = ({
                     }
                   </option>
                 ))}
-            </ul>
-          </div>
+            </TextField>
+          </Box>
 
-          <div
-            className={`flex-col flex z-0 relative justify-center items-center py-3.5 mb-32 ${
-              openDist ? "hidden" : ""
-            }  ${open ? "hidden" : ""} `}
-          >
-            <div
-              onClick={() => setOpenMahal(!openMahal)}
-              className={`bg-white  w-96    p-1 rounded h-[56px] mb-4 ${
-                openMahal ? " border-2   " : " border"
-              } border-black flex justify-between items-center shadow-lg font-bold cursor-pointer`}
-            >
-              {selectedMahal ? selectedMahal : "mahalle"}
-              <BiChevronDown size={38} className="text-gray-400" />
-            </div>
-            <ul
-              className={`bg-white  overflow-y-auto w-96 shadow-lg  rounded-lg ${
-                openMahal
-                  ? "max-h-[220px] border-2 z-10 overflow-hidden absolute mt-[290px]"
-                  : "max-h-0"
-              }`}
+          <Box className="flex-col flex justify-center items-center mb-4 w-96  ">
+            <TextField
+              label="Mahalle"
+              select
+              value={selectedMahal2}
+              className={`bg-white     shadow-lg font-bold `}
+              fullWidth
             >
               <div className="flex  justify-center items-center   h-9 sticky  bg-white">
                 <div className="relative">
@@ -324,11 +307,14 @@ const Deneme2 = ({
                   }
                   ${mah.mahalle === selectedMahal && "text-orange-400"} `}
                   key={mah.mahalle}
-                  onClick={() => {
+                  onClick={(e) => {
                     if (mah.mahalle !== selectedMahal) {
                       setSelectedMahal(mah.mahalle);
+                      setSelectedMahal2(mah.mahalle);
                     }
                     setOpenMahal(!openMahal);
+                    handleClick();
+                    handleRemoveItem(e.target);
                   }}
                 >
                   {
@@ -338,8 +324,8 @@ const Deneme2 = ({
                   }
                 </option>
               ))}
-            </ul>
-          </div>
+            </TextField>
+          </Box>
         </div>
       </div>
     </div>

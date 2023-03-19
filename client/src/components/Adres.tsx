@@ -31,7 +31,7 @@ const Adres = () => {
               {selectedMahal}.
             </h1>
           ) : (
-            "Teslimat adresini seçiniz"
+            <h1 className="mt-2">Teslimat adresini seçiniz</h1>
           )}
         </div>
 
