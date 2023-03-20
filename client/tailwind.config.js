@@ -7,7 +7,12 @@ module.exports = {
         primary: "#ff7f00",
         hemen: "#ffc200",
       },
-
+      variants: {
+        extend: {
+          border: ["focus"],
+          ring: ["focus"],
+        },
+      },
       tooltipArrows: (theme) => ({
         "danger-arrow": {
           borderColor: theme("colors.gray.300"),
@@ -19,6 +24,7 @@ module.exports = {
       }),
     },
   },
+
   plugins: [
     require("@tailwindcss/line-clamp"),
     require("tailwindcss-tooltip-arrow-after")(),
