@@ -113,20 +113,22 @@ const Deneme2 = ({
   return (
     <div>
       <div className="fixed  z-0 inset-0  flex justify-center items-center ">
-        <div className="w-[600px] h-[550px] relative  bg-white rounded  flex flex-col justify-center items-center">
-          <div className="bg-white mb-8 w-full font-bold justify-between  flex ">
-            <div className="flex flex-col items-center  justify-between ">
-              <h1 className="text-2xl ml-24 p-1  font-bold w-96 justify-center flex items-center text-center ">
+        <div className="w-[590px] h-[500px] relative  bg-white rounded  flex flex-col justify-center items-center">
+          <div className="bg-white top-0  absolute font-bold justify-between  flex ">
+            <div className="flex flex-col items-center pt-2 justify-between ">
+              <h1 className="text-xl ml-20 p-4  font-bold w-96 justify-center flex items-center text-center ">
                 Adresime Gelsin
               </h1>
-              <h1 className="text-xl ml-24 justify-center text-center font-bold ">
+              <h1 className="text-lg ml-20 justify-center pb-4  text-center font-bold ">
                 Siparişini nereye getirelim?
               </h1>
             </div>
             <div className=" mb-4">
               <span
-                onClick={handleClick}
-                className="w-16 ml-8  h-16 place-self-end rounded-full justify-center  items-center flex hover:bg-gray-100 cursor-pointer"
+                onClick={() => {
+                  handleClick();
+                }}
+                className="w-[50px] mt-5 ml-12  h-[50px] place-self-end rounded-full justify-center  items-center flex hover:bg-gray-50  cursor-pointer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +136,7 @@ const Deneme2 = ({
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="w-8 h-8 text-black text-xl  cursor-pointer"
+                  className="w-8 h-8 text-gray-500 text-xl  cursor-pointer "
                 >
                   <path
                     strokeLinecap="round"
@@ -146,24 +148,46 @@ const Deneme2 = ({
             </div>
           </div>
 
-          <div className="flex-col flex justify-center items-center py-3.5 ">
+          <div className="flex-col flex relative mt-[130px] justify-center  items-center py-3.5 ">
+            {" "}
             <div
-              onClick={() => setOpen(!open)}
-              className={`bg-white  w-96   p-1 rounded mb-4  h-[56px] ${
-                open ? " border-2 " : "border"
-              } border-black flex justify-between items-center shadow-lg font-bold cursor-pointer`}
+              id="dropD1"
+              onClick={() => {
+                setOpen(!open);
+              }}
+              className={`bg-white  w-[400px]  p-1 rounded mb-1  h-[56px]  transition duration-200 ${
+                open ? "border-[2.4px] " : " border hover:border-[1.6px] "
+              }  border  border-black flex justify-between items-center  font-bold cursor-pointer`}
             >
-              {selectedCity2 ? selectedCity2 : <h1 className="ml-3">İl</h1>}
-
-              <BiChevronDown size={38} className="text-gray-400" />
+              {selectedCity2 ? (
+                <h1 className="ml-3">{selectedCity2}</h1>
+              ) : (
+                <h3 className="text-gray-500 ml-3 text-sm">İl</h3>
+              )}
+              <span
+                className={`text-sm ml-3 text-black font-bold text-opacity-80 absolute transition duration-200 ${
+                  open
+                    ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-90"
+                    : ""
+                } ${
+                  selectedCity2
+                    ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-90"
+                    : ""
+                }`}
+              >
+                İl
+              </span>
+              <BiChevronDown size={38} className="text-gray-400 " />
             </div>
             <ul
-              className={`bg-white  overflow-y-auto w-96 active:border-2  shadow-lg rounded-lg ${
-                open ? "max-h-60 border-2 mb-[88px]" : "max-h-0"
+              className={`bg-white  overflow-y-auto w-[400px] active:border-2 shadow-gray-400 shadow-md rounded-b-lg ${
+                open
+                  ? "max-h-60 border-2  absolute mt-[310px] z-10 "
+                  : "max-h-0"
               }`}
             >
-              <div className="flex  justify-center items-center w-96   h-9 sticky  bg-white">
-                <div className="relative border rounded border-gray-700 p-[2px] mt-2">
+              <div className="flex  justify-center items-center  sticky  h-9 mb-2  bg-white">
+                <div className=" border rounded   border-gray-700 p-[2px] mt-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -179,24 +203,24 @@ const Deneme2 = ({
                     />
                   </svg>
                   <input
-                    className=" bg-white rounded pl-6 h-7 w-[365px] outline-offset-2 outline-2 "
+                    className=" bg-white  rounded pl-6 h-7 w-[365px] outline-offset-2 outline-2 "
                     type="text"
                     value={city}
                     onChange={(e) => setCity(e.target.value?.toLowerCase())}
-                  ></input>
+                  />
                 </div>
               </div>
 
               {iller?.map((cit: any) => (
                 <option
                   value={cit.id}
-                  className={`p-2  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
+                  className={`p-4  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
                     cit.il
                   }
-                 ${cit.il === selectedCity && "text-orange-400"} ${
-                    cit?.il?.toLowerCase().startsWith(city) ? "block" : "hidden"
+                 ${cit.il === selectedCity && "text-orange-400"}  ${
+                    cit?.il?.startsWith(city) ? "block" : "hidden"
                   }  `}
-                  key={cit.il}
+                  key={cit?.il}
                   onClick={(e: any) => {
                     if (cit.il?.toLowerCase() !== selectedCity?.toLowerCase()) {
                       setSelectedCity(cit.il);
@@ -217,24 +241,45 @@ const Deneme2 = ({
 
           <div
             className={`flex-col flex  justify-center items-center py-3.5  ${
-              open ? "hidden" : ""
-            } `}
+              open ? "" : ""
+            }${!selectedCity2 ? "   pointer-events-none opacity-20 " : ""} `}
           >
-            <div
-              onClick={() => setOpenDist(!openDist)}
-              className={`bg-white  w-96    p-1 rounded h-[56px] mb-4 ${
-                openDist ? " border-2  " : " border"
-              } border-black flex justify-between items-center shadow-lg font-bold cursor-pointer`}
-            >
-              {selectedDist2 ? selectedDist2 : <h1 className="ml-3">İlçe</h1>}
-              <BiChevronDown size={38} className="text-gray-400" />
-            </div>
+            <label>
+              <div
+                onClick={() => setOpenDist(!openDist)}
+                className={`bg-white  w-[400px]  border  p-1 rounded h-[56px] mb-1 transition duration-200${
+                  openDist
+                    ? " border-[2.4px]  "
+                    : " border hover:border-[1.6px]"
+                } border-black flex justify-between items-center  font-bold cursor-pointer `}
+              >
+                {selectedDist2 ? (
+                  <h1 className="ml-3">{selectedDist2}</h1>
+                ) : (
+                  <h3 className="text-gray-500 ml-3 text-md">İlçe</h3>
+                )}
+                <span
+                  className={`text-md ml-3 text-black text-opacity-80 absolute transition duration-200 ${
+                    openDist
+                      ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-90"
+                      : ""
+                  }${
+                    selectedDist2
+                      ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-90"
+                      : ""
+                  }`}
+                >
+                  İlçe
+                </span>
+                <BiChevronDown size={38} className="text-gray-400 " />
+              </div>
+            </label>
             <ul
-              className={`bg-white  overflow-y-auto w-96 shadow-lg  rounded-lg ${
-                openDist ? "max-h-[228px] border-2  " : "max-h-0"
+              className={`bg-white  overflow-y-auto w-[400px] shadow-gray-400 shadow-md   rounded-b-lg ${
+                openDist ? "max-h-[205px] border-2 mt-2 " : "max-h-0"
               }`}
             >
-              <div className="flex  justify-center items-center   h-9 sticky  bg-white">
+              <div className="flex  justify-center items-center mb-1  h-9 sticky  bg-white">
                 <div className="relative border rounded border-gray-700 p-[2px] mt-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -262,7 +307,7 @@ const Deneme2 = ({
               {districts2 &&
                 districts2?.map((dis: any) => (
                   <option
-                    className={`p-2  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
+                    className={`p-4  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
                       dis.ilce
                     }
                   ${dis.ilce === selectedDist && "text-orange-400"} `}
@@ -287,31 +332,52 @@ const Deneme2 = ({
           </div>
 
           <div
-            className={`flex-col flex z-0 relative justify-center items-center py-3.5 mb-32 ${
+            className={`flex-col flex z-0 relative justify-center items-center py-3.5 mb-28 ${
               openDist ? "hidden" : ""
-            }  ${open ? "hidden" : ""} `}
+            }  ${open ? "" : ""} ${
+              selectedDist2
+                ? ""
+                : "pointer-events-none opacity-20 cursor-not-allowed"
+            } `}
           >
-            <div
-              onClick={() => setOpenMahal(!openMahal)}
-              className={`bg-white  w-96    p-1 rounded h-[56px] mb-4 ${
-                openMahal ? " border-2   " : " border"
-              } border-black flex justify-between items-center shadow-lg font-bold cursor-pointer`}
-            >
-              {selectedMahal2 ? (
-                selectedMahal2
-              ) : (
-                <h1 className="ml-3">Mahalle</h1>
-              )}
-              <BiChevronDown size={38} className="text-gray-400" />
-            </div>
+            <label>
+              <div
+                onClick={() => setOpenMahal(!openMahal)}
+                className={`bg-white  w-[400px] border   p-1 rounded h-[56px] mb-4 transition duration-200${
+                  openMahal
+                    ? " border-[2.4px]   "
+                    : " border hover:border-[1.6px]"
+                } border-black flex justify-between items-center font-bold cursor-pointer`}
+              >
+                {selectedMahal2 ? (
+                  <h1 className="ml-3"> {selectedMahal2}</h1>
+                ) : (
+                  <h3 className="text-gray-500 ml-3 text-md">Mahalle</h3>
+                )}
+                <span
+                  className={`text-md ml-3 text-black text-opacity-80 absolute transition duration-200 ${
+                    openMahal
+                      ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1   scale-90"
+                      : ""
+                  }${
+                    selectedMahal2
+                      ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-90"
+                      : ""
+                  }`}
+                >
+                  Mahalle
+                </span>
+                <BiChevronDown size={38} className="text-gray-400 " />
+              </div>
+            </label>
             <ul
-              className={`bg-white  overflow-y-auto w-96 shadow-lg  rounded-lg ${
+              className={`bg-white  overflow-y-auto w-[400px] shadow-gray-400 shadow-md  rounded-b-lg ${
                 openMahal
-                  ? "max-h-[220px] border-2 z-10 overflow-hidden absolute mt-[290px]"
+                  ? "max-h-[220px] border-2 z-10 overflow-hidden absolute mt-[280px]"
                   : "max-h-0"
               }`}
             >
-              <div className="flex  justify-center items-center   h-9 sticky  bg-white">
+              <div className="flex  justify-center items-center mb-1  h-9 sticky  bg-white">
                 <div className="relative border rounded border-gray-700 p-[2px] mt-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -338,7 +404,7 @@ const Deneme2 = ({
 
               {mahalleler2?.map((mah: any) => (
                 <option
-                  className={`p-2  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
+                  className={`p-4  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
                     mah.mahalle
                   }
                   ${mah.mahalle === selectedMahal && "text-orange-400"} `}

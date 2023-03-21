@@ -37,17 +37,17 @@ const AdresModal = ({
   return (
     <div className="fixed inset-0  bg-black bg-opacity-40 flex justify-center items-center ">
       {!isOn ? (
-        <div className="w-[600px] h-[550px]    bg-white rounded  align-top flex flex-col justify-center items-center">
-          <div className="bg-white mb-8 w-full  font-bold justify-between  flex ">
-            <div className="flex justify-between pt-0">
-              <h1 className="text-2xl ml-28 font-bold w-96 justify-center flex items-center text-center">
+        <div className="w-[600px] h-[600px]    bg-white rounded  align-top flex flex-col justify-center items-center">
+          <div className="bg-white mb-8  absolute mt-20 top-0 font-bold justify-between  flex ">
+            <div className="flex justify-between  ">
+              <h1 className="text-xl ml-[100px]   p-4 font-bold  w-96 justify-center flex items-center text-center">
                 Teslimat Yöntemini Belirle{" "}
               </h1>
             </div>
             <div>
               <span
                 onClick={handleClick}
-                className="w-16 h-16 ml-8  place-self-end rounded-full justify-center  items-center flex hover:bg-gray-100 cursor-pointer"
+                className="w-[55px] h-[55px] ml-12 mt-1  place-self-end rounded-full justify-center  items-center flex hover:bg-gray-100 cursor-pointer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@ const AdresModal = ({
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="w-8 h-8 text-black text-xl  cursor-pointer"
+                  className="w-8 h-8 text-gray-700 text-xl  cursor-pointer"
                 >
                   <path
                     strokeLinecap="round"
@@ -66,10 +66,10 @@ const AdresModal = ({
               </span>
             </div>
           </div>
-          <div className="flex flex-col w-96 mb-4 mr-8">
+          <div className="flex flex-col w-96 mt-9 mb-4 mr-8">
             <div className="bg-white rounded font-extrabold ">
-              <h1 className="mb-4">Merhaba,</h1>
-              <h1 className="text-2xl  font-bold ">
+              <h1 className="mb-4">Merhaba ,</h1>
+              <h1 className="text-xll  font-bold ">
                 Siparişini nasıl getirelim?{" "}
               </h1>
             </div>
@@ -77,9 +77,9 @@ const AdresModal = ({
           <div className="flex-col flex justify-center items-center px-20 pb-20 pt-0">
             <div
               onClick={handleClick2}
-              className="bg-white  w-[420px] h-20 items-center px-8 rounded-lg mb-4 border-2 flex shadow-lg font-bold cursor-pointer"
+              className="bg-white  w-[420px] h-[80px] items-center px-8 rounded-lg mb-6 border border-gray-300 flex shadow-md font-bold cursor-pointer"
             >
-              <div className="w-10 h-10 ml-12 ">
+              <div className="w-10 h-10 ml-1 ">
                 {" "}
                 <img
                   className="w-10 h-10 "
@@ -94,9 +94,9 @@ const AdresModal = ({
               </div>
             </div>
 
-            <div className="bg-white px-8 h-20 mb-4 w-[420px] items-center shadow-lg  border-2 rounded-lg flex font-bold cursor-pointer">
+            <div className="bg-white px-8 h-[80px] mb-6 w-[420px] items-center shadow-md  border border-gray-300 rounded-lg flex font-bold cursor-pointer">
               <img
-                className="w-10 h-10 ml-12"
+                className="w-10 h-10 ml-1"
                 src="https://www.migros.com.tr/assets/images/delivery/store.svg"
                 alt="home"
               />
@@ -105,16 +105,16 @@ const AdresModal = ({
                 <div className="mb-1 ml-6 flex text-lg text-center items-center">
                   <h1>Tıkla Gel Al</h1>
                 </div>
-                <div className="ml-6 flex text-xs text-green-400 text-center items-center">
+                <div className="ml-6 flex text-sm font-normal text-green-500 text-center items-center">
                   <h1>Ücretsiz Teslimat!</h1>
                 </div>
               </div>
             </div>
-            <div className="bg-white px-8 h-20 w-[420px] items-center rounded-lg border-2 shadow-lg  flex font-bold  cursor-pointer">
+            <div className="bg-white px-8 h-[80px] w-[420px] items-center rounded-lg border border-gray-300 shadow-md flex font-bold  cursor-pointer">
               <div className="">
                 {" "}
                 <img
-                  className="w-10 h-10 ml-12"
+                  className="w-10 h-10 ml-1"
                   src="https://www.migros.com.tr/assets/images/delivery/foundation.svg"
                   alt="home"
                 />

@@ -11,3 +11,14 @@
       @apply antialiased
   }
 }
+#dropD1{
+ @apply focus:border-2
+}
+#dropD1{
+  @apply focus:border-black
+ }
+ #dropD1{
+  @apply focus:outline-none
+ }
+ #dropD1{
+  @apply focus:ring-0}
