@@ -114,12 +114,12 @@ const Deneme2 = ({
     <div>
       <div className="fixed  z-0 inset-0  flex justify-center items-center ">
         <div className="w-[590px] h-[500px] relative  bg-white rounded  flex flex-col justify-center items-center">
-          <div className="bg-white top-0  absolute font-bold justify-between  flex ">
+          <div className="bg-white top-0 ml-2 absolute font-bold justify-between  flex ">
             <div className="flex flex-col items-center pt-2 justify-between ">
-              <h1 className="text-xl ml-20 p-4  font-bold w-96 justify-center flex items-center text-center ">
+              <h1 className="text-xl ml-20 p-3  font-bold w-96 justify-center flex items-center text-center ">
                 Adresime Gelsin
               </h1>
-              <h1 className="text-lg ml-20 justify-center pb-4  text-center font-bold ">
+              <h1 className="text-lg ml-20 justify-center   text-center font-bold ">
                 Siparişini nereye getirelim?
               </h1>
             </div>
@@ -148,7 +148,7 @@ const Deneme2 = ({
             </div>
           </div>
 
-          <div className="flex-col flex relative mt-[130px] justify-center  items-center py-3.5 ">
+          <div className="flex-col flex relative mt-[100px] justify-center  items-center py-3.5 ">
             {" "}
             <div
               id="dropD1"
@@ -180,10 +180,8 @@ const Deneme2 = ({
               <BiChevronDown size={38} className="text-gray-400 " />
             </div>
             <ul
-              className={`bg-white  overflow-y-auto w-[400px] active:border-2 shadow-gray-400 shadow-md rounded-b-lg ${
-                open
-                  ? "max-h-60 border-2  absolute mt-[310px] z-10 "
-                  : "max-h-0"
+              className={`bg-white  overflow-y-auto w-[400px]  shadow-gray-400 shadow-md rounded-b-lg ${
+                open ? "max-h-60 border  absolute mt-[310px] z-10 " : "max-h-0"
               }`}
             >
               <div className="flex  justify-center items-center  sticky  h-9 mb-2  bg-white">
@@ -211,31 +209,37 @@ const Deneme2 = ({
                 </div>
               </div>
 
-              {iller?.map((cit: any) => (
-                <option
-                  value={cit.id}
-                  className={`p-4  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
-                    cit.il
-                  }
-                 ${cit.il === selectedCity && "text-orange-400"}  ${
-                    cit?.il?.startsWith(city) ? "block" : "hidden"
-                  }  `}
-                  key={cit?.il}
-                  onClick={(e: any) => {
-                    if (cit.il?.toLowerCase() !== selectedCity?.toLowerCase()) {
-                      setSelectedCity(cit.il);
-                      setSelectedCity2(cit.il);
+              {iller
+                ?.filter((item: any) => {
+                  return city?.toLowerCase() === ""
+                    ? item
+                    : item.il.toLowerCase().includes(city);
+                })
+                .map((cit: any) => (
+                  <option
+                    value={cit.id}
+                    className={`p-4  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
+                      cit.il
                     }
-                    handleCity(e.target.value);
-                    setOpen(!open);
-                  }}
-                >
-                  {
-                    (cit.il =
-                      cit.il.charAt(0) + cit.il.substring(1).toLowerCase())
-                  }
-                </option>
-              ))}
+                 ${cit.il === selectedCity && "text-orange-400"}  `}
+                    key={cit?.il}
+                    onClick={(e: any) => {
+                      if (
+                        cit.il?.toLowerCase() !== selectedCity?.toLowerCase()
+                      ) {
+                        setSelectedCity(cit.il);
+                        setSelectedCity2(cit.il);
+                      }
+                      handleCity(e.target.value);
+                      setOpen(!open);
+                    }}
+                  >
+                    {
+                      (cit.il =
+                        cit.il.charAt(0) + cit.il.substring(1).toLowerCase())
+                    }
+                  </option>
+                ))}
             </ul>
           </div>
 
