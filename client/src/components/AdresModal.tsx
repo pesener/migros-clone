@@ -8,8 +8,8 @@ type Props = {
   setSelectedDist: (active: string) => void;
   selectedCity: string;
   setSelectedCity: (active: string) => void;
-  selectedMahal: string;
-  setSelectedMahal: (active: string) => void;
+  selectedNeighborhood: string;
+  setSelectedNeighborhood: (active: string) => void;
 };
 
 const AdresModal = ({
@@ -19,8 +19,8 @@ const AdresModal = ({
   setSelectedCity,
   selectedDist,
   setSelectedDist,
-  selectedMahal,
-  setSelectedMahal,
+  selectedNeighborhood,
+  setSelectedNeighborhood,
 }: Props) => {
   const [isOn, setIsOn] = useState<boolean>(false);
 
@@ -135,8 +135,8 @@ const AdresModal = ({
           setSelectedCity={setSelectedCity}
           selectedDist={selectedDist}
           setSelectedDist={setSelectedDist}
-          selectedMahal={selectedMahal}
-          setSelectedMahal={setSelectedMahal}
+          selectedNeighborhood={selectedNeighborhood}
+          setSelectedNeighborhood={setSelectedNeighborhood}
         />
       )}
     </div>

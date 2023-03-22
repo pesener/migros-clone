@@ -1,32 +1,33 @@
 import express from "express";
-import Mahalle from "../models/mahalle.js";
-import Il from "../models/il.js";
-import Ilce from "../models/ilce.js";
+import Neighborhood from "../models/neighborhood.js";
+import City from "../models/city.js";
+import District from "../models/district.js";
 const router = express.Router();
 
-router.post("/dropDown3", async (req, res) => {
+router.post("/dropdownNeigh", async (req, res) => {
   try {
-    const { ilce_id } = req.body;
-    const mahalle = await Mahalle.find({ ilce_id: ilce_id });
+    const { district_id } = req.body;
+    const mahalle = await Neighborhood.find({ district_id: district_id });
     res.status(200).json(mahalle);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 });
 
-router.get("/dropDown2", async (req, res) => {
+router.post("/dropdownDistrict", async (req, res) => {
   try {
-    const ilce = await Ilce.find();
-    res.status(200).json(ilce);
+    const { city_id } = req.body;
+    const district = await District.find({ city_id: city_id });
+    res.status(200).json(district);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 });
 
-router.get("/dropDown1", async (req, res) => {
+router.get("/dropdownCity", async (req, res) => {
   try {
-    const il = await Il.find();
-    res.status(200).json(il);
+    const city = await City.find();
+    res.status(200).json(city);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

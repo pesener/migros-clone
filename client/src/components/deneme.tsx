@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { BiChevronDown } from "react-icons/bi";
-import { getDataIl, getDataIlce, getDataMahalle } from "../axios/indexAxios";
+import Dropdown from "./Dropdown";
+import {
+  getDataCity,
+  getDataDistrict,
+  getDataNeighborhood,
+} from "../axios/indexAxios";
 
 type Props = {
   isOn: boolean;
@@ -11,8 +16,8 @@ type Props = {
   setSelectedDist: (active: string) => void;
   selectedCity: string;
   setSelectedCity: (active: string) => void;
-  selectedMahal: string;
-  setSelectedMahal: (active: string) => void;
+  selectedNeighborhood: string;
+  setSelectedNeighborhood: (active: string) => void;
 };
 
 const Deneme2 = ({
@@ -24,8 +29,8 @@ const Deneme2 = ({
   setSelectedCity,
   selectedDist,
   setSelectedDist,
-  selectedMahal,
-  setSelectedMahal,
+  selectedNeighborhood,
+  setSelectedNeighborhood,
 }: Props) => {
   const handleClick = () => {
     setIsActive(false);
@@ -46,69 +51,75 @@ const Deneme2 = ({
 
   ///city///
 
-  const [iller, setIller] = useState<any>();
+  const [filteredCities, setFilteredCities] = useState<any>();
 
-  const [city, setCity] = useState<string>();
+  const [cities, setCities] = useState<any>();
 
   const [open, setOpen] = useState<boolean>(false);
 
   const [selectedCity2, setSelectedCity2] = useState<any>();
 
+  const filterCities = (inputValue: any) => {
+    const inputter = cities.filter((item: any) =>
+      item.city
+        .toLocaleUpperCase("tr-TR")
+        .startsWith(inputValue.toLocaleUpperCase("tr-TR"))
+    );
+    setFilteredCities(inputter);
+
+    console.log("inputValue", inputValue);
+  };
+
   useEffect(() => {
-    getDataIl()
+    getDataCity()
       .then((res) => {
-        setIller(res.data);
-        console.log(res.data);
+        setFilteredCities(res.data);
+        setCities(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  console.log(iller);
   ///dist///
-  const [districts2, setDistricts2] = useState<any>();
+  const [filteredDistricts, setFilteredDistricts] = useState<any>();
 
   const [districts, setDistricts] = useState<any>();
 
-  const [openDist, setOpenDist] = useState<boolean>(false);
+  const [districtID, setDistrictID] = useState<any>();
+
+  const [openDistDrop, setOpenDistDrop] = useState<boolean>(false);
 
   const [selectedDist2, setSelectedDist2] = useState<any>();
   useEffect(() => {
-    getDataIlce()
+    getDataDistrict({ city_id: districtID })
       .then((res) => {
-        setDistricts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  ///Mahalle///
-
-  const [mahalleler2, setMahalleler2] = useState<any>();
-
-  const [mid, setMid] = useState<any>();
-
-  const [openMahal, setOpenMahal] = useState<boolean>(false);
-
-  const [selectedMahal2, setSelectedMahal2] = useState<any>();
-
-  useEffect(() => {
-    getDataMahalle({ ilce_id: mid })
-      .then((res) => {
-        setMahalleler2(res.data);
+        setFilteredDistricts(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   });
 
-  const handleCity = async (id: any) => {
-    const dt: any = districts?.filter((x: any) => x.il_id === id);
-    await setDistricts2(dt);
-    console.log(dt);
-  };
+  ///Mahalle///
+
+  const [filteredNeighbor, setFilteredNeighbor] = useState<any>();
+
+  const [neighborID, setNeighborID] = useState<any>();
+
+  const [openNeighDrop, setOpenNeighDrop] = useState<boolean>(false);
+
+  const [selectedMahal2, setSelectedMahal2] = useState<any>();
+
+  useEffect(() => {
+    getDataNeighborhood({ district_id: neighborID })
+      .then((res) => {
+        setFilteredNeighbor(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [selectedDist2]);
 
   return (
     <div>
@@ -147,7 +158,7 @@ const Deneme2 = ({
               </span>
             </div>
           </div>
-
+          {/* 
           <div className="flex-col flex relative mt-[100px] justify-center  items-center py-3.5 ">
             {" "}
             <div
@@ -181,7 +192,7 @@ const Deneme2 = ({
             </div>
             <ul
               className={`bg-white  overflow-y-auto w-[400px]  shadow-gray-400 shadow-md rounded-b-lg ${
-                open ? "max-h-60 border  absolute mt-[310px] z-10 " : "max-h-0"
+                open ? "h-60 border  absolute mt-[310px] z-10 " : "max-h-0"
               }`}
             >
               <div className="flex  justify-center items-center  sticky  h-9 mb-2  bg-white">
@@ -203,45 +214,51 @@ const Deneme2 = ({
                   <input
                     className=" bg-white  rounded pl-6 h-7 w-[365px] outline-offset-2 outline-2 "
                     type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value?.toLowerCase())}
+                    onChange={(e) => filterCities(e.target.value)}
                   />
                 </div>
               </div>
 
-              {iller
-                ?.filter((item: any) => {
-                  return city?.toLowerCase() === ""
-                    ? item
-                    : item.il.toLowerCase().includes(city);
-                })
-                .map((cit: any) => (
-                  <option
-                    value={cit.id}
-                    className={`p-4  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
-                      cit.il
+           
+              {filteredCities?.map((item: any) => (
+                <option
+                  value={item.id}
+                  className={`p-4  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 
+                 ${item.city === selectedCity && "text-orange-400"}  `}
+                  key={item?.city}
+                  onClick={(e: any) => {
+                    if (
+                      item.city?.toLocaleUpperCase("tr-TR") !==
+                      selectedCity?.toLocaleUpperCase("tr-TR")
+                    ) {
+                      setSelectedCity(item.city);
+                      setSelectedCity2(item.city);
                     }
-                 ${cit.il === selectedCity && "text-orange-400"}  `}
-                    key={cit?.il}
-                    onClick={(e: any) => {
-                      if (
-                        cit.il?.toLowerCase() !== selectedCity?.toLowerCase()
-                      ) {
-                        setSelectedCity(cit.il);
-                        setSelectedCity2(cit.il);
-                      }
-                      handleCity(e.target.value);
-                      setOpen(!open);
-                    }}
-                  >
-                    {
-                      (cit.il =
-                        cit.il.charAt(0) + cit.il.substring(1).toLowerCase())
-                    }
-                  </option>
-                ))}
+                    setDistrictID(e.target.value);
+                    setOpen(!open);
+                  }}
+                >
+                  {
+                    (item.city =
+                      item.city.charAt(0) +
+                      item.city.substring(1).toLocaleLowerCase("tr-TR"))
+                  }
+                </option>
+              ))}
             </ul>
-          </div>
+          </div> */}
+          <Dropdown
+            type={"city"}
+            name="İl"
+            open={open}
+            setOpen={setOpen}
+            data={filteredCities}
+            filter={filterCities}
+            selectedItem={selectedCity}
+            setSelectedItem={setSelectedCity}
+            setItemID={setDistrictID}
+            itemID={districtID}
+          />
 
           <div
             className={`flex-col flex  justify-center items-center py-3.5  ${
@@ -250,9 +267,9 @@ const Deneme2 = ({
           >
             <label>
               <div
-                onClick={() => setOpenDist(!openDist)}
+                onClick={() => setOpenDistDrop(!openDistDrop)}
                 className={`bg-white  w-[400px]  border  p-1 rounded h-[56px] mb-1 transition duration-200${
-                  openDist
+                  openDistDrop
                     ? " border-[2.4px]  "
                     : " border hover:border-[1.6px]"
                 } border-black flex justify-between items-center  font-bold cursor-pointer `}
@@ -264,7 +281,7 @@ const Deneme2 = ({
                 )}
                 <span
                   className={`text-md ml-3 text-black text-opacity-80 absolute transition duration-200 ${
-                    openDist
+                    openDistDrop
                       ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-90"
                       : ""
                   }${
@@ -280,7 +297,7 @@ const Deneme2 = ({
             </label>
             <ul
               className={`bg-white  overflow-y-auto w-[400px] shadow-gray-400 shadow-md   rounded-b-lg ${
-                openDist ? "max-h-[205px] border-2 mt-2 " : "max-h-0"
+                openDistDrop ? "max-h-[205px] border-2 mt-2 " : "max-h-0"
               }`}
             >
               <div className="flex  justify-center items-center mb-1  h-9 sticky  bg-white">
@@ -302,33 +319,31 @@ const Deneme2 = ({
                   <input
                     className=" bg-white rounded pl-6 h-7 w-[372px] outline-offset-2 outline-2  "
                     type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value?.toLowerCase())}
                   ></input>
                 </div>
               </div>
 
-              {districts2 &&
-                districts2?.map((dis: any) => (
+              {filteredDistricts &&
+                filteredDistricts?.map((item: any) => (
                   <option
                     className={`p-4  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
-                      dis.ilce
+                      item.district
                     }
-                  ${dis.ilce === selectedDist && "text-orange-400"} `}
-                    key={dis.ilce}
+                  ${item.district === selectedDist && "text-orange-400"} `}
+                    key={item.district}
                     onClick={(e: any) => {
-                      if (dis.ilce !== selectedDist) {
-                        setSelectedDist(dis.ilce);
-                        setSelectedDist2(dis.ilce);
+                      if (item.district !== selectedDist) {
+                        setSelectedDist(item.district);
+                        setSelectedDist2(item.district);
                       }
-                      setOpenDist(!openDist);
-                      setMid(dis.id);
+                      setOpenDistDrop(!openDistDrop);
+                      setNeighborID(item.id);
                     }}
                   >
                     {
-                      (dis.ilce =
-                        dis.ilce.charAt(0) +
-                        dis.ilce.substring(1).toLowerCase())
+                      (item.district =
+                        item.district.charAt(0) +
+                        item.district.substring(1).toLocaleLowerCase("tr-TR"))
                     }
                   </option>
                 ))}
@@ -337,7 +352,7 @@ const Deneme2 = ({
 
           <div
             className={`flex-col flex z-0 relative justify-center items-center py-3.5 mb-28 ${
-              openDist ? "hidden" : ""
+              openDistDrop ? "hidden" : ""
             }  ${open ? "" : ""} ${
               selectedDist2
                 ? ""
@@ -346,9 +361,9 @@ const Deneme2 = ({
           >
             <label>
               <div
-                onClick={() => setOpenMahal(!openMahal)}
+                onClick={() => setOpenNeighDrop(!openNeighDrop)}
                 className={`bg-white  w-[400px] border   p-1 rounded h-[56px] mb-4 transition duration-200${
-                  openMahal
+                  openNeighDrop
                     ? " border-[2.4px]   "
                     : " border hover:border-[1.6px]"
                 } border-black flex justify-between items-center font-bold cursor-pointer`}
@@ -360,7 +375,7 @@ const Deneme2 = ({
                 )}
                 <span
                   className={`text-md ml-3 text-black text-opacity-80 absolute transition duration-200 ${
-                    openMahal
+                    openNeighDrop
                       ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1   scale-90"
                       : ""
                   }${
@@ -376,7 +391,7 @@ const Deneme2 = ({
             </label>
             <ul
               className={`bg-white  overflow-y-auto w-[400px] shadow-gray-400 shadow-md  rounded-b-lg ${
-                openMahal
+                openNeighDrop
                   ? "max-h-[220px] border-2 z-10 overflow-hidden absolute mt-[280px]"
                   : "max-h-0"
               }`}
@@ -400,33 +415,34 @@ const Deneme2 = ({
                   <input
                     className=" bg-white rounded pl-6 h-7 w-[372px] outline-offset-2 outline-2  "
                     type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value?.toLowerCase())}
                   ></input>
                 </div>
               </div>
 
-              {mahalleler2?.map((mah: any) => (
+              {filteredNeighbor?.map((item: any) => (
                 <option
                   className={`p-4  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
-                    mah.mahalle
+                    item.neighborhood
                   }
-                  ${mah.mahalle === selectedMahal && "text-orange-400"} `}
-                  key={mah.mahalle}
+                  ${
+                    item.neighborhood === selectedNeighborhood &&
+                    "text-orange-400"
+                  } `}
+                  key={item.neighborhood}
                   onClick={(e) => {
-                    if (mah.mahalle !== selectedMahal) {
-                      setSelectedMahal(mah.mahalle);
-                      setSelectedMahal2(mah.mahalle);
+                    if (item.neighborhood !== selectedNeighborhood) {
+                      setSelectedNeighborhood(item.neighborhood);
+                      setSelectedMahal2(item.neighborhood);
                     }
-                    setOpenMahal(!openMahal);
+                    setOpenNeighDrop(!openNeighDrop);
                     handleClick();
                     handleRemoveItem(e.target);
                   }}
                 >
                   {
-                    (mah.mahalle =
-                      mah.mahalle.charAt(0) +
-                      mah.mahalle.substring(1).toLowerCase())
+                    (item.neighborhood =
+                      item.neighborhood.charAt(0) +
+                      item.neighborhood.substring(1).toLocaleLowerCase("tr-TR"))
                   }
                 </option>
               ))}
@@ -439,3 +455,31 @@ const Deneme2 = ({
 };
 
 export default Deneme2;
+
+// Variable names and file names should be in Engilsh and make sense -30 mins X
+// Variable types should be configured -30 mins
+// Dropdown should be a single component -1 day
+// All the data should be fetched from the server after filtering(except city) -3 hours X
+// API endpoint names should be make sense(E.g. /address/city or /address/town etc.) -2 mins X
+// JSON files names should be in English -1 min X
+// Estimation: Total of 2 days
+
+/* <Dropdown
+type={"district"}
+  name="İlçe"
+  open={open}
+  setOpen={setOpen}
+  data={districts2}
+  filter={filterTowns()}
+  selectedItem={selectedTown}
+/>
+
+<Dropdown
+type={"neighborhood"}
+  name="Mahalle"
+  open={open}
+  setOpen={setOpen}
+  data={mahalleler2}
+  filter={}
+  selectedItem={selectedNeighhoud}
+/> */

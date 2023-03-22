@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { SlMagnifier } from "react-icons/sl";
-import { getDataIl, getDataIlce, getDataMahalle } from "../axios/indexAxios";
+import {
+  getDataCity,
+  getDataDistrict,
+  getDataNeighborhood,
+} from "../axios/indexAxios";
 
 type Props = {
   isOn: boolean;
@@ -42,7 +46,7 @@ const Deneme2 = ({
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    getDataIl()
+    getDataCity()
       .then((res) => {
         setIller(res.data);
       })
@@ -61,7 +65,7 @@ const Deneme2 = ({
   const [openDist, setOpenDist] = useState<boolean>(false);
 
   useEffect(() => {
-    getDataIlce()
+    getDataDistrict()
       .then((res) => {
         setDistricts(res.data);
       })
@@ -81,7 +85,7 @@ const Deneme2 = ({
   const [openMahal, setOpenMahal] = useState<boolean>(false);
 
   useEffect(() => {
-    getDataMahalle()
+    getDataNeighborhood()
       .then((res) => {
         setMahalleler(res.data);
       })

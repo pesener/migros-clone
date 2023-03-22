@@ -4,12 +4,12 @@ import AdresModal from "./AdresModal";
 const Adres = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [selectedCity, setSelectedCity] = useState<any>();
+  // const [selectedCity, setSelectedCity] = useState<{modalCity: string, mainCity: string}>({modalCity: '', mainCity: ''});
   const [selectedDist, setSelectedDist] = useState<any>();
-  const [selectedMahal, setSelectedMahal] = useState<any>();
+  const [selectedNeighborhood, setSelectedNeighborhood] = useState<any>();
 
   const handleClick = () => {
     setIsActive(true);
-    console.log(isActive);
   };
 
   return (
@@ -28,7 +28,7 @@ const Adres = () => {
           {selectedCity ? (
             <h1>
               {selectedCity}, {selectedDist},<br></br>
-              {selectedMahal}.
+              {selectedNeighborhood}.
             </h1>
           ) : (
             <h1 className="mt-2">Teslimat adresini seçiniz</h1>
@@ -60,8 +60,8 @@ const Adres = () => {
       </div>
       {isActive ? (
         <AdresModal
-          selectedMahal={selectedMahal}
-          setSelectedMahal={setSelectedMahal}
+          selectedNeighborhood={selectedNeighborhood}
+          setSelectedNeighborhood={setSelectedNeighborhood}
           selectedCity={selectedCity}
           setSelectedCity={setSelectedCity}
           selectedDist={selectedDist}

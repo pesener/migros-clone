@@ -4,9 +4,10 @@ const HTTP = axios.create({
   baseURL: "http://localhost:5000",
 });
 
-export const getDataIl = async () => await HTTP.get("/home/dropDown1");
+export const getDataCity = async () => await HTTP.get("/home/dropdownCity");
 
-export const getDataIlce = async () => await HTTP.get("/home/dropDown2");
+export const getDataDistrict = async (city_id) =>
+  await HTTP.post("/home/dropdownDistrict", city_id);
 
-export const getDataMahalle = async (ilce_id) =>
-  await HTTP.post("/home/dropDown3", ilce_id);
+export const getDataNeighborhood = async (district_id) =>
+  await HTTP.post("/home/dropdownNeigh", district_id);

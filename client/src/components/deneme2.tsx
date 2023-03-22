@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BiChevronDown } from "react-icons/bi";
-import { getDataIl, getDataIlce, getDataMahalle } from "../axios/indexAxios";
+import {
+  getDataDistrict,
+  getDataCity,
+  getDataNeighborhood,
+} from "../axios/indexAxios";
 import { Select, MenuItem, TextField, FormControl, Box } from "@mui/material";
 
 type Props = {
@@ -56,7 +60,7 @@ const Deneme2 = ({
   const [selectedCity2, setSelectedCity2] = useState<any>();
 
   useEffect(() => {
-    getDataIl()
+    getDataCity()
       .then((res) => {
         setIller(res.data);
         console.log(res.data);
@@ -76,7 +80,7 @@ const Deneme2 = ({
 
   const [selectedDist2, setSelectedDist2] = useState<any>();
   useEffect(() => {
-    getDataIlce()
+    getDataDistrict()
       .then((res) => {
         setDistricts(res.data);
       })
@@ -96,7 +100,7 @@ const Deneme2 = ({
   const [selectedMahal2, setSelectedMahal2] = useState<any>();
 
   useEffect(() => {
-    getDataMahalle({ ilce_id: mid })
+    getDataNeighborhood({ ilce_id: mid })
       .then((res) => {
         setMahalleler2(res.data);
       })
