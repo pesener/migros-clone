@@ -16,7 +16,19 @@ const Dropdown = ({
   openNeighDrop,
   setOpenNeighDrop,
   handleClick,
+  activation,
+  setActivation,
+  activationDist,
+  setActivationDist,
+  activationNeigh,
+  setActivationNeigh,
 }: {
+  activationNeigh: boolean;
+  setActivationNeigh: (active: boolean) => void;
+  activationDist: boolean;
+  setActivationDist: (active: boolean) => void;
+  activation: boolean;
+  setActivation: (active: boolean) => void;
   handleClick: any;
   openNeighDrop: boolean;
   setOpenNeighDrop: (active: boolean) => void;
@@ -32,7 +44,11 @@ const Dropdown = ({
   data: any;
 }) => {
   return (
-    <div className="flex-col flex relative  justify-center  items-center py-3.5 ">
+    <div
+      className={`flex-col flex relative  justify-center  items-center py-3.5 ${
+        !activation ? "pointer-events-none opacity-20 cursor-not-allowed" : ""
+      } `}
+    >
       {" "}
       <div
         onClick={() => {
@@ -107,6 +123,12 @@ const Dropdown = ({
               }
               setItemID(item.id);
               setOpen(!open);
+              if (nameOf === "İl") {
+                setActivationDist((activationDist = true));
+              }
+              if (nameOf === "İlçe") {
+                setActivationNeigh((activationNeigh = true));
+              }
               if (nameOf === "Mahalle") {
                 handleClick();
               }

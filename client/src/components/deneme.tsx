@@ -46,6 +46,8 @@ const Deneme2 = ({
 
   const [selectedCityModal, setSelectedCityModal] = useState<any>();
 
+  const [activateDropCity, setActivateDropCity] = useState<boolean>(true);
+
   const filterCities = (inputCity: any) => {
     const inputter = cities.filter((item: any) =>
       item.name
@@ -79,6 +81,8 @@ const Deneme2 = ({
 
   const [selectedDistrictModal, setSelectedDistrictModal] = useState<any>();
 
+  const [activateDropDist, setActivateDropDist] = useState<boolean>(false);
+
   useEffect(() => {
     getDataDistrict({ city_id: districtID })
       .then((res) => {
@@ -111,6 +115,8 @@ const Deneme2 = ({
   const [openNeighDrop, setOpenNeighDrop] = useState<boolean>(false);
 
   const [selectedNeighModal, setSelectedNeighModal] = useState<any>();
+
+  const [activateDropNeigh, setActivateDropNeigh] = useState<boolean>(false);
 
   const filterNeighbor = (inputNeighbor: any) => {
     const inputterNeigh = neighborhoods.filter((item: any) =>
@@ -274,6 +280,12 @@ const Deneme2 = ({
             openNeighDrop={openNeighDrop}
             setOpenNeighDrop={setOpenNeighDrop}
             handleClick={handleClick}
+            activation={activateDropCity}
+            setActivation={setActivateDropCity}
+            activationDist={activateDropDist}
+            setActivationDist={setActivateDropDist}
+            activationNeigh={activateDropNeigh}
+            setActivationNeigh={setActivateDropNeigh}
           />
 
           {/* <div
@@ -379,6 +391,12 @@ const Deneme2 = ({
             openNeighDrop={openNeighDrop}
             setOpenNeighDrop={setOpenNeighDrop}
             handleClick={handleClick}
+            activation={activateDropDist}
+            setActivation={setActivateDropDist}
+            activationDist={activateDropNeigh}
+            setActivationDist={setActivateDropNeigh}
+            activationNeigh={activateDropNeigh}
+            setActivationNeigh={setActivateDropNeigh}
           />
 
           {/* <div
@@ -494,6 +512,12 @@ const Deneme2 = ({
             openNeighDrop={openNeighDrop}
             setOpenNeighDrop={setOpenNeighDrop}
             handleClick={handleClick}
+            activation={activateDropNeigh}
+            setActivation={setActivateDropNeigh}
+            activationDist={activateDropNeigh}
+            setActivationDist={setActivateDropNeigh}
+            activationNeigh={activateDropNeigh}
+            setActivationNeigh={setActivateDropNeigh}
           />
         </div>
       </div>
