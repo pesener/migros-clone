@@ -3,44 +3,49 @@ import React, { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 
 const Dropdown = ({
-  name,
+  nameOf,
   open,
-  type,
   setOpen,
   data,
   filter,
   selectedItem,
-  itemID,
+  selectedModalItem,
+  setSelectedModalItem,
   setItemID,
   setSelectedItem,
+  openNeighDrop,
+  setOpenNeighDrop,
+  handleClick,
 }: {
-  setSelectedItem: any;
-  itemID: any;
-  setItemID: any;
-  selectedItem: any;
+  handleClick: any;
+  openNeighDrop: boolean;
+  setOpenNeighDrop: (active: boolean) => void;
+  selectedModalItem: string;
+  setSelectedModalItem: (active: string) => void;
+  setSelectedItem: (active: string) => void;
+  setItemID: (active: string) => void;
+  selectedItem: string;
   filter: any;
-  name: string;
+  nameOf: string;
   open: boolean;
-  type: string;
   setOpen: (active: boolean) => void;
   data: any;
 }) => {
   return (
-    <div className="flex-col flex relative mt-[100px] justify-center  items-center py-3.5 ">
+    <div className="flex-col flex relative  justify-center  items-center py-3.5 ">
       {" "}
       <div
-        id="dropD1"
         onClick={() => {
           setOpen(!open);
         }}
-        className={`bg-white  w-[400px]  p-1 rounded mb-1  h-[56px]  transition duration-200 ${
+        className={`bg-white  w-[400px]  p-1 rounded  h-[56px]  transition duration-200 ${
           open ? "border-[2.4px] " : " border hover:border-[1.6px] "
         }  border  border-black flex justify-between items-center  font-bold cursor-pointer`}
       >
-        {selectedItem ? (
-          <h1 className="ml-3">{selectedItem}</h1>
+        {selectedModalItem ? (
+          <h1 className="ml-3">{selectedModalItem}</h1>
         ) : (
-          <h3 className="text-gray-500 ml-3 text-sm">{name}</h3>
+          <h3 className="text-gray-500 ml-3 text-sm">{nameOf}</h3>
         )}
         <span
           className={`text-sm ml-3 text-black font-bold text-opacity-80 absolute transition duration-200 ${
@@ -48,12 +53,12 @@ const Dropdown = ({
               ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-90"
               : ""
           } ${
-            selectedItem
+            selectedModalItem
               ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-90"
               : ""
           }`}
         >
-          {name}
+          {nameOf}
         </span>
         <BiChevronDown size={38} className="text-gray-400 " />
       </div>
@@ -88,23 +93,30 @@ const Dropdown = ({
 
         {data?.map((item: any) => (
           <option
-            value={item.index}
+            value={item?.name}
             className={`p-4  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 
-         ${item.city === selectedItem && "text-orange-400"}  `}
-            key={item?.id}
+         ${item?.name === selectedItem && "text-orange-400"}  `}
+            key={item?.name}
             onClick={(e: any) => {
               if (
-                item.type?.toLocaleUpperCase("tr-TR") !==
+                item.name?.toLocaleUpperCase("tr-TR") !==
                 selectedItem?.toLocaleUpperCase("tr-TR")
               ) {
-                setSelectedItem(item.typer);
-                setSelectedItem(item.typer);
+                setSelectedItem(item.name);
+                setSelectedModalItem(item.name);
               }
-              setItemID(e.target.value);
+              setItemID(item.id);
               setOpen(!open);
+              if (nameOf === "Mahalle") {
+                handleClick();
+              }
             }}
           >
-            {item.type}
+            {
+              (item.name =
+                item.name.charAt(0) +
+                item.name.substring(1).toLocaleLowerCase("tr-TR"))
+            }
           </option>
         ))}
       </ul>

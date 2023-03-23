@@ -10,6 +10,7 @@ const Adres = () => {
 
   const handleClick = () => {
     setIsActive(true);
+    console.log(isActive);
   };
 
   return (

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { BiChevronDown } from "react-icons/bi";
 import Dropdown from "./Dropdown";
 import {
   getDataCity,
@@ -37,18 +36,6 @@ const Deneme2 = ({
     console.log(isActive);
   };
 
-  const handleRemoveItem = (e: any) => {
-    setSelectedCity2(
-      selectedCity2.filter((item: any) => item !== e.target.value)
-    );
-    setSelectedDist2(
-      selectedDist2.filter((item: any) => item !== e.target.value)
-    );
-    setSelectedMahal2(
-      selectedMahal2.filter((item: any) => item !== e.target.value)
-    );
-  };
-
   ///city///
 
   const [filteredCities, setFilteredCities] = useState<any>();
@@ -57,17 +44,17 @@ const Deneme2 = ({
 
   const [open, setOpen] = useState<boolean>(false);
 
-  const [selectedCity2, setSelectedCity2] = useState<any>();
+  const [selectedCityModal, setSelectedCityModal] = useState<any>();
 
-  const filterCities = (inputValue: any) => {
+  const filterCities = (inputCity: any) => {
     const inputter = cities.filter((item: any) =>
-      item.city
+      item.name
         .toLocaleUpperCase("tr-TR")
-        .startsWith(inputValue.toLocaleUpperCase("tr-TR"))
+        .startsWith(inputCity.toLocaleUpperCase("tr-TR"))
     );
     setFilteredCities(inputter);
 
-    console.log("inputValue", inputValue);
+    console.log("inputValue", inputCity);
   };
 
   useEffect(() => {
@@ -90,18 +77,32 @@ const Deneme2 = ({
 
   const [openDistDrop, setOpenDistDrop] = useState<boolean>(false);
 
-  const [selectedDist2, setSelectedDist2] = useState<any>();
+  const [selectedDistrictModal, setSelectedDistrictModal] = useState<any>();
+
   useEffect(() => {
     getDataDistrict({ city_id: districtID })
       .then((res) => {
+        setDistricts(res.data);
         setFilteredDistricts(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, [selectedCity]);
+  const filterDistricts = (inputDistrict: any) => {
+    const inputterDis = districts.filter((item: any) =>
+      item.name
+        .toLocaleUpperCase("tr-TR")
+        .startsWith(inputDistrict.toLocaleUpperCase("tr-TR"))
+    );
+    setFilteredDistricts(inputterDis);
+
+    console.log("inputValueDis", inputDistrict);
+  };
 
   ///Mahalle///
+
+  const [neighborhoods, setNeighborhoods] = useState<any>();
 
   const [filteredNeighbor, setFilteredNeighbor] = useState<any>();
 
@@ -109,17 +110,29 @@ const Deneme2 = ({
 
   const [openNeighDrop, setOpenNeighDrop] = useState<boolean>(false);
 
-  const [selectedMahal2, setSelectedMahal2] = useState<any>();
+  const [selectedNeighModal, setSelectedNeighModal] = useState<any>();
+
+  const filterNeighbor = (inputNeighbor: any) => {
+    const inputterNeigh = neighborhoods.filter((item: any) =>
+      item.name
+        .toLocaleUpperCase("tr-TR")
+        .startsWith(inputNeighbor.toLocaleUpperCase("tr-TR"))
+    );
+    setFilteredNeighbor(inputterNeigh);
+
+    console.log("inputValueNeigh", inputNeighbor);
+  };
 
   useEffect(() => {
     getDataNeighborhood({ district_id: neighborID })
       .then((res) => {
         setFilteredNeighbor(res.data);
+        setNeighborhoods(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [selectedDist2]);
+  }, [selectedDist]);
 
   return (
     <div>
@@ -248,8 +261,7 @@ const Deneme2 = ({
             </ul>
           </div> */}
           <Dropdown
-            type={"city"}
-            name="İl"
+            nameOf={"İl"}
             open={open}
             setOpen={setOpen}
             data={filteredCities}
@@ -257,10 +269,14 @@ const Deneme2 = ({
             selectedItem={selectedCity}
             setSelectedItem={setSelectedCity}
             setItemID={setDistrictID}
-            itemID={districtID}
+            selectedModalItem={selectedCityModal}
+            setSelectedModalItem={setSelectedCityModal}
+            openNeighDrop={openNeighDrop}
+            setOpenNeighDrop={setOpenNeighDrop}
+            handleClick={handleClick}
           />
 
-          <div
+          {/* <div
             className={`flex-col flex  justify-center items-center py-3.5  ${
               open ? "" : ""
             }${!selectedCity2 ? "   pointer-events-none opacity-20 " : ""} `}
@@ -348,10 +364,25 @@ const Deneme2 = ({
                   </option>
                 ))}
             </ul>
-          </div>
+          </div> */}
+          <Dropdown
+            nameOf={"İlçe"}
+            open={openDistDrop}
+            setOpen={setOpenDistDrop}
+            data={filteredDistricts}
+            filter={filterDistricts}
+            selectedItem={selectedDist}
+            setSelectedItem={setSelectedDist}
+            selectedModalItem={selectedDistrictModal}
+            setSelectedModalItem={setSelectedDistrictModal}
+            setItemID={setNeighborID}
+            openNeighDrop={openNeighDrop}
+            setOpenNeighDrop={setOpenNeighDrop}
+            handleClick={handleClick}
+          />
 
-          <div
-            className={`flex-col flex z-0 relative justify-center items-center py-3.5 mb-28 ${
+          {/* <div
+            className={`flex-col flex z-0 relative justify-center items-center py-3.5  ${
               openDistDrop ? "hidden" : ""
             }  ${open ? "" : ""} ${
               selectedDist2
@@ -362,7 +393,7 @@ const Deneme2 = ({
             <label>
               <div
                 onClick={() => setOpenNeighDrop(!openNeighDrop)}
-                className={`bg-white  w-[400px] border   p-1 rounded h-[56px] mb-4 transition duration-200${
+                className={`bg-white  w-[400px] border   p-1 rounded h-[56px]  transition duration-200${
                   openNeighDrop
                     ? " border-[2.4px]   "
                     : " border hover:border-[1.6px]"
@@ -447,7 +478,23 @@ const Deneme2 = ({
                 </option>
               ))}
             </ul>
-          </div>
+          </div> */}
+
+          <Dropdown
+            nameOf={"Mahalle"}
+            open={openNeighDrop}
+            setOpen={setOpenNeighDrop}
+            data={filteredNeighbor}
+            filter={filterNeighbor}
+            selectedItem={selectedNeighborhood}
+            setSelectedItem={setSelectedNeighborhood}
+            selectedModalItem={selectedNeighModal}
+            setSelectedModalItem={setSelectedNeighModal}
+            setItemID={setNeighborID}
+            openNeighDrop={openNeighDrop}
+            setOpenNeighDrop={setOpenNeighDrop}
+            handleClick={handleClick}
+          />
         </div>
       </div>
     </div>
