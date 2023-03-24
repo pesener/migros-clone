@@ -18,15 +18,7 @@ const Dropdown = ({
   handleClick,
   activation,
   setActivation,
-  activationDist,
-  setActivationDist,
-  activationNeigh,
-  setActivationNeigh,
 }: {
-  activationNeigh: boolean;
-  setActivationNeigh: (active: boolean) => void;
-  activationDist: boolean;
-  setActivationDist: (active: boolean) => void;
   activation: boolean;
   setActivation: (active: boolean) => void;
   handleClick: any;
@@ -46,7 +38,7 @@ const Dropdown = ({
   return (
     <div
       className={`flex-col flex relative  justify-center  items-center py-3.5 ${
-        !activation ? "pointer-events-none opacity-20 cursor-not-allowed" : ""
+        !activation ? "cursor-not-allowed pointer-events-none opacity-20 " : ""
       } `}
     >
       {" "}
@@ -66,11 +58,11 @@ const Dropdown = ({
         <span
           className={`text-sm ml-3 text-black font-bold text-opacity-80 absolute transition duration-200 ${
             open
-              ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-90"
+              ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-75"
               : ""
           } ${
             selectedModalItem
-              ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-90"
+              ? "text-black bg-white p-1 transform -translate-y-7 -translate-x-1 scale-75"
               : ""
           }`}
         >
@@ -124,10 +116,10 @@ const Dropdown = ({
               setItemID(item.id);
               setOpen(!open);
               if (nameOf === "İl") {
-                setActivationDist((activationDist = true));
+                setActivation((activation = true));
               }
               if (nameOf === "İlçe") {
-                setActivationNeigh((activationNeigh = true));
+                setActivation((activation = true));
               }
               if (nameOf === "Mahalle") {
                 handleClick();

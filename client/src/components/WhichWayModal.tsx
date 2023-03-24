@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Deneme from "./deneme";
+import AdressModal from "./AdressModal";
 
 type Props = {
   isActive: boolean;
@@ -126,7 +126,7 @@ const AdresModal = ({
           </div>
         </div>
       ) : (
-        <Deneme
+        <AdressModal
           setIsOn={setIsOn}
           isOn={isOn}
           setIsActive={setIsActive}

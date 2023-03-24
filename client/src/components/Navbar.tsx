@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Adres from "./Adres";
+import Adress from "./Adress";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
@@ -66,7 +66,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
-      <Adres />
+      <Adress />
     </div>
   );
 };

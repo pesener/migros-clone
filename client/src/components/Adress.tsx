@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import AdresModal from "./AdresModal";
+import AdresModal from "./WhichWayModal";
 
-const Adres = () => {
+const Adress = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [selectedCity, setSelectedCity] = useState<any>();
   // const [selectedCity, setSelectedCity] = useState<{modalCity: string, mainCity: string}>({modalCity: '', mainCity: ''});
@@ -104,4 +104,4 @@ const Adres = () => {
   );
 };
 
-export default Adres;
+export default Adress;
