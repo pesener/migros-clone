@@ -14,13 +14,13 @@ const Navbar = () => {
   };
 
   return (
-    <div className="border-b-2 h-[190px] ">
+    <div className="border-b-2 h-[198px] ">
       {!isActive ? (
         <div className="flex justify-items-start relative  ">
-          <div className="bg-primary overflow-hidden h-[67px]  w-full">
+          <div className="bg-primary overflow-hidden h-[68px]  w-full">
             <button
               onClick={handleClick}
-              className="cursor-pointer w-[185px] ml-32 h-[56px] mt-3  rounded-tl-lg rounded-tr-lg  bg-white "
+              className="cursor-pointer w-[185px] ml-32 h-[58px] mt-3  rounded-tl-lg rounded-tr-lg  bg-white "
             >
               <img
                 className="w-[150px]  h-10 mb-2 my-2 ml-4   cursor-pointer"
