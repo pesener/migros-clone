@@ -36,6 +36,15 @@ const AdressModal = ({
     console.log(isActive);
   };
 
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
+
   ///city///
 
   const [filteredCities, setFilteredCities] = useState<any>();
@@ -142,97 +151,105 @@ const AdressModal = ({
 
   return (
     <div>
-      <div className="fixed  z-0 inset-0  flex justify-center items-center ">
-        <div className="w-[590px] h-[500px] relative  bg-white rounded  flex flex-col justify-center items-center">
-          <div className="bg-white top-0 ml-2 absolute font-bold justify-between  flex ">
-            <div className="flex flex-col items-center pt-2 justify-between ">
-              <h1 className="text-xl ml-20 p-3  font-bold w-96 justify-center flex items-center text-center ">
-                Adresime Gelsin
-              </h1>
-              <h1 className="text-lg ml-20 justify-center   text-center font-bold ">
-                Siparişini nereye getirelim?
-              </h1>
-            </div>
-            <div className=" mb-4">
-              <span
-                onClick={() => {
-                  handleClick();
-                }}
-                className="w-[50px] mt-5 ml-12  h-[50px] place-self-end rounded-full justify-center  items-center flex hover:bg-gray-50  cursor-pointer"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-8 h-8 text-gray-500 text-xl  cursor-pointer "
+      {loading ? (
+        <img
+          className="index-0 flex bg-gray-300 bg-opacity-10 justify-center-items-center h-[90px] w-[90px]"
+          src="https://www.migros.com.tr/assets/icons/loading-indicator.gif"
+          alt="indicator"
+        />
+      ) : (
+        <div className="fixed  z-0 inset-0  flex justify-center items-center ">
+          <div className="w-[590px] h-[500px] relative  bg-white rounded  flex flex-col justify-center items-center">
+            <div className="bg-white top-0 ml-2 absolute font-bold justify-between  flex ">
+              <div className="flex flex-col items-center pt-2 justify-between ">
+                <h1 className="text-xl ml-20 p-3  font-bold w-96 justify-center flex items-center text-center ">
+                  Adresime Gelsin
+                </h1>
+                <h1 className="text-lg ml-20 justify-center   text-center font-bold ">
+                  Siparişini nereye getirelim?
+                </h1>
+              </div>
+              <div className=" mb-4">
+                <span
+                  onClick={() => {
+                    handleClick();
+                  }}
+                  className="w-[50px] mt-5 ml-12  h-[50px] place-self-end rounded-full justify-center  items-center flex hover:bg-gray-50  cursor-pointer"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-8 h-8 text-gray-500 text-xl  cursor-pointer "
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </span>
+              </div>
             </div>
+
+            <Dropdown
+              nameOf={"İl"}
+              open={open}
+              setOpen={setOpen}
+              data={filteredCities}
+              filter={filterCities}
+              selectedItem={selectedCity}
+              setSelectedItem={setSelectedCity}
+              setItemID={setDistrictID}
+              selectedModalItem={selectedCityModal}
+              setSelectedModalItem={setSelectedCityModal}
+              openNeighDrop={openNeighDrop}
+              setOpenNeighDrop={setOpenNeighDrop}
+              handleClick={handleClick}
+              activation={activateDropCity}
+              setActivation={setActivateDropDist}
+            />
+
+            <Dropdown
+              nameOf={"İlçe"}
+              open={openDistDrop}
+              setOpen={setOpenDistDrop}
+              data={filteredDistricts}
+              filter={filterDistricts}
+              selectedItem={selectedDist}
+              setSelectedItem={setSelectedDist}
+              selectedModalItem={selectedDistrictModal}
+              setSelectedModalItem={setSelectedDistrictModal}
+              setItemID={setNeighborID}
+              openNeighDrop={openNeighDrop}
+              setOpenNeighDrop={setOpenNeighDrop}
+              handleClick={handleClick}
+              activation={activateDropDist}
+              setActivation={setActivateDropNeigh}
+            />
+
+            <Dropdown
+              nameOf={"Mahalle"}
+              open={openNeighDrop}
+              setOpen={setOpenNeighDrop}
+              data={filteredNeighbor}
+              filter={filterNeighbor}
+              selectedItem={selectedNeighborhood}
+              setSelectedItem={setSelectedNeighborhood}
+              selectedModalItem={selectedNeighModal}
+              setSelectedModalItem={setSelectedNeighModal}
+              setItemID={setNeighborID}
+              openNeighDrop={openNeighDrop}
+              setOpenNeighDrop={setOpenNeighDrop}
+              handleClick={handleClick}
+              activation={activateDropNeigh}
+              setActivation={setActivateDropNeigh}
+            />
           </div>
-
-          <Dropdown
-            nameOf={"İl"}
-            open={open}
-            setOpen={setOpen}
-            data={filteredCities}
-            filter={filterCities}
-            selectedItem={selectedCity}
-            setSelectedItem={setSelectedCity}
-            setItemID={setDistrictID}
-            selectedModalItem={selectedCityModal}
-            setSelectedModalItem={setSelectedCityModal}
-            openNeighDrop={openNeighDrop}
-            setOpenNeighDrop={setOpenNeighDrop}
-            handleClick={handleClick}
-            activation={activateDropCity}
-            setActivation={setActivateDropDist}
-          />
-
-          <Dropdown
-            nameOf={"İlçe"}
-            open={openDistDrop}
-            setOpen={setOpenDistDrop}
-            data={filteredDistricts}
-            filter={filterDistricts}
-            selectedItem={selectedDist}
-            setSelectedItem={setSelectedDist}
-            selectedModalItem={selectedDistrictModal}
-            setSelectedModalItem={setSelectedDistrictModal}
-            setItemID={setNeighborID}
-            openNeighDrop={openNeighDrop}
-            setOpenNeighDrop={setOpenNeighDrop}
-            handleClick={handleClick}
-            activation={activateDropDist}
-            setActivation={setActivateDropNeigh}
-          />
-
-          <Dropdown
-            nameOf={"Mahalle"}
-            open={openNeighDrop}
-            setOpen={setOpenNeighDrop}
-            data={filteredNeighbor}
-            filter={filterNeighbor}
-            selectedItem={selectedNeighborhood}
-            setSelectedItem={setSelectedNeighborhood}
-            selectedModalItem={selectedNeighModal}
-            setSelectedModalItem={setSelectedNeighModal}
-            setItemID={setNeighborID}
-            openNeighDrop={openNeighDrop}
-            setOpenNeighDrop={setOpenNeighDrop}
-            handleClick={handleClick}
-            activation={activateDropNeigh}
-            setActivation={setActivateDropNeigh}
-          />
         </div>
-      </div>
+      )}
     </div>
   );
 };

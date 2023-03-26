@@ -1,3 +1,5 @@
+const { Opacity } = require("@mui/icons-material");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
@@ -22,11 +24,10 @@ module.exports = {
       },
       tooltipArrows: (theme) => ({
         "danger-arrow": {
-          borderColor: theme("colors.gray.300"),
+          borderColor: theme("colors.primary"),
           borderWidth: 1,
-          backgroundColor: theme("colors.white"),
-          size: 10,
-          offset: 10,
+          backgroundColor: theme("colors.primary"),
+          size: 20,
         },
       }),
     },
