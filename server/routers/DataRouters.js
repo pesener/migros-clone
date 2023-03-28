@@ -2,6 +2,7 @@ import express from "express";
 import Neighborhood from "../models/neighborhood.js";
 import City from "../models/city.js";
 import District from "../models/district.js";
+import Products from "../models/products.js";
 const router = express.Router();
 
 router.post("/dropdownNeigh", async (req, res) => {
@@ -32,5 +33,7 @@ router.get("/dropdownCity", async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 });
+
+///Products///
 
 export default router;
