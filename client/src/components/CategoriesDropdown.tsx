@@ -1,8 +1,21 @@
-import React from "react";
-import { links } from "./links";
+import React, { useEffect, useState } from "react";
+import { getProducts } from "../axios/indexAxios";
 import { Link } from "react-router-dom";
 
 const CategoriesDropdown = () => {
+  const [links, setLinks] = useState<any>([]);
+
+  useEffect(() => {
+    getProducts()
+      .then((res) => {
+        setLinks(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div>
       <div className="ml-[125px]   w-[140px] mt-4 group group/underline font-bold p-1   cursor-pointer text-sm  flex  ">
@@ -33,7 +46,7 @@ const CategoriesDropdown = () => {
                 <div className=" h-[64px] z-10  group-hover/edit:bg-primary group-hover/edit:bg-opacity-20 rotate-45 transform origin-top-left"></div>
               </div>{" "}
             </div>
-            {links.map((link) => (
+            {links.map((link: any) => (
               <div className="group/link">
                 <div className="hover:bg-primary  z-10 group/edit hover:bg-opacity-20 h-10 w-[300px] relative flex  ">
                   <div className="absolute group-hover/edit:bg-primary h-[38px] w-[6px] rounded-br-lg rounded-tr-lg"></div>
@@ -57,19 +70,19 @@ const CategoriesDropdown = () => {
                         ></div>
                       </div>
                       <div className="bg-white  ml-[100px] grid grid-cols-2">
-                        {link.sublinks.map((mysublinks) => (
+                        {link.sublinks.map((mysublinks: any) => (
                           <div>
                             <h1
                               key={mysublinks.Head}
-                              className="text-sm text-primary p-10 h-[10px] w-[300px]"
+                              className="text-sm flex items-center text-primary hover:underline decoration-primary p-5 h-[10px] w-[300px]"
                             >
                               {mysublinks.Head}
                             </h1>
-                            {mysublinks.sublink.map((slink) => (
+                            {mysublinks.sublink.map((slink: any) => (
                               <h3 className="text-sm text-gray-900 ">
-                                <h3 className="hover:text-primary font-normal ml-[20px]">
-                                  {slink.name.split(",")}
-                                </h3>
+                                <dd className="hover:text-primary font-normal ml-[20px]">
+                                  {slink.name}
+                                </dd>
                               </h3>
                             ))}
                           </div>

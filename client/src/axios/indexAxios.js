@@ -11,3 +11,7 @@ export const getDataDistrict = async (city_id) =>
 
 export const getDataNeighborhood = async (district_id) =>
   await HTTP.post("/home/dropdownNeigh", district_id);
+
+/// Products
+
+export const getProducts = async () => await HTTP.get("/home/products");
