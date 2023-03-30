@@ -78,7 +78,7 @@ const CategoriesDropdown = () => {
                             >
                               {mysublinks.Head}
                             </h1>
-                            <div className="    items-center w-[450px] flex-wrap flex">
+                            <div className="    items-center w-[420px] flex-wrap flex ml-[20px] ">
                               {mysublinks.sublink.map((slink: any, i: any) => (
                                 <div
                                   key={slink.name}
