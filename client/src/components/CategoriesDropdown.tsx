@@ -25,7 +25,7 @@ const CategoriesDropdown = () => {
           className="mr-4 w-5 h-5 "
         />
         <span className="flex-col"> KATEGORİLER </span>
-        <div className="group-hover/underline:bg-primary absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
+        <div className="group-hover/underline:bg-primary  absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
         <div className="group-hover:bg-black  group-hover:bg-opacity-20 hidden group-hover:flex inset-x-0   absolute   h-[700px] mt-[32px]  ">
           <div className="group-hover:bg-white group/info z-10 absolute  w-[230px]   h-[600px] ml-32 rounded-bl-lg flex-col">
             <div className="group-hover/info:bg-white  ml-[230px] absolute rounded-br-lg rounded-bl-lg z-0 w-[1080px] h-[600px]"></div>
@@ -78,13 +78,19 @@ const CategoriesDropdown = () => {
                             >
                               {mysublinks.Head}
                             </h1>
-                            {mysublinks.sublink.map((slink: any) => (
-                              <h3 className="text-sm text-gray-900 ">
-                                <dd className="hover:text-primary font-normal ml-[20px]">
-                                  {slink.name}
-                                </dd>
-                              </h3>
-                            ))}
+                            <div className="    items-center w-[450px]   ">
+                              {mysublinks.sublink.map((slink: any, i: any) => (
+                                <h1
+                                  key={slink.name}
+                                  className="text-sm text-gray-900  "
+                                >
+                                  {" "}
+                                  <h3 className="hover:text-primary   font-normal ">
+                                    {slink.name.join(",")}
+                                  </h3>
+                                </h1>
+                              ))}
+                            </div>
                           </div>
                         ))}
                       </div>
