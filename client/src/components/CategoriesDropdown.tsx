@@ -28,7 +28,7 @@ const CategoriesDropdown = () => {
         <div className="group-hover/underline:bg-primary  absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
         <div className="group-hover:bg-black  group-hover:bg-opacity-20 hidden group-hover:flex inset-x-0   absolute   h-[700px] mt-[32px]  ">
           <div className="group-hover:bg-white group/info z-10 absolute  w-[230px]   h-[600px] ml-32 rounded-bl-lg flex-col">
-            <div className="group-hover/info:bg-white  ml-[230px] absolute rounded-br-lg rounded-bl-lg z-0 w-[1080px] h-[600px]"></div>
+            <div className="group-hover/info:bg-white  ml-[230px] absolute rounded-br-lg  z-0 w-[1080px] h-[600px]"></div>
 
             <div className="hover:bg-primary z-10 group/edit  hover:bg-opacity-20 h-10 w-[300px] flex  relative ">
               <div className="absolute group-hover/edit:bg-primary h-[38px] w-[6px] rounded-br-lg rounded-tr-lg"></div>
