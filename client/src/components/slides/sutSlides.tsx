@@ -1,7 +1,7 @@
 import React from "react";
 
-const sutSlides = () => {
-  const sutKSlides = [
+const SutSlides = () => {
+  const slides = [
     {
       url: "https://images.migrosone.com/sanalmarket/banner/category_page_top/39859/41893-webkategori1-f05ede.jpg",
     },
@@ -15,7 +15,14 @@ const sutSlides = () => {
       url: "https://images.migrosone.com/sanalmarket/banner/category_page_top/39984/42018-webkategori1-51daaf.jpg",
     },
   ];
-  return <div>sutSlides</div>;
+  return (
+    <div className="w-[800px] h-[130px]  m-auto relative z-1">
+      <div
+        style={{ backgroundImage: `url(${slides[0].url})` }}
+        className="w-full h-full rounded bg-center bg-cover z-1"
+      ></div>
+    </div>
+  );
 };
 
-export default sutSlides;
+export default SutSlides;

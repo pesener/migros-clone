@@ -30,14 +30,13 @@ function App() {
         </div>
       )}
       <main className="py-10">
-        <div>
-          <Routes>
-            <Route path="/" element={<HomeScreen />} />
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
 
-            <Route path="/meyveSebze" element={<MeyveSebze />} />
-            <Route path="/sutKahval " element={<SutKahval />} />
-          </Routes>
-        </div>
+          <Route path="/meyveSebze" element={<MeyveSebze />} />
+
+          <Route path="/sutKahval" element={<SutKahval />} />
+        </Routes>
       </main>
     </Router>
   );

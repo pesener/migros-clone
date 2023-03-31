@@ -19,7 +19,7 @@ const CategoriesDropdown = () => {
 
   return (
     <div>
-      <div className="ml-[125px]   w-[140px] mt-4 group group/underline font-bold p-1   cursor-pointer text-sm  flex  ">
+      <div className="ml-[125px] z-10  w-[140px] mt-4 group group/underline font-bold p-1   cursor-pointer text-sm  flex  ">
         <img
           src="https://www.migros.com.tr/assets/icons/categories.svg"
           alt="categories"
@@ -48,7 +48,7 @@ const CategoriesDropdown = () => {
                   Sadece Migros'ta
                 </h1>
                 <div className="w-[28px] z-10  overflow-hidden absolute ml-[300px]">
-                  <div className=" h-[64px] z-10  group-hover/edit:bg-primary group-hover/edit:bg-opacity-20 rotate-45 transform origin-top-left"></div>
+                  <div className=" h-[64px] z-10 group-hover/edit:bg-primary group-hover/edit:bg-opacity-20 rotate-45 transform origin-top-left"></div>
                 </div>{" "}
               </div>
               {links.map((link: any) => (
@@ -58,7 +58,7 @@ const CategoriesDropdown = () => {
                     <Link
                       to={link.link}
                       key={link.name}
-                      className="text-black font-normal group-hover/edit:text-primary z-10 mt-2 ml-6"
+                      className="text-black font-normal  group-hover/edit:text-primary z-10 mt-2 ml-6"
                     >
                       <h1>{link.name}</h1>
                     </Link>
@@ -75,7 +75,7 @@ const CategoriesDropdown = () => {
                    bg-white "
                           ></div>
                         </div>
-                        <div className="bg-white  ml-[100px] grid grid-cols-2">
+                        <div className="bg-white  ml-[100px] z-10 grid grid-cols-2">
                           {link.sublinks.map((mysublinks: any) => (
                             <div>
                               <h1

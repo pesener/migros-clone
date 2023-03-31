@@ -24,8 +24,8 @@
           { "name": " Kuru Sebzeler", "link": "/" },
           { "name": " Mevsim Sebzeleri", "link": "/" },
           { "name": " Yeşillikler", "link": "/" },
-          { "name": " Patates ", "link": "/" },
-          { "name": " Soğan ", "link": "/" },
+          { "name": " Patates", "link": "/" },
+          { "name": " Soğan", "link": "/" },
           { "name": " Sarımsak", "link": "/" }
         ]
       },
@@ -56,7 +56,7 @@
         "Head": "Kırmızı Et",
         "sublink": [
           { "name": " Dana Eti", "link": "/" },
-          { "name": " Kuzu Eti ", "link": "/" },
+          { "name": " Kuzu Eti", "link": "/" },
           { "name": " Sakatat", "link": "/" },
           { "name": " Dondurulmuş Kırmızı Et", "link": "/" }
         ]
@@ -102,7 +102,7 @@
         "sublink": [
           { "name": " Kaymaklı Yoğurt", "link": "/" },
           { "name": " Sade Yoğurt", "link": "/" },
-          { "name": " Yoğurt Mayası ", "link": "/" },
+          { "name": " Yoğurt Mayası", "link": "/" },
           { "name": " Süzme", "link": "/" },
           { "name": " Çeşnili Yoğurt", "link": "/" },
           { "name": " Meyveli Yoğurt", "link": "/" },
