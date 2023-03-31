@@ -26,7 +26,7 @@ const Adress = () => {
         ></img>
 
         <div className="text-sm mt-2 font-bold  w-[180px] ">
-          {selectedCity ? (
+          {selectedNeighborhood ? (
             <h1>
               {selectedCity}, {selectedDist},<br></br>
               {selectedNeighborhood}.

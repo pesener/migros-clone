@@ -40,7 +40,7 @@ const AdresModal = ({
         <div className="w-[600px] h-[600px]    bg-white rounded  align-top flex flex-col justify-center items-center">
           <div className="bg-white mb-8  absolute mt-20 top-0 font-bold justify-between  flex ">
             <div className="flex justify-between  ">
-              <h1 className="text-xl ml-[100px]   p-4 font-bold  w-96 justify-center flex items-center text-center">
+              <h1 className="text-xl ml-[100px]   p-2 font-bold  w-96 justify-center flex items-center text-center">
                 Teslimat Yöntemini Belirle{" "}
               </h1>
             </div>

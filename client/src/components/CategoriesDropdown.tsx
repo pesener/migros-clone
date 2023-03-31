@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../axios/indexAxios";
 import { Link } from "react-router-dom";
+import { ListItem } from "@mui/material";
 
 const CategoriesDropdown = () => {
   const [links, setLinks] = useState<any>([]);
@@ -86,9 +87,10 @@ const CategoriesDropdown = () => {
                                 >
                                   {" "}
                                   <h3 className="hover:text-primary  items-center font-normal  ">
-                                    {i > 0 && ", "}
-
                                     {slink.name}
+                                    {i === mysublinks.sublink.length - 1
+                                      ? ""
+                                      : " ,"}
                                   </h3>
                                 </div>
                               ))}
