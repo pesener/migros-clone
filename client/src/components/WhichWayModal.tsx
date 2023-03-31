@@ -37,10 +37,10 @@ const AdresModal = ({
   return (
     <div className="fixed inset-0  bg-black bg-opacity-40 flex justify-center items-center ">
       {!isOn ? (
-        <div className="w-[600px] h-[600px]    bg-white rounded  align-top flex flex-col justify-center items-center">
-          <div className="bg-white mb-8  absolute mt-20 top-0 font-bold justify-between  flex ">
+        <div className="w-[600px] h-[550px]    bg-white rounded  align-top flex flex-col justify-center items-center">
+          <div className="bg-white    mt-20 top-0 font-bold justify-between  flex ">
             <div className="flex justify-between  ">
-              <h1 className="text-xl ml-[100px]   p-2 font-bold  w-96 justify-center flex items-center text-center">
+              <h1 className="text-xl ml-[100px]   p-5 font-bold  w-96 justify-center flex items-center text-center">
                 Teslimat Yöntemini Belirle{" "}
               </h1>
             </div>
@@ -74,7 +74,7 @@ const AdresModal = ({
               </h1>
             </div>
           </div>
-          <div className="flex-col flex justify-center items-center px-20 pb-20 pt-0">
+          <div className="flex-col flex justify-center items-center px-20 pb-20 pt-0 mb-[40px]">
             <div
               onClick={handleClick2}
               className="bg-white  w-[420px] h-[80px] items-center px-8 rounded-lg mb-6 border border-gray-300 flex shadow-md font-bold cursor-pointer"

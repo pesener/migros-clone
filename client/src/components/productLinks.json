@@ -1,31 +1,32 @@
 [
   {
     "name": "Meyve, Sebze",
+    "link": "/meyveSebze",
     "submenu": true,
     "sublinks": [
       {
         "Head": "Meyve",
         "sublink": [
-          { "name": "Egzotik Meyveler", "link": "/" },
-          { "name": "Kavun ve karpuz", "link": "/" },
-          { "name": "Narenciye", "link": "/" },
-          { "name": "Sert Meyveler", "link": "/" },
-          { "name": "Yumuşak Meyveler", "link": "/" },
-          { "name": "Kabuklu Kuruyemiş", "link": "/" }
+          { "name": " Egzotik Meyveler", "link": "/" },
+          { "name": " Kavun ve karpuz", "link": "/" },
+          { "name": " Narenciye", "link": "/" },
+          { "name": " Sert Meyveler", "link": "/" },
+          { "name": " Yumuşak Meyveler", "link": "/" },
+          { "name": " Kabuklu Kuruyemiş", "link": "/" }
         ]
       },
       {
         "Head": "Sebze",
         "sublink": [
-          { "name": "Doğranmış", "link": "/" },
-          { "name": "Ayıklanmış Sebzeler", "link": "/" },
-          { "name": "Egzotik Sebzeler", "link": "/" },
-          { "name": "Kuru Sebzeler", "link": "/" },
-          { "name": "Mevsim Sebzeleri", "link": "/" },
-          { "name": "Yeşillikler ", "link": "/" },
-          { "name": "Patates ", "link": "/" },
-          { "name": "Soğan  ", "link": "/" },
-          { "name": "Sarımsak ", "link": "/" }
+          { "name": " Doğranmış", "link": "/" },
+          { "name": " Ayıklanmış Sebzeler", "link": "/" },
+          { "name": " Egzotik Sebzeler", "link": "/" },
+          { "name": " Kuru Sebzeler", "link": "/" },
+          { "name": " Mevsim Sebzeleri", "link": "/" },
+          { "name": " Yeşillikler", "link": "/" },
+          { "name": " Patates ", "link": "/" },
+          { "name": " Soğan ", "link": "/" },
+          { "name": " Sarımsak", "link": "/" }
         ]
       },
       {
@@ -36,130 +37,132 @@
   },
   {
     "name": "Et, Tavuk, Balık",
+    "link": "/etler",
     "submenu": true,
     "sublinks": [
       {
         "Head": "Et Şarküteri",
         "sublink": [
-          { "name": "Sucuk", "link": "/" },
-          { "name": "Salam", "link": "/" },
-          { "name": "Sosis", "link": "/" },
-          { "name": "Jambon", "link": "/" },
-          { "name": "Pastırma", "link": "/" },
-          { "name": "Füme Et", "link": "/" },
-          { "name": "Kavurma", "link": "/" }
+          { "name": " Sucuk", "link": "/" },
+          { "name": " Salam", "link": "/" },
+          { "name": " Sosis", "link": "/" },
+          { "name": " Jambon", "link": "/" },
+          { "name": " Pastırma", "link": "/" },
+          { "name": " Füme Et", "link": "/" },
+          { "name": " Kavurma", "link": "/" }
         ]
       },
       {
         "Head": "Kırmızı Et",
         "sublink": [
-          { "name": "Dana Eti", "link": "/" },
-          { "name": "Kuzu Eti ", "link": "/" },
-          { "name": "Sakatat", "link": "/" },
-          { "name": "Dondurulmuş Kırmızı Et", "link": "/" }
+          { "name": " Dana Eti", "link": "/" },
+          { "name": " Kuzu Eti ", "link": "/" },
+          { "name": " Sakatat", "link": "/" },
+          { "name": " Dondurulmuş Kırmızı Et", "link": "/" }
         ]
       },
       {
         "Head": "Beyaz Et",
         "sublink": [
-          { "name": "Piliç", "link": "/" },
-          { "name": "Hindi", "link": "/" },
-          { "name": "Diğer Beyaz Et", "link": "/" }
+          { "name": " Piliç", "link": "/" },
+          { "name": " Hindi", "link": "/" },
+          { "name": " Diğer Beyaz Et", "link": "/" }
         ]
       },
 
       {
         "Head": "Balık, Deniz Ürünleri",
         "sublink": [
-          { "name": "Mevsim Balıkları", "link": "/" },
-          { "name": "Hazır Deniz Ürünleri", "link": "/" },
-          { "name": "Dondurulmuş Deniz Ürünleri", "link": "/" }
+          { "name": " Mevsim Balıkları", "link": "/" },
+          { "name": " Hazır Deniz Ürünleri", "link": "/" },
+          { "name": " Dondurulmuş Deniz Ürünleri", "link": "/" }
         ]
       }
     ]
   },
   {
     "name": "Süt, Kahvaltılık",
+    "link": "/sutKahval",
     "submenu": true,
     "sublinks": [
       {
         "Head": "Peynir",
         "sublink": [
-          { "name": "Beyaz Peynir", "link": "/" },
-          { "name": "Kaşar Peyniri", "link": "/" },
-          { "name": "Krem Peynir", "link": "/" },
-          { "name": "Üçgen & Burger Peynir", "link": "/" },
-          { "name": "Yerli Yöresel Peynir", "link": "/" },
-          { "name": "Yabancı Yöresel Peynir", "link": "/" },
-          { "name": "Quark Peyniri", "link": "/" }
+          { "name": " Beyaz Peynir", "link": "/" },
+          { "name": " Kaşar Peyniri", "link": "/" },
+          { "name": " Krem Peynir", "link": "/" },
+          { "name": " Üçgen & Burger Peynir", "link": "/" },
+          { "name": " Yerli Yöresel Peynir", "link": "/" },
+          { "name": " Yabancı Yöresel Peynir", "link": "/" },
+          { "name": " Quark Peyniri", "link": "/" }
         ]
       },
       {
         "Head": "Yoğurt",
         "sublink": [
-          { "name": "Kaymaklı Yoğurt", "link": "/" },
-          { "name": "Sade Yoğurt", "link": "/" },
-          { "name": "Yoğurt Mayası ", "link": "/" },
-          { "name": "Süzme", "link": "/" },
-          { "name": "Çeşnili Yoğurt", "link": "/" },
-          { "name": "Meyveli Yoğurt ", "link": "/" },
-          { "name": "Sağlıklı Yaşam Yoğurtları ", "link": "/" },
-          { "name": "Büyüme Küpü  ", "link": "/" }
+          { "name": " Kaymaklı Yoğurt", "link": "/" },
+          { "name": " Sade Yoğurt", "link": "/" },
+          { "name": " Yoğurt Mayası ", "link": "/" },
+          { "name": " Süzme", "link": "/" },
+          { "name": " Çeşnili Yoğurt", "link": "/" },
+          { "name": " Meyveli Yoğurt", "link": "/" },
+          { "name": " Sağlıklı Yaşam Yoğurtları", "link": "/" },
+          { "name": " Büyüme Küpü", "link": "/" }
         ]
       },
       {
         "Head": "Kahvaltılıklar ",
         "sublink": [
-          { "name": "Bal", "link": "/" },
-          { "name": "Helva ", "link": "/" },
-          { "name": "Tahin ", "link": "/" },
-          { "name": "Pekmez ", "link": "/" },
-          { "name": "Kahvlatılık Gevrek ", "link": "/" },
-          { "name": "Krem Çikolata  ", "link": "/" },
-          { "name": "Ezmeler  ", "link": "/" },
-          { "name": "Reçel  ", "link": "/" },
-          { "name": "Marmelat  ", "link": "/" },
-          { "name": "Kahvaltılık Sos  ", "link": "/" }
+          { "name": " Bal", "link": "/" },
+          { "name": " Helva", "link": "/" },
+          { "name": " Tahin", "link": "/" },
+          { "name": " Pekmez", "link": "/" },
+          { "name": " Kahvaltılık Gevrek", "link": "/" },
+          { "name": " Krem Çikolata", "link": "/" },
+          { "name": " Ezmeler", "link": "/" },
+          { "name": " Reçel", "link": "/" },
+          { "name": " Marmelat", "link": "/" },
+          { "name": " Kahvaltılık Sos", "link": "/" }
         ]
       },
       {
-        "Head": "Sütlü Tatlı, Krema ",
+        "Head": "Sütlü Tatlı, Krema",
         "sublink": [
-          { "name": "Sütlü Tatlılar", "link": "/" },
-          { "name": "Puding ", "link": "/" },
-          { "name": "Kaymak ", "link": "/" },
-          { "name": "Krema ve Sos ", "link": "/" }
+          { "name": " Sütlü Tatlılar", "link": "/" },
+          { "name": " Puding", "link": "/" },
+          { "name": " Kaymak", "link": "/" },
+          { "name": " Krema ve Sos", "link": "/" }
         ]
       },
       {
-        "Head": "Margarin ",
+        "Head": "Margarin",
         "sublink": [
-          { "name": "Kase Margarin", "link": "/" },
-          { "name": "Paket Margarin ", "link": "/" },
-          { "name": "Sıvı Margarin ", "link": "/" }
+          { "name": " Kase Margarin", "link": "/" },
+          { "name": " Paket Margarin", "link": "/" },
+          { "name": " Sıvı Margarin", "link": "/" }
         ]
       },
       {
-        "Head": "Zeytin ",
+        "Head": "Zeytin",
         "sublink": [
-          { "name": "Siyah Zeytin", "link": "/" },
-          { "name": "Yeşil Zeytin ", "link": "/" },
-          { "name": "Zeytin Ezmesi ", "link": "/" }
+          { "name": " Siyah Zeytin", "link": "/" },
+          { "name": " Yeşil Zeytin", "link": "/" },
+          { "name": " Zeytin Ezmesi", "link": "/" }
         ]
       },
       {
-        "Head": "Süt ",
+        "Head": "Süt",
         "sublink": [
-          { "name": "Günlük Süt", "link": "/" },
-          { "name": "Uzun Ömürlü Süt ", "link": "/" }
+          { "name": " Günlük Süt", "link": "/" },
+          { "name": " Uzun Ömürlü Süt", "link": "/" }
         ]
       },
       {
-        "Head": "Tereyağı ",
+        "Head": "Tereyağı",
         "sublink": [{ "name": "", "link": "/" }]
       },
       {
-        "Head": "Yumurta ",
+        "Head": "Yumurta",
         "sublink": [{ "name": "", "link": "/" }]
       }
     ]

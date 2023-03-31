@@ -26,83 +26,91 @@ const CategoriesDropdown = () => {
           className="mr-4 w-5 h-5 "
         />
         <span className="flex-col"> KATEGORİLER </span>
-        <div className="group-hover/underline:bg-primary  absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
-        <div className="group-hover:bg-black  group-hover:bg-opacity-20 hidden group-hover:flex inset-x-0   absolute   h-[700px] mt-[32px]  ">
-          <div className="group-hover:bg-white group/info z-10 absolute  w-[230px]   h-[600px] ml-32 rounded-bl-lg flex-col">
-            <div className="group-hover/info:bg-white  ml-[230px] absolute rounded-br-lg  z-0 w-[1080px] h-[600px]"></div>
 
-            <div className="hover:bg-primary z-10 group/edit  hover:bg-opacity-20 h-10 w-[300px] flex  relative ">
-              <div className="absolute group-hover/edit:bg-primary h-[38px] w-[6px] rounded-br-lg rounded-tr-lg"></div>
-              <h1 className="text-green-600 group-hover/edit:text-primary z-10 mt-2 group/fix  ml-6 items-center ">
-                Tüm İndirimli Ürünler
-              </h1>{" "}
-              <div className="w-[28px] z-10 overflow-hidden absolute ml-[300px]">
-                <div className=" h-[64px] z-10  group-hover/edit:bg-primary group-hover/edit:bg-opacity-20 rotate-45 transform origin-top-left"></div>
-              </div>{" "}
-            </div>
-            <div className="hover:bg-primary  z-10 group/edit hover:bg-opacity-20 h-10 w-[300px] relative flex  ">
-              <div className="absolute group-hover/edit:bg-primary h-[38px] w-[6px] rounded-br-lg rounded-tr-lg"></div>
-              <h1 className="text-primary z-10 mt-2 ml-6">Sadece Migros'ta</h1>
-              <div className="w-[28px] z-10  overflow-hidden absolute ml-[300px]">
-                <div className=" h-[64px] z-10  group-hover/edit:bg-primary group-hover/edit:bg-opacity-20 rotate-45 transform origin-top-left"></div>
-              </div>{" "}
-            </div>
-            {links.map((link: any) => (
-              <div className="group/link">
-                <div className="hover:bg-primary  z-10 group/edit hover:bg-opacity-20 h-10 w-[300px] relative flex  ">
-                  <div className="absolute group-hover/edit:bg-primary h-[38px] w-[6px] rounded-br-lg rounded-tr-lg"></div>
-                  <h1
-                    key={link.name}
-                    className="text-black font-normal group-hover/edit:text-primary z-10 mt-2 ml-6"
-                  >
-                    {link.name}
-                  </h1>
-                  <div className="w-[28px] z-10  overflow-hidden absolute ml-[300px]">
-                    <div className=" h-[64px] z-10  group-hover/edit:bg-primary group-hover/edit:bg-opacity-20 rotate-45 transform origin-top-left"></div>
-                  </div>{" "}
-                </div>
-                {link.submenu && (
-                  <div>
-                    <div className="absolute ml-[300px] h-[600px] top-0 z-9 w-[1000px] hidden group-hover/link:block hover:block ">
-                      <div className="">
-                        <div
-                          className="w-12 h-12  absolute 
+        <div className="group-hover/underline:bg-primary  absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
+        <div className="group/close">
+          <div className="group-hover:bg-black z-0   group-hover:bg-opacity-20 hidden group-hover:flex inset-x-0   absolute   h-[700px] mt-[32px]  ">
+            <div className="group-hover:bg-white group/info z-10 absolute  w-[230px]   h-[600px] ml-32 rounded-bl-lg flex-col">
+              <div className="group-hover/info:bg-white  ml-[230px] absolute rounded-br-lg  z-0 w-[1080px] h-[600px]"></div>
+
+              <div className="hover:bg-primary z-10 group/edit  hover:bg-opacity-20 h-10 w-[300px] flex  relative ">
+                <div className="absolute group-hover/edit:bg-primary h-[38px] w-[6px] rounded-br-lg rounded-tr-lg"></div>
+                <h1 className="text-green-600 group-hover/edit:text-primary z-10 mt-2 group/fix  ml-6 items-center ">
+                  Tüm İndirimli Ürünler
+                </h1>{" "}
+                <div className="w-[28px] z-10 overflow-hidden absolute ml-[300px]">
+                  <div className=" h-[64px] z-10  group-hover/edit:bg-primary group-hover/edit:bg-opacity-20 rotate-45 transform origin-top-left"></div>
+                </div>{" "}
+              </div>
+              <div className="hover:bg-primary  z-10 group/edit hover:bg-opacity-20 h-10 w-[300px] relative flex  ">
+                <div className="absolute group-hover/edit:bg-primary h-[38px] w-[6px] rounded-br-lg rounded-tr-lg"></div>
+                <h1 className="text-primary z-10 mt-2 ml-6">
+                  Sadece Migros'ta
+                </h1>
+                <div className="w-[28px] z-10  overflow-hidden absolute ml-[300px]">
+                  <div className=" h-[64px] z-10  group-hover/edit:bg-primary group-hover/edit:bg-opacity-20 rotate-45 transform origin-top-left"></div>
+                </div>{" "}
+              </div>
+              {links.map((link: any) => (
+                <div className="group/link">
+                  <div className="hover:bg-primary  z-10 group/edit hover:bg-opacity-20 h-10 w-[300px] relative flex  ">
+                    <div className="absolute group-hover/edit:bg-primary h-[38px] w-[6px] rounded-br-lg rounded-tr-lg"></div>
+                    <Link
+                      to={link.link}
+                      key={link.name}
+                      className="text-black font-normal group-hover/edit:text-primary z-10 mt-2 ml-6"
+                    >
+                      <h1>{link.name}</h1>
+                    </Link>
+                    <div className="w-[28px] z-10  overflow-hidden absolute ml-[300px]">
+                      <div className=" h-[64px] z-10  group-hover/edit:bg-primary group-hover/edit:bg-opacity-20 rotate-45 transform origin-top-left"></div>
+                    </div>{" "}
+                  </div>
+                  {link.submenu && (
+                    <div>
+                      <div className="absolute ml-[300px] h-[600px] top-0 z-9 w-[1000px] hidden group-hover/link:block hover:block ">
+                        <div className="">
+                          <div
+                            className="w-12 h-12  absolute 
                    bg-white "
-                        ></div>
-                      </div>
-                      <div className="bg-white  ml-[100px] grid grid-cols-2">
-                        {link.sublinks.map((mysublinks: any) => (
-                          <div>
-                            <h1
-                              key={mysublinks.Head}
-                              className="text-sm flex items-center text-primary hover:underline decoration-primary p-5 h-[10px] w-[300px]"
-                            >
-                              {mysublinks.Head}
-                            </h1>
-                            <div className="    items-center w-[420px] flex-wrap flex ml-[20px] ">
-                              {mysublinks.sublink.map((slink: any, i: any) => (
-                                <div
-                                  key={slink.name}
-                                  className="text-xs text-gray-900 items-center h-[30px] "
-                                >
-                                  {" "}
-                                  <h3 className="hover:text-primary  items-center font-normal  ">
-                                    {slink.name}
-                                    {i === mysublinks.sublink.length - 1
-                                      ? ""
-                                      : " ,"}
-                                  </h3>
-                                </div>
-                              ))}
+                          ></div>
+                        </div>
+                        <div className="bg-white  ml-[100px] grid grid-cols-2">
+                          {link.sublinks.map((mysublinks: any) => (
+                            <div>
+                              <h1
+                                key={mysublinks.Head}
+                                className="text-sm flex items-center text-primary hover:underline decoration-primary p-5 h-[10px] w-[300px]"
+                              >
+                                {mysublinks.Head}
+                              </h1>
+                              <div className="    items-center w-[420px] flex-wrap flex ml-[20px] ">
+                                {mysublinks.sublink.map(
+                                  (slink: any, i: any) => (
+                                    <div
+                                      key={slink.name}
+                                      className="text-xs text-gray-900 items-center h-[30px] "
+                                    >
+                                      {" "}
+                                      <h3 className="hover:text-primary  items-center font-normal  ">
+                                        {slink.name}
+                                        {i === mysublinks.sublink.length - 1
+                                          ? ""
+                                          : ","}
+                                      </h3>
+                                    </div>
+                                  )
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
