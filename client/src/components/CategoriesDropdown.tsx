@@ -92,12 +92,12 @@ const CategoriesDropdown = () => {
                                       className="text-xs text-gray-900 items-center h-[30px] "
                                     >
                                       {" "}
-                                      <h3 className="hover:text-primary  items-center font-normal  ">
+                                      <span className="hover:text-primary  items-center font-normal  ">
                                         {slink.name}
                                         {i === mysublinks.sublink.length - 1
-                                          ? ""
-                                          : ","}
-                                      </h3>
+                                          ? " "
+                                          : `${","}\u00A0`}
+                                      </span>
                                     </div>
                                   )
                                 )}

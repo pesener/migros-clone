@@ -145,9 +145,9 @@
       {
         "Head": "Zeytin",
         "sublink": [
-          { "name": " Siyah Zeytin", "link": "/" },
-          { "name": " Yeşil Zeytin", "link": "/" },
-          { "name": " Zeytin Ezmesi", "link": "/" }
+          [{ "name": " Siyah Zeytin", "link": "/" }],
+          [{ "name": " Yeşil Zeytin", "link": "/" }],
+          [{ "name": " Zeytin Ezmesi", "link": "/" }]
         ]
       },
       {
