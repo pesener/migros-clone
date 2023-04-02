@@ -19,7 +19,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
 
   return (
     <div className="w-full h-[1500px] z-0 ">
-      {links?.map((link: any) => (
+      {Object.keys(links)?.map((link: any) => (
         <div className=" w-[250px] ml-[50px] flex items-center justify-center text-sm">
           <div className="cursor-pointer mr-4">Anasayfa</div>{" "}
           <BiChevronRight size={20} />{" "}
@@ -28,7 +28,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
           </div>{" "}
         </div>
       ))}
-      {links?.map((link: any) => (
+      {Object.keys(links)?.map((link: any) => (
         <div className="h-[700px] mt-5 absolute w-[340px]  border-2 rounded ml-[50px]">
           <div className="h-[100px] border-b ">
             {" "}
