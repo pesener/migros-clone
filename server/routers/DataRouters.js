@@ -3,6 +3,7 @@ import Neighborhood from "../models/neighborhood.js";
 import City from "../models/city.js";
 import District from "../models/district.js";
 import Products from "../models/products.js";
+import products from "../models/products.js";
 const router = express.Router();
 
 router.post("/dropdownNeigh", async (req, res) => {
@@ -42,6 +43,20 @@ router.get("/products", async (req, res) => {
     res.status(200).json(products);
   } catch (error) {
     res.status(404).json({ message: error.message });
+  }
+});
+router.get("/products/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log("get", req.params);
+  try {
+    const product = await Products.findById(id);
+
+    if (!product) return;
+    res.status(200).json(product);
+    console.log("getProducts", product);
+  } catch (error) {
+    res.status(404).json({ message: "products not found" });
+    console.log("products not ok", error);
   }
 });
 

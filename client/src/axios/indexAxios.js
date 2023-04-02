@@ -15,3 +15,4 @@ export const getDataNeighborhood = async (district_id) =>
 /// Products
 
 export const getProducts = async () => await HTTP.get("/home/products");
+export const getProduct = async (id) => await HTTP.get("/home/products/" + id);

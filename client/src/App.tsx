@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MeyveSebze from "./components/Screens/MeyveSebze";
+
+import SelectedCategoryScreen from "./components/Screens/SelectedCategoryScreen";
 import HomeScreen from "./components/Screens/HomeScreen";
-import SutKahval from "./components/Screens/SutKahval";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -33,9 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeScreen />} />
 
-          <Route path="/meyveSebze" element={<MeyveSebze />} />
-
-          <Route path="/sutKahval" element={<SutKahval />} />
+          <Route path="/products/:id" element={<SelectedCategoryScreen />} />
         </Routes>
       </main>
     </Router>
