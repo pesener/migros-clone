@@ -17,8 +17,8 @@ const CategoriesDropdown = () => {
   }, []);
 
   return (
-    <div>
-      <div className="ml-[125px]  z-10  w-[140px] mt-4 group group/underline font-bold p-1   cursor-pointer text-sm  relative flex  ">
+    <div className="relative flex focus:hidden">
+      <div className="ml-[125px]   z-10  w-[140px] mt-4 group group/underline font-bold p-1   cursor-pointer text-sm   flex  ">
         <img
           src="https://www.migros.com.tr/assets/icons/categories.svg"
           alt="categories"

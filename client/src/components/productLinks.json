@@ -112,11 +112,10 @@
       },
       {
         "Head": "Kahvaltılıklar ",
+        "SubHead": "Kahvaltılıklar",
         "sublink": [
           { "name": " Bal", "link": "/" },
-          { "name": " Helva", "link": "/" },
-          { "name": " Tahin", "link": "/" },
-          { "name": " Pekmez", "link": "/" },
+          { "name": " Helva, Tahin, Pekmez", "link": "/" },
           { "name": " Kahvaltılık Gevrek", "link": "/" },
           { "name": " Krem Çikolata", "link": "/" },
           { "name": " Ezmeler", "link": "/" },
