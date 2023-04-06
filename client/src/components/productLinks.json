@@ -39,6 +39,7 @@
     "name": "Et, Tavuk, Balık",
     "link": "/etler",
     "submenu": true,
+    "SubHead": "Alt Kategori",
     "sublinks": [
       {
         "Head": "Et Şarküteri",
@@ -115,7 +116,11 @@
         "SubHead": "Kahvaltılıklar",
         "sublink": [
           { "name": " Bal", "link": "/" },
-          { "name": " Helva, Tahin, Pekmez", "link": "/" },
+          {
+            "name": " Helva, Tahin, Pekmez",
+            "link": "/",
+            "img": "https://images.migrosone.com/sanalmarket/product/07085750/07085750-c7c32b.jpg"
+          },
           { "name": " Kahvaltılık Gevrek", "link": "/" },
           { "name": " Krem Çikolata", "link": "/" },
           { "name": " Ezmeler", "link": "/" },
@@ -136,7 +141,10 @@
       {
         "Head": "Margarin",
         "sublink": [
-          { "name": " Kase Margarin", "link": "/" },
+          {
+            "name": " Kase Margarin",
+            "link": "/"
+          },
           { "name": " Paket Margarin", "link": "/" },
           { "name": " Sıvı Margarin", "link": "/" }
         ]

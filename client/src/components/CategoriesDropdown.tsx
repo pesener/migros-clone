@@ -26,7 +26,7 @@ const CategoriesDropdown = () => {
         />
         <span className="flex-col"> KATEGORİLER </span>
 
-        <div className="group-hover/underline:bg-primary  absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
+        <div className="group-hover/underline:bg-primary   absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
         <div className="group/close">
           <div className="group-hover:bg-black z-0   group-hover:bg-opacity-20 hidden group-hover:flex inset-x-0   absolute   h-[700px] mt-[32px]  ">
             <div className="group-hover:bg-white group/info z-10 absolute  w-[230px]   h-[600px] ml-32 rounded-bl-lg flex-col">
