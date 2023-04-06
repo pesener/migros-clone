@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import SelectedCategoryScreen from "./components/Screens/SelectedCategoryScreen";
 import HomeScreen from "./components/Screens/HomeScreen";
+import ProductDetail from "./components/Screens/ProductDetail";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -34,6 +35,7 @@ function App() {
           <Route path="/" element={<HomeScreen />} />
 
           <Route path="/products/:id" element={<SelectedCategoryScreen />} />
+          <Route path="/details/:id/" element={<ProductDetail />} />
         </Routes>
       </main>
     </Router>

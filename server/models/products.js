@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 
 const productsSchema = mongoose.Schema({
-  title: {
+  name: {
     type: String,
   },
-  subtilte: {
-    type: String,
-  },
+
   link: {
     type: String,
   },

@@ -3,9 +3,7 @@ import SutSlides from "./slides/sutSlides";
 import { BiChevronRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
-
 import { getProduct } from "../axios/indexAxios";
-import ProductCards from "./ProductCards";
 
 const SelectedCategory = ({ id }: { id: any }) => {
   const [links, setLinks] = useState<any>([]);
@@ -81,18 +79,24 @@ const SelectedCategory = ({ id }: { id: any }) => {
       <div className="ml-[420px] mt-[330px] ">
         {links?.sublinks?.map((mysublinks: any) => (
           <div className="grid grid-cols-5  ">
-            {mysublinks.product?.map((slink: any) => (
+            {mysublinks.product?.map((plink: any) => (
               <div className=" ">
                 <div className=" h-[400px] ml- w-[220px] relative border mb-3 border-gray-400 rounded ">
-                  <img alt="" className="mt-2 cursor-pointer" src={slink.img} />
-                  <div className="font-semibold mx-2 text-sm cursor-pointer">
-                    {slink.name}
-                  </div>
+                  <Link to={`/details/${plink._id}`}>
+                    <img
+                      alt=""
+                      className="mt-2 cursor-pointer"
+                      src={plink.img}
+                    />
+                    <div className="font-semibold mx-2 text-sm cursor-pointer">
+                      {plink.name}
+                    </div>
+                  </Link>
                   <br></br>
 
                   <div className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default">
                     {" "}
-                    {slink.price}{" "}
+                    {plink.price}{" "}
                   </div>
 
                   <div className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer">

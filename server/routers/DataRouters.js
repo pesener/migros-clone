@@ -60,4 +60,20 @@ router.get("/products/:id", async (req, res) => {
   }
 });
 
+///Detail
+
+router.get("/details/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log("get", req.params);
+  try {
+    const detail = await Products.findById(id);
+
+    if (!detail) return;
+    res.status(200).json(detail);
+    console.log("getProductDetail", detail);
+  } catch (error) {
+    res.status(404).json({ message: "productDetail not found" });
+    console.log("productDetail not ok", error);
+  }
+});
 export default router;
