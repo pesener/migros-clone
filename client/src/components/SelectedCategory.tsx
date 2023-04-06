@@ -78,38 +78,32 @@ const SelectedCategory = ({ id }: { id: any }) => {
           <SutSlides />
         </div>
       </div>
-      <div className="ml-[420px] mt-[330px]  grid grid-cols-5">
+      <div className="ml-[420px] mt-[330px] ">
         {links?.sublinks?.map((mysublinks: any) => (
-          <div className="grid grid-cols-2">
-            <div className="h-[380px] w-[210px] border mb-3 border-gray-400 rounded">
-              <div>
-                {" "}
-                <div>
-                  <h1
-                    key={mysublinks.id}
-                    className="ml-6 font-normal text-md mt-4"
-                  >
-                    {}
-                  </h1>
-                  {mysublinks.sublink?.map((slink: any) => (
-                    <span
-                      key={slink._id}
-                      className="items-center font-normal  "
-                    >
-                      <img alt="" src={slink.img} />
-                      {slink.name}
-                    </span>
-                  ))}
+          <div className="grid grid-cols-5  ">
+            {mysublinks.product?.map((slink: any) => (
+              <div className=" ">
+                <div className=" h-[400px] ml- w-[220px] relative border mb-3 border-gray-400 rounded ">
+                  <img alt="" className="mt-2 cursor-pointer" src={slink.img} />
+                  <div className="font-semibold mx-2 text-sm cursor-pointer">
+                    {slink.name}
+                  </div>
+                  <br></br>
+
+                  <div className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default">
+                    {" "}
+                    {slink.price}{" "}
+                  </div>
+
+                  <div className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer">
+                    <AiOutlinePlus
+                      className="text-white  mt-1  ml-[5px]"
+                      size={30}
+                    />
+                  </div>
                 </div>
               </div>
-
-              <div className="w-[40px] h-[40px] shadow-xl relative mt-[10px]  bg-primary   ml-[150px] rounded cursor-pointer">
-                <AiOutlinePlus
-                  className="text-white absolute mt-1 ml-[5px]"
-                  size={30}
-                />
-              </div>
-            </div>
+            ))}
           </div>
         ))}
       </div>
