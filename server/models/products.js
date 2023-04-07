@@ -5,10 +5,10 @@ const productsSchema = mongoose.Schema({
     type: String,
   },
 
-  link: {
+  sublink: {
     type: String,
   },
-  sublink: {
+  product: {
     type: String,
   },
 });
