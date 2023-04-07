@@ -24,7 +24,7 @@ const CategoriesDropdown = () => {
           alt="categories"
           className="mr-4 w-5 h-5 "
         />
-        <span className="flex-col"> KATEGORİLER </span>
+        <span className="flex-col "> KATEGORİLER </span>
 
         <div className="group-hover/underline:bg-primary   absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
         <div className="group/close">
@@ -51,15 +51,18 @@ const CategoriesDropdown = () => {
                 </div>{" "}
               </div>
               {links.map((link: any) => (
-                <div className="group/link">
-                  <div className="hover:bg-primary  z-10 group/edit hover:bg-opacity-20 h-10 w-[300px] relative flex  ">
+                <div key={link.name} className="group/link">
+                  <div
+                    key={link.name}
+                    className="hover:bg-primary  z-10 group/edit hover:bg-opacity-20 h-10 w-[300px] relative flex  "
+                  >
                     <div className="absolute group-hover/edit:bg-primary h-[38px] w-[6px] rounded-br-lg rounded-tr-lg"></div>
                     <Link
                       to={`/products/${link._id}`}
-                      key={link._id}
+                      key={link.name}
                       className="text-black font-normal  group-hover/edit:text-primary z-10 mt-2 ml-6"
                     >
-                      <h1>{link.name}</h1>
+                      <h1 key={link.name}>{link.name}</h1>
                     </Link>
                     <div className="w-[28px] z-10  overflow-hidden absolute ml-[300px]">
                       <div className=" h-[64px] z-10  group-hover/edit:bg-primary group-hover/edit:bg-opacity-20 rotate-45 transform origin-top-left"></div>
@@ -76,9 +79,9 @@ const CategoriesDropdown = () => {
                         </div>
                         <div className="bg-white  ml-[100px] z-10 grid grid-cols-2">
                           {link.sublinks.map((mysublinks: any) => (
-                            <div>
+                            <div key={mysublinks.Head}>
                               <h1
-                                key={mysublinks._id}
+                                key={mysublinks.Head}
                                 className="text-sm flex items-center text-primary hover:underline decoration-primary p-5 h-[10px] w-[300px]"
                               >
                                 {mysublinks.Head}
@@ -86,10 +89,13 @@ const CategoriesDropdown = () => {
                               <div className="    items-center w-[420px] flex-wrap flex ml-[20px] ">
                                 {mysublinks.sublink.map(
                                   (slink: any, i: any) => (
-                                    <div className="text-xs text-gray-900 items-center h-[30px] ">
+                                    <div
+                                      key={slink.name}
+                                      className="text-xs text-gray-900 items-center h-[30px] "
+                                    >
                                       {" "}
                                       <span
-                                        key={slink._id}
+                                        key={slink.name}
                                         className="hover:text-primary  items-center font-normal  "
                                       >
                                         {slink.name}
