@@ -18,9 +18,7 @@ const Detail = ({ id }: { id: any }) => {
 
   return (
     <div>
-      <div className="bg-white border w-142 h-32 text-black" key={links._id}>
-        {links.name}
-      </div>
+      <div className="text-vlack bg-white w-20 h-20 border">{links.name}</div>
     </div>
   );
 };

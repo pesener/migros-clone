@@ -22,7 +22,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
   return (
     <div className="w-full absolute top-[220px] h-[1500px] z-0 ">
       <div className=" w-[250px] ml-[25px]  flex items-center justify-center text-sm">
-        <Link to={`/`} key={links._id}>
+        <Link to={`/`}>
           <div className="cursor-pointer mr-2">Anasayfa</div>{" "}
         </Link>
         <BiChevronRight size={20} />{" "}
@@ -32,25 +32,20 @@ const SelectedCategory = ({ id }: { id: any }) => {
       <div className="h-[700px] mt-5 absolute w-[330px]  border-2 rounded-lg ml-[55px]">
         <div className="h-[85px] border-b ">
           {" "}
-          <h1 key={links._id} className="ml-6 font-bold text-xl mt-4">
+          <h1 key={links.name} className="ml-6 font-bold text-xl mt-4">
             {links?.name}
           </h1>
           <div className="flex flex-col">
             {" "}
             {links?.sublinks?.map((mysublinks: any) => (
               <div>
-                <h1
-                  key={mysublinks.id}
-                  className="ml-6 font-normal text-md mt-4"
-                >
-                  {}
-                </h1>
+                <h1 className="ml-6 font-normal text-md mt-4">{}</h1>
                 {mysublinks.sublink?.map((slink: any) => (
                   <span
-                    key={slink._id}
+                    key={slink.name}
                     className="  items-center font-normal  "
                   >
-                    {slink.length}
+                    {}
                   </span>
                 ))}
               </div>
@@ -63,7 +58,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
             </div>{" "}
             {links?.sublinks?.map((mysublinks: any) => (
               <h1
-                key={mysublinks.id}
+                key={mysublinks.SubHead}
                 className="ml-6 font-normal text-md  cursor-pointer "
               >
                 {mysublinks.SubHead}
@@ -78,28 +73,41 @@ const SelectedCategory = ({ id }: { id: any }) => {
       </div>
       <div className="ml-[420px] mt-[330px] ">
         {links?.sublinks?.map((mysublinks: any) => (
-          <div className="grid grid-cols-5  ">
+          <div key={mysublinks.index} className="grid grid-cols-5  ">
             {mysublinks.product?.map((plink: any) => (
-              <div className=" ">
-                <div className=" h-[400px] ml- w-[220px] relative border mb-3 border-gray-400 rounded ">
-                  <Link to={`/details/${plink.id}`}>
+              <div key={plink.index} className=" ">
+                <div
+                  key={plink.index}
+                  className=" h-[400px] ml- w-[220px] relative border mb-3 border-gray-400 rounded "
+                >
+                  <Link to={`/details/${plink.id}`} key={plink.name}>
                     <img
+                      key={plink.img}
                       alt=""
                       className="mt-2 cursor-pointer"
                       src={plink.img}
                     />
-                    <div className="font-semibold mx-2 text-sm cursor-pointer">
+                    <div
+                      key={plink.name}
+                      className="font-semibold mx-2 text-sm cursor-pointer"
+                    >
                       {plink.name}
                     </div>
                   </Link>
                   <br></br>
 
-                  <div className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default">
+                  <div
+                    key={plink.price}
+                    className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
+                  >
                     {" "}
                     {plink.price}{" "}
                   </div>
 
-                  <div className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer">
+                  <div
+                    key={plink.index}
+                    className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                  >
                     <AiOutlinePlus
                       className="text-white  mt-1  ml-[5px]"
                       size={30}
