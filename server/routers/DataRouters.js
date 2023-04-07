@@ -63,10 +63,10 @@ router.get("/products/:id", async (req, res) => {
 ///Detail
 
 router.get("/details/:id", async (req, res) => {
-  const { p_id } = req.params;
+  const { id } = req.params;
   console.log("get", req.params);
   try {
-    const detail = await Products.findOne({ p_id: p_id });
+    const detail = await Products.findOne({ id: id });
 
     if (!detail) return;
     res.status(200).json(detail);

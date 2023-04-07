@@ -82,7 +82,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
             {mysublinks.product?.map((plink: any) => (
               <div className=" ">
                 <div className=" h-[400px] ml- w-[220px] relative border mb-3 border-gray-400 rounded ">
-                  <Link to={`/details/${plink._id}`}>
+                  <Link to={`/details/${plink.id}`}>
                     <img
                       alt=""
                       className="mt-2 cursor-pointer"

@@ -4,7 +4,7 @@ import { getProductDetail } from "../axios/indexAxios";
 const Detail = ({ id }: { id: any }) => {
   const [links, setLinks] = useState<any>([]);
   useEffect(() => {
-    getProductDetail({ p_id: id })
+    getProductDetail(id)
       .then((res: any) => {
         setLinks(res.data);
         console.log(res.data);

@@ -35,7 +35,7 @@ function App() {
           <Route path="/" element={<HomeScreen />} />
 
           <Route path="/products/:id" element={<SelectedCategoryScreen />} />
-          <Route path="/details/:id/" element={<ProductDetail />} />
+          <Route path="/details/:id" element={<ProductDetail />} />
         </Routes>
       </main>
     </Router>
