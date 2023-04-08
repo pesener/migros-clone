@@ -2,12 +2,12 @@ import React from "react";
 import Detail from "../Detail";
 import { useParams } from "react-router-dom";
 
-const ProductDetail = () => {
+const ProductDetail = ({ sid }: { sid: any }) => {
   const { id } = useParams();
 
   return (
     <div>
-      <Detail id={id} />
+      <Detail sid={sid} id={id} />
     </div>
   );
 };

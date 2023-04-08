@@ -1,24 +1,86 @@
 import React, { useState, useEffect } from "react";
-import { getProductDetail } from "../axios/indexAxios";
+import { getProduct } from "../axios/indexAxios";
+import { BiChevronRight } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
-const Detail = ({ id }: { id: any }) => {
+const Detail = ({ id, sid }: { id: any; sid: any }) => {
   const [links, setLinks] = useState<any>([]);
+
   useEffect(() => {
-    getProductDetail(id)
+    getProduct(sid)
       .then((res: any) => {
         setLinks(res.data);
         console.log(res.data);
-        console.log(id, " başarı id");
+        console.log(sid, " başarı id");
       })
       .catch((err: any) => {
         console.log(err);
-        console.log(id, " hata id");
+        console.log(sid, " hata id");
       });
-  }, [id]);
+  }, [sid]);
 
   return (
-    <div>
-      <div className="text-vlack bg-white w-20 h-20 border">{links.name}</div>
+    <div className="relative">
+      {" "}
+      <div>
+        <div className=" w-[400px] ml-[95px]   flex items-center justify-center text-sm">
+          <Link to={`/`}>
+            <div className="cursor-pointer mr-2">Anasayfa</div>{" "}
+          </Link>
+          <BiChevronRight size={20} />{" "}
+          <Link to={`/products/${sid}`}>
+            <div className="cursor-pointer  ml-2">{links?.name}</div>{" "}
+          </Link>
+          <BiChevronRight size={20} />
+          {links?.sublinks?.map((mysublinks: any) => (
+            <div className="cursor-default ml-1 "> {mysublinks.SubHead}</div>
+          ))}
+        </div>
+        <div className="mt-2 grid grid-cols-2">
+          {links?.sublinks?.map((mysublinks: any) => (
+            <div key={mysublinks.name} className=" ">
+              {mysublinks.product?.map((plink: any) => (
+                <div key={plink.name} className=" ">
+                  <div className="">
+                    {id === plink.id ? (
+                      <div className=" border border-gray-400 rounded-lg w-[600px] h-[600px]  ml-32 flex items-center justify-center">
+                        <img
+                          className=" w-[450px]  h-[450px] "
+                          alt=""
+                          src={plink.img}
+                        />
+                      </div>
+                    ) : (
+                      <div className="hidden  ">{""}</div>
+                    )}{" "}
+                  </div>
+
+                  <div>
+                    {" "}
+                    {id === plink.id ? (
+                      <div className="text-black text-lg font-bold">
+                        {plink.name}{" "}
+                      </div>
+                    ) : (
+                      <div className="hidden  ">{""}</div>
+                    )}{" "}
+                  </div>
+                  <div>
+                    {" "}
+                    {id === plink.id ? (
+                      <div className="text-black text-lg font-bold">
+                        {plink.price}{" "}
+                      </div>
+                    ) : (
+                      <div className="hidden  ">{""}</div>
+                    )}{" "}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

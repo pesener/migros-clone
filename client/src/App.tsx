@@ -8,6 +8,7 @@ import ProductDetail from "./components/Screens/ProductDetail";
 
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
+  const [sid, setSid] = useState<any>();
 
   useEffect(() => {
     setLoading(true);
@@ -34,8 +35,11 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeScreen />} />
 
-          <Route path="/products/:id" element={<SelectedCategoryScreen />} />
-          <Route path="/details/:id" element={<ProductDetail />} />
+          <Route
+            path="/products/:id"
+            element={<SelectedCategoryScreen setSid={setSid} />}
+          />
+          <Route path="/details/:id" element={<ProductDetail sid={sid} />} />
         </Routes>
       </main>
     </Router>
