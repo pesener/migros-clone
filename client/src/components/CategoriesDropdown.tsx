@@ -18,15 +18,18 @@ const CategoriesDropdown = () => {
 
   return (
     <div className="relative flex focus:hidden">
-      <div className="ml-[125px]   z-10  w-[140px] mt-4 group group/underline font-bold p-1   cursor-pointer text-sm   flex  ">
-        <img
-          src="https://www.migros.com.tr/assets/icons/categories.svg"
-          alt="categories"
-          className="mr-4 w-5 h-5 "
-        />
-        <span className="flex-col "> KATEGORİLER </span>
+      <div className="ml-[125px]     w-[140px] mt-4 group  font-bold p-1   cursor-pointer text-sm   flex  ">
+        <div className="flex group/underline">
+          {" "}
+          <img
+            src="https://www.migros.com.tr/assets/icons/categories.svg"
+            alt="categories"
+            className="mr-4 w-5 h-5 "
+          />
+          <div className=" "> KATEGORİLER </div>
+          <div className="group-hover/underline:bg-primary   absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
+        </div>
 
-        <div className="group-hover/underline:bg-primary   absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
         <div className="group/close">
           <div className="group-hover:bg-black z-0   group-hover:bg-opacity-20 hidden group-hover:flex inset-x-0   absolute   h-[700px] mt-[32px]  ">
             <div className="group-hover:bg-white group/info z-10 absolute  w-[230px]   h-[600px] ml-32 rounded-bl-lg flex-col">
