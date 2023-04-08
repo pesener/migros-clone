@@ -20,10 +20,10 @@ const Detail = ({ id, sid }: { id: any; sid: any }) => {
   }, [sid]);
 
   return (
-    <div className="relative">
+    <div className="relative flex w-full h-full">
       {" "}
-      <div>
-        <div className=" w-[400px] ml-[95px]   flex items-center justify-center text-sm">
+      <div className="relative flex">
+        <div className=" w-[450px] ml-[129px] absolute -top-6 flex items-center  text-sm">
           <Link to={`/`}>
             <div className="cursor-pointer mr-2">Anasayfa</div>{" "}
           </Link>
