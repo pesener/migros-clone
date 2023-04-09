@@ -20,8 +20,8 @@ const SelectedCategory = ({ id }: { id: any }) => {
   }, [id]);
 
   return (
-    <div>
-      <div className="w-full absolute top-[220px] h-[1500px] z-0 ">
+    <div className="">
+      <div className="w-full  top-[220px] h-[1500px] z-0 ">
         <div className=" w-[250px] ml-[25px]  flex items-center justify-center text-sm">
           <Link to={`/`}>
             <div className="cursor-pointer mr-2">Anasayfa</div>{" "}

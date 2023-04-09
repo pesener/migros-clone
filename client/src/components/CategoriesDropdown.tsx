@@ -17,8 +17,8 @@ const CategoriesDropdown = () => {
   }, []);
 
   return (
-    <div className="relative flex focus:hidden">
-      <div className="ml-[125px]     w-[140px] mt-4 group  font-bold p-1   cursor-pointer text-sm   flex  ">
+    <div className="relative flex z-10">
+      <div className="ml-[125px]  z-90   w-[140px] mt-4 group  font-bold p-1   cursor-pointer text-sm   flex  ">
         <div className="flex group/underline">
           {" "}
           <img
@@ -30,7 +30,7 @@ const CategoriesDropdown = () => {
           <div className="group-hover/underline:bg-primary   absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
         </div>
 
-        <div className="group/close">
+        <div className="group/close ">
           <div className="group-hover:bg-black z-0   group-hover:bg-opacity-20 hidden group-hover:flex inset-x-0   absolute   h-[700px] mt-[32px]  ">
             <div className="group-hover:bg-white group/info z-10 absolute  w-[230px]   h-[600px] ml-32 rounded-bl-lg flex-col">
               <div className="group-hover/info:bg-white  ml-[230px] absolute rounded-br-lg  z-1 w-[1080px] h-[600px]"></div>
