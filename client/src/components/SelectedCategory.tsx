@@ -9,11 +9,12 @@ import { TbArrowsDownUp } from "react-icons/tb";
 const SelectedCategory = ({ id }: { id: any }) => {
   const [links, setLinks] = useState<any>([]);
   const [open, setOpen] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<any>();
+  const [selectedItem, setSelectedItem] = useState<any>("Önerilenler");
+
   const sortData = [
     { name: "Önerilenler" },
-    { name: "Önce En Düşük" },
-    { name: "Önce En Yüksek" },
+    { name: "Önce En Düşük Fiyat" },
+    { name: "Önce En Yüksek Fiyat" },
   ];
 
   useEffect(() => {
@@ -96,7 +97,9 @@ const SelectedCategory = ({ id }: { id: any }) => {
                 {selectedItem ? (
                   <h1 className="text-black ml-12 text-md">{selectedItem}</h1>
                 ) : (
-                  <h3 className="text-black ml-12 text-md">Önerilenler</h3>
+                  <h3 className="text-black ml-12 text-md">
+                    {sortData[0].name}
+                  </h3>
                 )}
               </div>
               <ul
@@ -130,48 +133,142 @@ const SelectedCategory = ({ id }: { id: any }) => {
               key={mysublinks.index}
               className="grid grid-cols-5  w-[1100px] gap-0 p-0 "
             >
-              {mysublinks.product?.map((plink: any) => (
-                <div key={plink.index} className=" p-0">
-                  <div
-                    key={plink.index}
-                    className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
-                  >
-                    <Link to={`/details/${plink.id}`} key={plink.name}>
-                      <img
-                        key={plink.img}
-                        alt=""
-                        className="mt-2 cursor-pointer"
-                        src={plink.img}
-                      />
-                      <div
-                        key={plink.name}
-                        className="font-semibold mx-2 text-sm cursor-pointer"
-                      >
-                        {plink.name}
+              {selectedItem === "Önce En Düşük Fiyat"
+                ? mysublinks.product
+                    ?.sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
+                    .map((plink: any) => (
+                      <div key={plink.index} className=" p-0">
+                        <div
+                          key={plink.index}
+                          className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
+                        >
+                          <Link to={`/details/${plink.id}`} key={plink.name}>
+                            <img
+                              key={plink.img}
+                              alt=""
+                              className="mt-2 cursor-pointer"
+                              src={plink.img}
+                            />
+                            <div
+                              key={plink.name}
+                              className="font-semibold mx-2 text-sm cursor-pointer"
+                            >
+                              {plink.name}
+                            </div>
+                          </Link>
+                          <br></br>
+
+                          <div
+                            key={plink.price}
+                            className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
+                          >
+                            {" "}
+                            {plink.price}{" "}
+                          </div>
+
+                          <div
+                            key={plink.index}
+                            className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                          >
+                            <AiOutlinePlus
+                              className="text-white  mt-1  ml-[5px]"
+                              size={30}
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </Link>
-                    <br></br>
+                    ))
+                : selectedItem === "Önce En Yüksek Fiyat"
+                ? mysublinks.product
+                    ?.sort((a: any, b: any) => (a.price > b.price ? -1 : 1))
+                    .map((plink: any) => (
+                      <div key={plink.index} className=" p-0">
+                        <div
+                          key={plink.index}
+                          className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
+                        >
+                          <Link to={`/details/${plink.id}`} key={plink.name}>
+                            <img
+                              key={plink.img}
+                              alt=""
+                              className="mt-2 cursor-pointer"
+                              src={plink.img}
+                            />
+                            <div
+                              key={plink.name}
+                              className="font-semibold mx-2 text-sm cursor-pointer"
+                            >
+                              {plink.name}
+                            </div>
+                          </Link>
+                          <br></br>
 
-                    <div
-                      key={plink.price}
-                      className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
-                    >
-                      {" "}
-                      {plink.price}{" "}
-                    </div>
+                          <div
+                            key={plink.price}
+                            className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
+                          >
+                            {" "}
+                            {plink.price}{" "}
+                          </div>
 
-                    <div
-                      key={plink.index}
-                      className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
-                    >
-                      <AiOutlinePlus
-                        className="text-white  mt-1  ml-[5px]"
-                        size={30}
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))}
+                          <div
+                            key={plink.index}
+                            className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                          >
+                            <AiOutlinePlus
+                              className="text-white  mt-1  ml-[5px]"
+                              size={30}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                : selectedItem === "Önerilenler"
+                ? mysublinks.product
+                    ?.sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
+                    .map((plink: any) => (
+                      <div key={plink.index} className=" p-0">
+                        <div
+                          key={plink.index}
+                          className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
+                        >
+                          <Link to={`/details/${plink.id}`} key={plink.name}>
+                            <img
+                              key={plink.img}
+                              alt=""
+                              className="mt-2 cursor-pointer"
+                              src={plink.img}
+                            />
+                            <div
+                              key={plink.name}
+                              className="font-semibold mx-2 text-sm cursor-pointer"
+                            >
+                              {plink.name}
+                            </div>
+                          </Link>
+                          <br></br>
+
+                          <div
+                            key={plink.price}
+                            className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
+                          >
+                            {" "}
+                            {plink.price}{" "}
+                          </div>
+
+                          <div
+                            key={plink.index}
+                            className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                          >
+                            <AiOutlinePlus
+                              className="text-white  mt-1  ml-[5px]"
+                              size={30}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                : ""}
             </div>
           ))}
         </div>
