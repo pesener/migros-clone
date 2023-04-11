@@ -8,6 +8,13 @@ import { TbArrowsDownUp } from "react-icons/tb";
 
 const SelectedCategory = ({ id }: { id: any }) => {
   const [links, setLinks] = useState<any>([]);
+  const [open, setOpen] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<any>();
+  const sortData = [
+    { name: "Önerilenler" },
+    { name: "Önce En Düşük" },
+    { name: "Önce En Yüksek" },
+  ];
 
   useEffect(() => {
     getProduct(id)
@@ -53,27 +60,67 @@ const SelectedCategory = ({ id }: { id: any }) => {
                 </div>
               ))}
             </div>
-            <div className="border-b h-[80px]">
+            <div className="border-b h-[30px]">
               {" "}
-              <div className="cursor-default absolute top-32 font-semibold ml-6 text-lg">
+              <div className="cursor-default absolute top-28 font-bold ml-6 text-lg">
                 Alt Kategoriler
               </div>{" "}
               {links?.sublinks?.map((mysublinks: any) => (
                 <h1
                   key={mysublinks.SubHead}
-                  className="ml-6 font-normal text-md  cursor-pointer "
+                  className="ml-6 font-normal text-md  cursor-pointer  absolute top-[160px]"
                 >
                   {mysublinks.SubHead}
                 </h1>
               ))}
+            </div>
+            <div className="border-b h-[200px] font-bold ml-6 mt-4 text-lg">
+              {" "}
+              Markalar
             </div>
           </div>
           <div className="ml-[378px] top-8 absolute z-0">
             {" "}
             <SutSlides />
           </div>
-          <div className="w-[260px] h-[55px] border hover:border-[1.6px] border-black absolute ml-[1190px] rounded mt-[170px] cursor-pointer"></div>
-          <div className="text-black font-bold ml-[1225px] mt-[187px] ">
+          <div className="w-[260px] h-[55px]   border-black absolute ml-[1190px] rounded mt-[170px] cursor-pointer">
+            <div>
+              <div
+                onClick={() => {
+                  setOpen(!open);
+                }}
+                className={`  p-1 rounded  h-[56px]  transition duration-200 ${
+                  open ? "border-[2.4px] " : " border hover:border-[1.6px] "
+                }  border  border-black flex justify-between items-center  font-bold cursor-pointer`}
+              >
+                {selectedItem ? (
+                  <h1 className="text-black ml-12 text-md">{selectedItem}</h1>
+                ) : (
+                  <h3 className="text-black ml-12 text-md">Önerilenler</h3>
+                )}
+              </div>
+              <ul
+                className={`bg-white  overflow-y-auto w-[255px]  shadow-gray-400 shadow-sm rounded-b-lg ${
+                  open ? "h-50 border  absolute mt-[10px] z-10 " : "max-h-0"
+                }`}
+              >
+                {sortData?.map((item: any) => (
+                  <option
+                    onClick={() => {
+                      setSelectedItem(item.name);
+                      setOpen(!open);
+                    }}
+                    className={`p-4  text-md cursor-pointer  hover:text-orange-400 active:bg-gray-200    ${
+                      item?.name === selectedItem && "text-orange-400"
+                    }  `}
+                  >
+                    {item.name}
+                  </option>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="text-black font-bold ml-[1205px] mt-[187px] ">
             <TbArrowsDownUp size={22} />
           </div>
         </div>

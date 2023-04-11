@@ -27,27 +27,27 @@ const CategoriesDropdown = () => {
             {" "}
             KAMPANYALAR{" "}
           </div>
-          <div className="group-hover/underskin:bg-primary   absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
+          <div className="group-hover/underskin:bg-primary   absolute mt-[27px]  w-[140px] h-[6px] rounded-tr-lg rounded-tl-lg"></div>
         </div>
         <div className="group/underski z-30 absolute flex mt-[20px] ml-[400px] font-bold text-sm ">
-          <div className=" ml-7 group-hover/underski:text-primary cursor-pointer  ">
+          <div className=" ml-3 group-hover/underski:text-primary cursor-pointer  ">
             {" "}
             MİGROSKOP{" "}
           </div>
-          <div className="group-hover/underski:bg-primary   absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
+          <div className="group-hover/underski:bg-primary   absolute mt-[27px]  w-[110px] h-[6px] rounded-tr-lg rounded-tl-lg"></div>
         </div>
-        <div className="group/undersk z-30 absolute flex mt-[20px] ml-[540px] font-bold text-sm ">
+        <div className="group/undersk z-30 absolute flex mt-[20px] ml-[520px] font-bold text-sm ">
           <div className=" ml-0  w-[150px] group-hover/undersk:text-primary cursor-pointer ">
             {" "}
             ÇOKLU İNDİRİMLER{" "}
           </div>
-          <div className="group-hover/undersk:bg-primary   absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
+          <div className="group-hover/undersk:bg-primary   absolute mt-[27px]  w-[140px] h-[6px] rounded-tr-lg rounded-tl-lg"></div>
         </div>
-        <div className="group/unders z-30 absolute flex mt-[20px] ml-[700px] font-bold text-sm ">
+        <div className="group/unders z-30 absolute flex mt-[20px] ml-[680px] font-bold text-sm ">
           <div className=" ml-2 w-[170px] group-hover/unders:text-primary cursor-pointer ">
             MONEY İNDİRİMLİ
           </div>
-          <div className="group-hover/unders:bg-primary   absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
+          <div className="group-hover/unders:bg-primary   absolute mt-[27px]  w-[140px] h-[6px] rounded-tr-lg rounded-tl-lg"></div>
         </div>
       </div>
       <div className="relative flex z-20">
