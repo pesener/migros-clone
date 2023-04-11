@@ -35,7 +35,7 @@ const AdresModal = ({
 
   if (!isActive) return null;
   return (
-    <div className="fixed inset-0  bg-black bg-opacity-40 flex justify-center items-center ">
+    <div className="fixed inset-0 z-40 bg-black bg-opacity-40 flex justify-center items-center ">
       {!isOn ? (
         <div className="w-[600px] h-[550px]    bg-white rounded  align-top flex flex-col justify-center items-center">
           <div className="bg-white    mt-20 top-0 font-bold justify-between  flex ">

@@ -158,7 +158,7 @@ const AdressModal = ({
           alt="indicator"
         />
       ) : (
-        <div className="fixed  z-0 inset-0  flex justify-center items-center ">
+        <div className="fixed   inset-0 z-0  flex justify-center items-center ">
           <div className="w-[590px] h-[500px] relative  bg-white rounded  flex flex-col justify-center items-center">
             <div className="bg-white top-0 ml-2 absolute font-bold justify-between  flex ">
               <div className="flex flex-col items-center pt-2 justify-between ">
@@ -174,7 +174,7 @@ const AdressModal = ({
                   onClick={() => {
                     handleClick();
                   }}
-                  className="w-[50px] mt-5 ml-12  h-[50px] place-self-end rounded-full justify-center  items-center flex hover:bg-gray-50  cursor-pointer"
+                  className="w-[50px] mt-3 ml-12  h-[50px] z-10 rounded-full justify-center  items-center flex hover:bg-gray-50  cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -37,8 +37,8 @@ const Dropdown = ({
 }) => {
   return (
     <div
-      className={`flex-col flex relative  justify-center  items-center py-3.5 ${
-        !activation ? "cursor-not-allowed pointer-events-none opacity-20 " : ""
+      className={`flex-col flex relative   justify-center  items-center py-3.5 ${
+        !activation ? "cursor-not-allowed pointer-events-none opacity-20  " : ""
       } `}
     >
       {" "}

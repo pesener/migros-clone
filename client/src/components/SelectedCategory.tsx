@@ -4,6 +4,7 @@ import { BiChevronRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { getProduct } from "../axios/indexAxios";
+import { TbArrowsDownUp } from "react-icons/tb";
 
 const SelectedCategory = ({ id }: { id: any }) => {
   const [links, setLinks] = useState<any>([]);
@@ -30,7 +31,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
           <div className=" cursor-default ml-2">{links?.name}</div>{" "}
         </div>
 
-        <div className="h-[700px] mt-5 absolute w-[330px]  border-2 rounded-lg ml-[55px]">
+        <div className="h-[700px] mt-5 absolute w-[330px]  border-2 rounded-lg ml-[55px] ">
           <div className="h-[85px] border-b ">
             {" "}
             <h1 key={links.name} className="ml-6 font-bold text-xl mt-4">
@@ -67,19 +68,26 @@ const SelectedCategory = ({ id }: { id: any }) => {
               ))}
             </div>
           </div>
-          <div className="ml-[370px] top-8 absolute z-0">
+          <div className="ml-[378px] top-8 absolute z-0">
             {" "}
             <SutSlides />
           </div>
+          <div className="w-[260px] h-[55px] border hover:border-[1.6px] border-black absolute ml-[1190px] rounded mt-[170px] cursor-pointer"></div>
+          <div className="text-black font-bold ml-[1225px] mt-[187px] ">
+            <TbArrowsDownUp size={22} />
+          </div>
         </div>
-        <div className="ml-[420px] mt-[330px] ">
+        <div className="ml-[420px] mt-[380px] ">
           {links?.sublinks?.map((mysublinks: any) => (
-            <div key={mysublinks.index} className="grid grid-cols-5  ">
+            <div
+              key={mysublinks.index}
+              className="grid grid-cols-5  w-[1100px] gap-0 p-0 "
+            >
               {mysublinks.product?.map((plink: any) => (
-                <div key={plink.index} className=" ">
+                <div key={plink.index} className=" p-0">
                   <div
                     key={plink.index}
-                    className=" h-[400px] ml- w-[220px] relative border mb-3 border-gray-400 rounded "
+                    className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
                   >
                     <Link to={`/details/${plink.id}`} key={plink.name}>
                       <img
