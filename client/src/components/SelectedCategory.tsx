@@ -42,7 +42,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
         <div className="h-[700px] mt-5 absolute w-[330px]  border-2 rounded-lg ml-[55px] ">
           <div className="h-[85px] border-b ">
             {" "}
-            <h1 key={links.name} className="ml-6 font-bold text-xl mt-4">
+            <h1 key={links.uniqueId} className="ml-6 font-bold text-xl mt-4">
               {links?.name}
             </h1>
             <div className="flex flex-col">
@@ -52,7 +52,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
                   <h1 className="ml-6 font-normal text-md mt-4">{}</h1>
                   {mysublinks.sublink?.map((slink: any) => (
                     <span
-                      key={slink.name}
+                      key={slink.uniqueId}
                       className="  items-center font-normal  "
                     >
                       {}
@@ -61,21 +61,21 @@ const SelectedCategory = ({ id }: { id: any }) => {
                 </div>
               ))}
             </div>
-            <div className="border-b h-[30px]">
+            <div className="border-b h-[100px]">
               {" "}
               <div className="cursor-default absolute top-28 font-bold ml-6 text-lg">
                 Alt Kategoriler
               </div>{" "}
               {links?.sublinks?.map((mysublinks: any) => (
                 <h1
-                  key={mysublinks.SubHead}
+                  key={mysublinks.uniqueId}
                   className="ml-6 font-normal text-md  cursor-pointer  absolute top-[160px]"
                 >
                   {mysublinks.SubHead}
                 </h1>
               ))}
             </div>
-            <div className="border-b h-[200px] font-bold ml-6 mt-4 text-lg">
+            <div className="border-b h-[200px] absolute font-bold ml-6 mt-12 text-lg">
               {" "}
               Markalar
             </div>
@@ -130,27 +130,30 @@ const SelectedCategory = ({ id }: { id: any }) => {
         <div className="ml-[420px] mt-[380px] ">
           {links?.sublinks?.map((mysublinks: any) => (
             <div
-              key={mysublinks.index}
+              key={mysublinks.uniqueId}
               className="grid grid-cols-5  w-[1100px] gap-0 p-0 "
             >
               {selectedItem === "Önce En Düşük Fiyat"
                 ? mysublinks.product
                     ?.sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
                     .map((plink: any) => (
-                      <div key={plink.index} className=" p-0">
+                      <div key={plink.uniqueId} className=" p-0">
                         <div
-                          key={plink.index}
+                          key={plink.uniqueId}
                           className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
                         >
-                          <Link to={`/details/${plink.id}`} key={plink.name}>
+                          <Link
+                            to={`/details/${plink.id}`}
+                            key={plink.uniqueId}
+                          >
                             <img
-                              key={plink.img}
+                              key={plink.uniqueId}
                               alt=""
                               className="mt-2 cursor-pointer"
                               src={plink.img}
                             />
                             <div
-                              key={plink.name}
+                              key={plink.uniqueId}
                               className="font-semibold mx-2 text-sm cursor-pointer"
                             >
                               {plink.name}
@@ -159,15 +162,14 @@ const SelectedCategory = ({ id }: { id: any }) => {
                           <br></br>
 
                           <div
-                            key={plink.price}
+                            key={plink.uniqueId}
                             className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
                           >
-                            {" "}
-                            {plink.price}{" "}
+                            {plink.price}TL
                           </div>
 
                           <div
-                            key={plink.index}
+                            key={plink.uniqueId}
                             className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
                           >
                             <AiOutlinePlus
@@ -182,20 +184,23 @@ const SelectedCategory = ({ id }: { id: any }) => {
                 ? mysublinks.product
                     ?.sort((a: any, b: any) => (a.price > b.price ? -1 : 1))
                     .map((plink: any) => (
-                      <div key={plink.index} className=" p-0">
+                      <div key={plink.uniqueId} className=" p-0">
                         <div
-                          key={plink.index}
+                          key={plink.uniqueId}
                           className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
                         >
-                          <Link to={`/details/${plink.id}`} key={plink.name}>
+                          <Link
+                            to={`/details/${plink.id}`}
+                            key={plink.uniqueId}
+                          >
                             <img
-                              key={plink.img}
+                              key={plink.uniqueId}
                               alt=""
                               className="mt-2 cursor-pointer"
                               src={plink.img}
                             />
                             <div
-                              key={plink.name}
+                              key={plink.uniqueId}
                               className="font-semibold mx-2 text-sm cursor-pointer"
                             >
                               {plink.name}
@@ -204,7 +209,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
                           <br></br>
 
                           <div
-                            key={plink.price}
+                            key={plink.uniqueId}
                             className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
                           >
                             {" "}
@@ -212,7 +217,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
                           </div>
 
                           <div
-                            key={plink.index}
+                            key={plink.uniqueId}
                             className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
                           >
                             <AiOutlinePlus
@@ -227,20 +232,23 @@ const SelectedCategory = ({ id }: { id: any }) => {
                 ? mysublinks.product
                     ?.sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
                     .map((plink: any) => (
-                      <div key={plink.index} className=" p-0">
+                      <div key={plink.uniqueId} className=" p-0">
                         <div
-                          key={plink.index}
+                          key={plink.uniqueId}
                           className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
                         >
-                          <Link to={`/details/${plink.id}`} key={plink.name}>
+                          <Link
+                            to={`/details/${plink.id}`}
+                            key={plink.uniqueId}
+                          >
                             <img
-                              key={plink.img}
+                              key={plink.uniqueId}
                               alt=""
                               className="mt-2 cursor-pointer"
                               src={plink.img}
                             />
                             <div
-                              key={plink.name}
+                              key={plink.uniqueId}
                               className="font-semibold mx-2 text-sm cursor-pointer"
                             >
                               {plink.name}
@@ -249,15 +257,16 @@ const SelectedCategory = ({ id }: { id: any }) => {
                           <br></br>
 
                           <div
-                            key={plink.price}
-                            className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
+                            key={plink.uniqueId}
+                            className="text-primary absolute bottom-16 text-lg font-semibold ml-2 cursor-default"
                           >
                             {" "}
-                            {plink.price}{" "}
+                            {plink.price}
+                            {`\u00A0TL`}
                           </div>
 
                           <div
-                            key={plink.index}
+                            key={plink.uniqueId}
                             className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
                           >
                             <AiOutlinePlus
