@@ -5,11 +5,26 @@ import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { getProduct } from "../axios/indexAxios";
 import { TbArrowsDownUp } from "react-icons/tb";
+import { BiChevronDown } from "react-icons/bi";
 
 const SelectedCategory = ({ id }: { id: any }) => {
   const [links, setLinks] = useState<any>([]);
   const [open, setOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<any>("Önerilenler");
+  const [selectedFilter, setSelectedFilter] = useState<any>(null);
+  // const [checkedState, setCheckedState] = useState<any>(
+  //   new Array(
+  //     links?.sublinks
+  //       ?.map((mysublinks: any) => mysublinks.product?.length)
+  //       .fill(false)
+  //   )
+  // );
+  // const handleOnChange = (position: any) => {
+  //   const updatedCheckedState = checkedState.map((item: any, index: any) =>
+  //     index === position ? !item : item
+  //   );
+  //   setCheckedState(updatedCheckedState);
+  // };
 
   const sortData = [
     { name: "Önerilenler" },
@@ -21,6 +36,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
     getProduct(id)
       .then((res: any) => {
         setLinks(res.data);
+
         console.log(res.data);
       })
       .catch((err: any) => {
@@ -66,23 +82,59 @@ const SelectedCategory = ({ id }: { id: any }) => {
               <div className="cursor-default absolute top-28 font-bold ml-6 text-lg">
                 Alt Kategoriler
               </div>{" "}
-              {links?.sublinks?.map((mysublinks: any) => (
-                <h1
-                  key={mysublinks.uniqueId}
-                  className="ml-6 font-normal text-md  cursor-pointer  absolute top-[160px]"
-                >
-                  {mysublinks.SubHead}
-                </h1>
-              ))}
+              {links?.sublinks?.map((mysublinks: any) =>
+                mysublinks.product?.map((item: any) => (
+                  <h1
+                    key={mysublinks.uniqueId}
+                    className="ml-6 font-normal text-md  cursor-pointer  absolute top-[160px]"
+                  >
+                    {mysublinks.SubHead}
+                    {`\u00A0 (${mysublinks.product.length})`}
+                  </h1>
+                ))
+              )}
             </div>
-            <div className="border-b h-[200px] absolute font-bold ml-6 mt-12 text-lg">
+            <div className=" h-[40px] absolute font-bold ml-6 mt-6 text-lg">
               {" "}
               Markalar
+            </div>
+            <div className="border-b">
+              <input
+                placeholder="Marka Ara"
+                className="border-black indent-3 outline-none mt-20 rounded w-[280px] focus:border-[2.4px] h-[55px] mx-6 border hover:border-[1.6px] "
+              ></input>
+              <ul className="ml-6 mt-6  flex flex-col  h-40 w-[250px]  overflow-y-auto  justify-start">
+                {links?.sublinks?.map((mysublinks: any) =>
+                  mysublinks.product?.map((item: any) => (
+                    <div className="flex items-center mb-2">
+                      <input
+                        id="default-checkbox"
+                        className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
+                        type="checkbox"
+                        key={item.uniqueId}
+                        // checked={checkedState}
+                        // onChange={(index) => {
+                        //   handleOnChange(index);
+                        // }}
+                        onClick={() => {
+                          setSelectedFilter(item.brand);
+                        }}
+                      />
+
+                      <label key={item.uniqueId}>{item.brand}</label>
+                    </div>
+                  ))
+                )}
+              </ul>
             </div>
           </div>
           <div className="ml-[378px] top-8 absolute z-0">
             {" "}
-            <SutSlides />
+            {selectedFilter === null ? (
+              <SutSlides />
+            ) : (
+              <div className="text-lg bg-blue-300">{selectedFilter}</div>
+            )}
           </div>
           <div className="w-[260px] h-[55px]   border-black absolute ml-[1190px] rounded mt-[170px] cursor-pointer">
             <div>
@@ -125,6 +177,9 @@ const SelectedCategory = ({ id }: { id: any }) => {
           </div>
           <div className="text-black font-bold ml-[1205px] mt-[187px] ">
             <TbArrowsDownUp size={22} />
+          </div>
+          <div className="text-gray-400  ml-[1395px] absolute top-[280px]">
+            <BiChevronDown size={38} />
           </div>
         </div>
         <div className="ml-[420px] mt-[380px] ">

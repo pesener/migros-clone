@@ -39,7 +39,7 @@ const SutSlides = () => {
         className="w-full h-full rounded bg-center bg-cover z-1 transition-all  ease-in-out"
       ></div>
       {/* left arrow */}
-      <div className="absolute z-10 flex items-center justify-center  top-[50%]  translate-x-[-31%] h-8 w-16 translate-y-[-50%] left-1 bg-white   rounded-tl-full rounded-tr-full  rotate-90  text-gray-600 cursor-pointer shadow-lg">
+      <div className="absolute z-10 flex items-center justify-center  top-[50%]  translate-x-[-31%] h-8 w-16 translate-y-[-50%] left-[3.7px] bg-white   rounded-tl-full rounded-tr-full  rotate-90  text-gray-600 cursor-pointer shadow-lg">
         <div className=" mt-2     ">
           <BsChevronDown onClick={prevSlide} size={30} />
         </div>
