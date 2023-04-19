@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Meyve, Sebze",
+    "submenu": true,
+    "sublinks": [
+      {
+        "SubHead": "Meyve, Sebze",
+        "Head": "Meyve",
+        "sublink": [
+          { "name": " Egzotik Meyveler", "link": "/" },
+          { "name": " Kavun ve karpuz", "link": "/" },
+          { "name": " Narenciye", "link": "/" },
+          { "name": " Sert Meyveler", "link": "/" },
+          { "name": " Yumuşak Meyveler", "link": "/" },
+          { "name": " Kabuklu Kuruyemiş", "link": "/" }
+        ],
+        "product": [
+          {
+            "id": "MeyveLimon1",
+            "name": "Limon 1 Kg",
+            "img": "https://images.migrosone.com/hemen/product/27268060/27268060-1760f1.jpg",
+            "price": "19,90",
+            "brand": "Reyondan"
+          },
+          {
+            "id": "MeyvePortakal1",
+            "name": "Finike Portakal 1 Kg",
+            "img": "https://images.migrosone.com/hemen/product/27307085/27307085-3eaab6.jpg",
+            "price": "19,90",
+            "brand": "Reyondan"
+          }
+        ]
+      }
+    ]
+  }
+]

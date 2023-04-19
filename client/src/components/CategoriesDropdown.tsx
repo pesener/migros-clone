@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getProducts } from "../axios/indexAxios";
 import { Link } from "react-router-dom";
+import { fetchProducts } from "./actions/productActions";
+import { useAppDispatch, useAppSelector } from "../index";
 
 const CategoriesDropdown = () => {
-  const [links, setLinks] = useState<any>([]);
+  const dispatch = useAppDispatch();
+  const links = useAppSelector((state) => state.links);
 
   useEffect(() => {
-    getProducts()
-      .then((res) => {
-        setLinks(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(fetchProducts());
   }, []);
 
   return (

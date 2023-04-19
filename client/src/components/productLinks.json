@@ -20,14 +20,16 @@
             "name": "Limon 1 Kg",
             "img": "https://images.migrosone.com/hemen/product/27268060/27268060-1760f1.jpg",
             "price": "19,90",
-            "brand": "Reyondan"
+            "brand": "Reyondan",
+            "isChecked": false
           },
           {
             "id": "MeyvePortakal1",
             "name": "Finike Portakal 1 Kg",
             "img": "https://images.migrosone.com/hemen/product/27307085/27307085-3eaab6.jpg",
             "price": "19,90",
-            "brand": "Reyondan"
+            "brand": "Reyondan",
+            "isChecked": false
           }
         ]
       },
@@ -148,49 +150,56 @@
             "name": "Migros Tahin 470 G Ve Pekmez 600 G 2'li Paket",
             "img": "https://images.migrosone.com/sanalmarket/product/07085750/07085750-c7c32b.jpg",
             "price": "79,90",
-            "brand": "Migros"
+            "brand": "Migros",
+            "isChecked": false
           },
           {
             "id": "Helva1",
             "name": "Koska Kakaolu Helva Paket 500 G",
             "img": "https://images.migrosone.com/sanalmarket/product/07089976/koska-kakaolu-helva-paket-500-gr-d3fef7.jpg",
             "price": "62,90",
-            "brand": "Koska"
+            "brand": "Koska",
+            "isChecked": false
           },
           {
             "id": "Tahin2",
             "name": "Migros Tahin 600 G",
             "img": "https://images.migrosone.com/sanalmarket/product/07080167/07080167-3f4876.jpg",
             "price": "49,90",
-            "brand": "Migros"
+            "brand": "Migros",
+            "isChecked": false
           },
           {
             "id": "Bal1",
             "name": "Migros Çiçek Balı 460 G",
             "img": "https://images.migrosone.com/sanalmarket/product/07070955/07070955-723f85.jpg",
             "price": "56,90",
-            "brand": "Migros"
+            "brand": "Migros",
+            "isChecked": false
           },
           {
             "id": "Pekmez1",
             "name": "Migros Üzüm Pekmezi 800 G",
             "img": "https://images.migrosone.com/sanalmarket/product/07080168/07080168-e2a7a9.jpg",
             "price": "57,50",
-            "brand": "Migros"
+            "brand": "Migros",
+            "isChecked": false
           },
           {
             "id": "Nutella1",
             "name": "Nutella 750 G",
             "img": "https://images.migrosone.com/sanalmarket/product/07155709/7155709-e9e0e3.jpg",
             "price": "84,50",
-            "brand": "Nutella"
+            "brand": "Nutella",
+            "isChecked": false
           },
           {
             "id": "Bal2",
             "name": "Tkv Süzme Çiçek Balı 850G",
             "img": "https://images.migrosone.com/sanalmarket/product/07070090/07070090-a08e9d.jpg",
             "price": "120,90",
-            "brand": "Tkv"
+            "brand": "Tkv",
+            "isChecked": false
           }
         ]
       },

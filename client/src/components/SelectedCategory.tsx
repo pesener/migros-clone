@@ -3,15 +3,48 @@ import SutSlides from "./slides/sutSlides";
 import { BiChevronRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
-import { getProduct } from "../axios/indexAxios";
 import { TbArrowsDownUp } from "react-icons/tb";
 import { BiChevronDown } from "react-icons/bi";
 
+import { fetchOneProduct } from "./actions/oneProductAction";
+import { useAppDispatch, useAppSelector } from "../index";
+
 const SelectedCategory = ({ id }: { id: any }) => {
-  const [links, setLinks] = useState<any>([]);
+  const dispatch = useAppDispatch();
+  const linkOne = useAppSelector((state) => state.linkOne);
+
+  useEffect(() => {
+    dispatch(fetchOneProduct(id));
+  }, [id]);
+
   const [open, setOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<any>("Önerilenler");
   const [selectedFilter, setSelectedFilter] = useState<any>(null);
+  const [selectedFilt2, setSelectedFilt2] = useState<any>();
+  const [selectedFilt, setSelectedFilt] = useState<any>();
+
+  const filterBrands = (input: any) => {
+    const inputter = selectedFilt2.filter((item: any) =>
+      item.brand
+        .toLocaleUpperCase("tr-TR")
+        .startsWith(input.toLocaleUpperCase("tr-TR"))
+    );
+    setSelectedFilt2(inputter);
+    console.log(inputter, "ddd");
+  };
+
+  //   console.log("inputValue", input);
+  //   console.log("inputValue", selectedFilt);
+  // };
+
+  // useState(() => {
+  //   const filto = links?.sublinks?.map(
+  //     (mysublinks: any) => mysublinks?.product
+  //   );
+  //   setSelectedFilt(filto);
+
+  //   console.log(selectedFilt.length);
+  // });
   // const [checkedState, setCheckedState] = useState<any>(
   //   new Array(
   //     links?.sublinks
@@ -32,17 +65,22 @@ const SelectedCategory = ({ id }: { id: any }) => {
     { name: "Önce En Yüksek Fiyat" },
   ];
 
-  useEffect(() => {
-    getProduct(id)
-      .then((res: any) => {
-        setLinks(res.data);
+  // useEffect(() => {
+  //   getProduct(id)
+  //     .then((res: any) => {
+  //       setLinks(res.data);
+  //       setSelectedFilt2(
+  //         res.data?.sublinks?.filter((item: any) => item.product)
+  //       );
 
-        console.log(res.data);
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
-  }, [id]);
+  //       console.log(selectedFilt2);
+
+  //       console.log(res.data);
+  //     })
+  //     .catch((err: any) => {
+  //       console.log(err);
+  //     });
+  // }, [id]);
 
   return (
     <div className="">
@@ -52,18 +90,18 @@ const SelectedCategory = ({ id }: { id: any }) => {
             <div className="cursor-pointer mr-2">Anasayfa</div>{" "}
           </Link>
           <BiChevronRight size={20} />{" "}
-          <div className=" cursor-default ml-2">{links?.name}</div>{" "}
+          <div className=" cursor-default ml-2">{linkOne?.name}</div>{" "}
         </div>
 
         <div className="h-[700px] mt-5 absolute w-[330px]  border-2 rounded-lg ml-[55px] ">
           <div className="h-[85px] border-b ">
             {" "}
-            <h1 key={links.uniqueId} className="ml-6 font-bold text-xl mt-4">
-              {links?.name}
+            <h1 key={linkOne.uniqueId} className="ml-6 font-bold text-xl mt-4">
+              {linkOne?.name}
             </h1>
             <div className="flex flex-col">
               {" "}
-              {links?.sublinks?.map((mysublinks: any) => (
+              {linkOne?.sublinks?.map((mysublinks: any) => (
                 <div>
                   <h1 className="ml-6 font-normal text-md mt-4">{}</h1>
                   {mysublinks.sublink?.map((slink: any) => (
@@ -82,7 +120,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
               <div className="cursor-default absolute top-28 font-bold ml-6 text-lg">
                 Alt Kategoriler
               </div>{" "}
-              {links?.sublinks?.map((mysublinks: any) =>
+              {linkOne?.sublinks?.map((mysublinks: any) =>
                 mysublinks.product?.map((item: any) => (
                   <h1
                     key={mysublinks.uniqueId}
@@ -102,26 +140,27 @@ const SelectedCategory = ({ id }: { id: any }) => {
               <input
                 placeholder="Marka Ara"
                 className="border-black indent-3 outline-none mt-20 rounded w-[280px] focus:border-[2.4px] h-[55px] mx-6 border hover:border-[1.6px] "
+                onChange={(e) => filterBrands(e.target.value)}
               ></input>
               <ul className="ml-6 mt-6  flex flex-col  h-40 w-[250px]  overflow-y-auto  justify-start">
-                {links?.sublinks?.map((mysublinks: any) =>
-                  mysublinks.product?.map((item: any) => (
+                {linkOne.sublinks?.map((e: any) =>
+                  e?.product?.map((e2: any) => (
                     <div className="flex items-center mb-2">
                       <input
                         id="default-checkbox"
                         className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
                         type="checkbox"
-                        key={item.uniqueId}
+                        key={e2.brand}
                         // checked={checkedState}
                         // onChange={(index) => {
                         //   handleOnChange(index);
                         // }}
-                        onClick={() => {
-                          setSelectedFilter(item.brand);
+                        onChange={() => {
+                          setSelectedFilter(e2.brand);
                         }}
                       />
 
-                      <label key={item.uniqueId}>{item.brand}</label>
+                      <label>{e2.brand}</label>
                     </div>
                   ))
                 )}
@@ -133,7 +172,9 @@ const SelectedCategory = ({ id }: { id: any }) => {
             {selectedFilter === null ? (
               <SutSlides />
             ) : (
-              <div className="text-lg bg-blue-300">{selectedFilter}</div>
+              <div className="text-lg bg-blue-300 rounded-lg p-1">
+                {selectedFilter}
+              </div>
             )}
           </div>
           <div className="w-[260px] h-[55px]   border-black absolute ml-[1190px] rounded mt-[170px] cursor-pointer">
@@ -147,7 +188,9 @@ const SelectedCategory = ({ id }: { id: any }) => {
                 }  border  border-black flex justify-between items-center  font-bold cursor-pointer`}
               >
                 {selectedItem ? (
-                  <h1 className="text-black ml-12 text-md">{selectedItem}</h1>
+                  <h1 className="text-black mx-auto text-md  truncate">
+                    {selectedItem}
+                  </h1>
                 ) : (
                   <h3 className="text-black ml-12 text-md">
                     {sortData[0].name}
@@ -178,12 +221,12 @@ const SelectedCategory = ({ id }: { id: any }) => {
           <div className="text-black font-bold ml-[1205px] mt-[187px] ">
             <TbArrowsDownUp size={22} />
           </div>
-          <div className="text-gray-400  ml-[1395px] absolute top-[280px]">
+          <div className="text-gray-400  ml-[1400px] absolute top-[280px]">
             <BiChevronDown size={38} />
           </div>
         </div>
         <div className="ml-[420px] mt-[380px] ">
-          {links?.sublinks?.map((mysublinks: any) => (
+          {linkOne?.sublinks?.map((mysublinks: any) => (
             <div
               key={mysublinks.uniqueId}
               className="grid grid-cols-5  w-[1100px] gap-0 p-0 "
