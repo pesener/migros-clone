@@ -9,10 +9,12 @@ import { Provider } from "react-redux";
 import linksReducer from "./reducers/linksReducer";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import linkOneReducer from "./reducers/linkOneReducer";
+import CityReducer from "./reducers/CityReducer";
 
 const reducer = combineReducers({
   links: linksReducer,
   linkOne: linkOneReducer,
+  cities: CityReducer,
 });
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));

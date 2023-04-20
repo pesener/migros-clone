@@ -1,24 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { getProduct } from "../axios/indexAxios";
+import React, { useEffect } from "react";
 import { BiChevronRight } from "react-icons/bi";
 import { BsHeart } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
 
+import { fetchOneProduct } from "./actions/oneProductAction";
+import { useAppDispatch, useAppSelector } from "../index";
+
 const Detail = ({ id, sid }: { id: any; sid: any }) => {
-  const [links, setLinks] = useState<any>([]);
+  const dispatch = useAppDispatch();
+  const linkOne = useAppSelector((state) => state.linkOne);
 
   useEffect(() => {
-    getProduct(sid)
-      .then((res: any) => {
-        setLinks(res.data);
-        console.log(res.data);
-        console.log(sid, " başarı id");
-      })
-      .catch((err: any) => {
-        console.log(err);
-        console.log(sid, " hata id");
-      });
+    dispatch(fetchOneProduct(sid));
+    console.log(sid, " başarı id");
   }, [sid]);
 
   return (
@@ -31,15 +26,15 @@ const Detail = ({ id, sid }: { id: any; sid: any }) => {
           </Link>
           <BiChevronRight size={20} />{" "}
           <Link to={`/products/${sid}`}>
-            <div className="cursor-pointer  ml-2">{links?.name}</div>{" "}
+            <div className="cursor-pointer  ml-2">{linkOne?.name}</div>{" "}
           </Link>
           <BiChevronRight size={20} />
-          {links?.sublinks?.map((mysublinks: any) => (
+          {linkOne?.sublinks?.map((mysublinks: any) => (
             <div className="cursor-default ml-1 "> {mysublinks.SubHead}</div>
           ))}
         </div>
         <div className="mt-2 grid grid-cols-2">
-          {links?.sublinks?.map((mysublinks: any) => (
+          {linkOne?.sublinks?.map((mysublinks: any) => (
             <div key={mysublinks.name} className=" ">
               {mysublinks.product?.map((plink: any) => (
                 <div key={plink.name} className=" grid grid-cols-2 ">

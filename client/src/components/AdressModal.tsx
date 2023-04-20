@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
-import {
-  getDataCity,
-  getDataDistrict,
-  getDataNeighborhood,
-} from "../axios/indexAxios";
+import { getDataDistrict, getDataNeighborhood } from "../axios/indexAxios";
+import { fetchCity } from "./actions/cityAction";
+import { useAppDispatch, useAppSelector } from "../index";
 
 type Props = {
   isOn: boolean;
@@ -36,6 +34,10 @@ const AdressModal = ({
     console.log(isActive);
   };
 
+  const dispatch = useAppDispatch();
+
+  const cities = useAppSelector((state) => state.cities);
+
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -48,8 +50,6 @@ const AdressModal = ({
   ///city///
 
   const [filteredCities, setFilteredCities] = useState<any>();
-
-  const [cities, setCities] = useState<any>();
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -69,15 +69,9 @@ const AdressModal = ({
   };
 
   useEffect(() => {
-    getDataCity()
-      .then((res) => {
-        setFilteredCities(res.data);
-        setCities(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    dispatch(fetchCity());
+    setFilteredCities(cities);
+  }, [isOn]);
 
   ///dist///
   const [filteredDistricts, setFilteredDistricts] = useState<any>();
