@@ -10,11 +10,15 @@ import linksReducer from "./reducers/linksReducer";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import linkOneReducer from "./reducers/linkOneReducer";
 import CityReducer from "./reducers/CityReducer";
+import DistReducer from "./reducers/DistReducer";
+import NeighborReducer from "./reducers/NeighborReducer";
 
 const reducer = combineReducers({
   links: linksReducer,
   linkOne: linkOneReducer,
   cities: CityReducer,
+  districts: DistReducer,
+  neighborhoods: NeighborReducer,
 });
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));

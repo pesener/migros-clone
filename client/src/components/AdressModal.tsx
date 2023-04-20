@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
-import { getDataDistrict, getDataNeighborhood } from "../axios/indexAxios";
+import { getDataNeighborhood } from "../axios/indexAxios";
 import { fetchCity } from "./actions/cityAction";
+import { fetchDistrict } from "./actions/distAction";
+import { fetchNeighbor } from "./actions/neighborAction";
+
 import { useAppDispatch, useAppSelector } from "../index";
 
 type Props = {
@@ -38,6 +41,10 @@ const AdressModal = ({
 
   const cities = useAppSelector((state) => state.cities);
 
+  const districts = useAppSelector((state) => state.districts);
+
+  const neighborhoods = useAppSelector((state) => state.neighborhoods);
+
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -71,12 +78,10 @@ const AdressModal = ({
   useEffect(() => {
     dispatch(fetchCity());
     setFilteredCities(cities);
-  }, [isOn]);
+  }, [open]);
 
   ///dist///
   const [filteredDistricts, setFilteredDistricts] = useState<any>();
-
-  const [districts, setDistricts] = useState<any>();
 
   const [districtID, setDistrictID] = useState<any>();
 
@@ -87,15 +92,10 @@ const AdressModal = ({
   const [activateDropDist, setActivateDropDist] = useState<boolean>(false);
 
   useEffect(() => {
-    getDataDistrict({ city_id: districtID })
-      .then((res) => {
-        setDistricts(res.data);
-        setFilteredDistricts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [selectedCity]);
+    dispatch(fetchDistrict({ city_id: districtID }));
+    setFilteredDistricts(districts);
+  }, [selectedCity, openDistDrop]);
+
   const filterDistricts = (inputDistrict: any) => {
     const inputterDis = districts.filter((item: any) =>
       item.name
@@ -108,8 +108,6 @@ const AdressModal = ({
   };
 
   ///Mahalle///
-
-  const [neighborhoods, setNeighborhoods] = useState<any>();
 
   const [filteredNeighbor, setFilteredNeighbor] = useState<any>();
 
@@ -133,15 +131,9 @@ const AdressModal = ({
   };
 
   useEffect(() => {
-    getDataNeighborhood({ district_id: neighborID })
-      .then((res) => {
-        setFilteredNeighbor(res.data);
-        setNeighborhoods(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [selectedDist]);
+    dispatch(fetchNeighbor({ district_id: neighborID }));
+    setFilteredNeighbor(neighborhoods);
+  }, [selectedDist, openNeighDrop]);
 
   return (
     <div>
