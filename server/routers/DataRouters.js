@@ -3,7 +3,7 @@ import Neighborhood from "../models/neighborhood.js";
 import City from "../models/city.js";
 import District from "../models/district.js";
 import Products from "../models/products.js";
-import products from "../models/products.js";
+import Brand from "../models/brand.js";
 const router = express.Router();
 
 router.post("/dropdownNeigh", async (req, res) => {
@@ -47,6 +47,7 @@ router.get("/products", async (req, res) => {
 });
 router.get("/products/:id", async (req, res) => {
   const { id } = req.params;
+
   console.log("get", req.params);
   try {
     const product = await Products.findById(id);
@@ -75,3 +76,14 @@ router.get("/details/:id", async (req, res) => {
   }
 });
 export default router;
+
+///BRAND
+
+router.get("/brands", async (req, res) => {
+  try {
+    const brand = await Brand.find();
+    res.status(200).json(brand);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+});

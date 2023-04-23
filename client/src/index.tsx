@@ -12,6 +12,7 @@ import linkOneReducer from "./reducers/linkOneReducer";
 import CityReducer from "./reducers/CityReducer";
 import DistReducer from "./reducers/DistReducer";
 import NeighborReducer from "./reducers/NeighborReducer";
+import brandReducer from "./reducers/brandReducer";
 
 const reducer = combineReducers({
   links: linksReducer,
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   cities: CityReducer,
   districts: DistReducer,
   neighborhoods: NeighborReducer,
+  brands: brandReducer,
 });
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
@@ -32,9 +34,9 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  <div>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
+  </div>
 );

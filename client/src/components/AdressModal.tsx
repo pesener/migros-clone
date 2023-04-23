@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
-import { getDataNeighborhood } from "../axios/indexAxios";
 import { fetchCity } from "./actions/cityAction";
 import { fetchDistrict } from "./actions/distAction";
 import { fetchNeighbor } from "./actions/neighborAction";
@@ -39,11 +38,11 @@ const AdressModal = ({
 
   const dispatch = useAppDispatch();
 
-  const cities = useAppSelector((state) => state.cities);
+  const cities = useAppSelector((state: any) => state.cities);
 
-  const districts = useAppSelector((state) => state.districts);
+  const districts = useAppSelector((state: any) => state.districts);
 
-  const neighborhoods = useAppSelector((state) => state.neighborhoods);
+  const neighborhoods = useAppSelector((state: any) => state.neighborhoods);
 
   const [loading, setLoading] = useState<boolean>(false);
 
