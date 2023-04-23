@@ -2,35 +2,46 @@ import React, { useEffect, useState } from "react";
 import SutSlides from "./slides/sutSlides";
 import { BiChevronRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineCloseCircle } from "react-icons/ai";
 import { TbArrowsDownUp } from "react-icons/tb";
 import { BiChevronDown } from "react-icons/bi";
-
 import { fetchOneProduct } from "./actions/oneProductAction";
 import { useAppDispatch, useAppSelector } from "../index";
+import { fetchBrand } from "./actions/brandAction";
 
 const SelectedCategory = ({ id }: { id: any }) => {
   const dispatch = useAppDispatch();
   const linkOne = useAppSelector((state) => state.linkOne);
 
+  const brands = useAppSelector((state) => state.brands);
+
   useEffect(() => {
     dispatch(fetchOneProduct(id));
+  }, [id]);
+
+  useEffect(() => {
+    dispatch(fetchBrand());
+    setSelectedFilt2(brands);
+
+    console.log(selectedFilt2);
   }, [id]);
 
   const [open, setOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<any>("Önerilenler");
   const [selectedFilter, setSelectedFilter] = useState<any>(null);
   const [selectedFilt2, setSelectedFilt2] = useState<any>();
-  const [selectedFilt, setSelectedFilt] = useState<any>();
+  const [filteredBrands, setFilteredBrands] = useState<any>();
+  const [filteredBrands2, setFilteredBrands2] = useState<any>();
 
   const filterBrands = (input: any) => {
-    const inputter = selectedFilt2.filter((item: any) =>
+    const inputter = filteredBrands2.filter((item: any) =>
       item.brand
-        .toLocaleUpperCase("tr-TR")
-        .startsWith(input.toLocaleUpperCase("tr-TR"))
+        .toLocaleLowerCase("tr-TR")
+        .startsWith(input.toLocaleLowerCase("tr-TR"))
     );
-    setSelectedFilt2(inputter);
+    setFilteredBrands(inputter);
     console.log(inputter, "ddd");
+    console.log(selectedFilter);
   };
 
   //   console.log("inputValue", input);
@@ -65,6 +76,23 @@ const SelectedCategory = ({ id }: { id: any }) => {
     { name: "Önce En Yüksek Fiyat" },
   ];
 
+  useEffect(() => {
+    linkOne.name === "Meyve, Sebze"
+      ? setFilteredBrands(linkOne?.sublinks[0]?.product)
+      : linkOne.name === "Süt, Kahvaltılık"
+      ? setFilteredBrands(linkOne?.sublinks[2]?.product)
+      : console.log(filteredBrands);
+  }, []);
+
+  useEffect(() => {
+    linkOne.name === "Meyve, Sebze"
+      ? setFilteredBrands2(linkOne?.sublinks[0]?.product)
+      : linkOne.name === "Süt, Kahvaltılık"
+      ? setFilteredBrands2(linkOne?.sublinks[2]?.product)
+      : console.log(filteredBrands);
+  }, []);
+
+  const handleRemoveFilterOne = () => {};
   // useEffect(() => {
   //   getProduct(id)
   //     .then((res: any) => {
@@ -81,6 +109,29 @@ const SelectedCategory = ({ id }: { id: any }) => {
   //       console.log(err);
   //     });
   // }, [id]);
+
+  // useEffect(() => {
+  //   console.log("filteredBrands:: ", filteredBrands);
+  // }, [filteredBrands]);
+
+  // const brandCounts: any = {};
+
+  // useEffect(() => {
+  //   linkOne?.sublinks
+  //     ?.filter((item: any) => item.Head === "Kahvaltılıklar ")
+  //     ?.map(
+  //       (mysublinks: any) =>
+  //         mysublinks.product?.map((item: any) => {
+  //           const brand = item.brand;
+  //           if (brandCounts.hasOwnProperty(brand)) {
+  //             brandCounts[brand]++;
+  //           } else {
+  //             brandCounts[brand] = 1;
+  //           }
+  //         })
+  //       // .includes(brandInput)
+  //     );
+  // }, []);
 
   return (
     <div className="">
@@ -143,27 +194,51 @@ const SelectedCategory = ({ id }: { id: any }) => {
                 onChange={(e) => filterBrands(e.target.value)}
               ></input>
               <ul className="ml-6 mt-6  flex flex-col  h-40 w-[250px]  overflow-y-auto  justify-start">
-                {linkOne.sublinks?.map((e: any) =>
-                  e?.product?.map((e2: any) => (
+                {filteredBrands?.map(
+                  (item: any) => (
                     <div className="flex items-center mb-2">
                       <input
                         id="default-checkbox"
                         className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
                         type="checkbox"
-                        key={e2.brand}
+                        key={item.brand}
                         // checked={checkedState}
                         // onChange={(index) => {
                         //   handleOnChange(index);
                         // }}
-                        onChange={() => {
-                          setSelectedFilter(e2.brand);
-                        }}
+                        onChange={() => setSelectedFilter(item.brand)}
                       />
 
-                      <label>{e2.brand}</label>
+                      <label>{item.brand}</label>
                     </div>
-                  ))
+                  )
+                  // .includes(brandInput)
                 )}
+                {/* {linkOne?.sublinks
+                  ?.filter((item: any) => item.Head === "Kahvaltılıklar ")
+                  .map((item: any) => {
+                    item?.product.map((item: any) => {
+                      return (
+                        <div className="flex items-center mb-2">
+                          <input
+                            id="default-checkbox"
+                            className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
+                            type="checkbox"
+                            key={item.brand}
+                            // checked={checkedState}
+                            // onChange={(index) => {
+                            //   handleOnChange(index);
+                            // }}
+                            // onChange={() => {
+                            //   setSelectedFilter(e2.brand);
+                            // }}
+                          />
+
+                          <label>{item.brand}</label>
+                        </div>
+                      );
+                    });
+                  })} */}
               </ul>
             </div>
           </div>
@@ -172,8 +247,19 @@ const SelectedCategory = ({ id }: { id: any }) => {
             {selectedFilter === null ? (
               <SutSlides />
             ) : (
-              <div className="text-lg bg-blue-300 rounded-lg p-1">
-                {selectedFilter}
+              <div className="flex items-center ">
+                <div className="text-lg mr-6 flex justify-center items-center hover:bg-gray-100 border rounded-lg px-4">
+                  <div className="mr-3 cursor-pointer"> {selectedFilter} </div>
+                  <div
+                    className="text-primary cursor-pointer"
+                    onClick={handleRemoveFilterOne}
+                  >
+                    <AiOutlineCloseCircle />
+                  </div>
+                </div>
+                <div className="text-primary font-semibold text-sm w-[140px] cursor-pointer">
+                  Filtreleri Temizle ({selectedFilter.length})
+                </div>
               </div>
             )}
           </div>
