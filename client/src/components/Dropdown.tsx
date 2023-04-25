@@ -1,5 +1,3 @@
-import React from "react";
-
 import { BiChevronDown } from "react-icons/bi";
 
 const Dropdown = ({

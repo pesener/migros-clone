@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AdresModal from "./WhichWayModal";
 
 const Adress = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Adress from "./Adress";
 import CategoriesDropdown from "./CategoriesDropdown";
 

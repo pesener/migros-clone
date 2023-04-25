@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
 import { fetchCity } from "./actions/cityAction";
 import { fetchDistrict } from "./actions/distAction";

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { BiChevronRight } from "react-icons/bi";
 import { BsHeart } from "react-icons/bs";
 

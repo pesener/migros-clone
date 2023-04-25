@@ -4,8 +4,6 @@ const HTTP = axios.create({
   baseURL: "http://localhost:5000",
 });
 
-export const getDataBrand = async () => await HTTP.get("/home/brands");
-
 export const getDataCity = async () => await HTTP.get("/home/dropdownCity");
 
 export const getDataDistrict = async (city_id) =>

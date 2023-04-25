@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SutSlides from "./slides/sutSlides";
 import { BiChevronRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
@@ -7,29 +7,18 @@ import { TbArrowsDownUp } from "react-icons/tb";
 import { BiChevronDown } from "react-icons/bi";
 import { fetchOneProduct } from "./actions/oneProductAction";
 import { useAppDispatch, useAppSelector } from "../index";
-import { fetchBrand } from "./actions/brandAction";
 
 const SelectedCategory = ({ id }: { id: any }) => {
   const dispatch = useAppDispatch();
   const linkOne = useAppSelector((state) => state.linkOne);
 
-  const brands = useAppSelector((state) => state.brands);
-
   useEffect(() => {
     dispatch(fetchOneProduct(id));
   }, [id]);
 
-  useEffect(() => {
-    dispatch(fetchBrand());
-    setSelectedFilt2(brands);
-
-    console.log(selectedFilt2);
-  }, [id]);
-
   const [open, setOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<any>("Önerilenler");
-  const [selectedFilter, setSelectedFilter] = useState<any>(null);
-  const [selectedFilt2, setSelectedFilt2] = useState<any>();
+  const [selectedFilter, setSelectedFilter] = useState<any>([]);
   const [filteredBrands, setFilteredBrands] = useState<any>();
   const [filteredBrands2, setFilteredBrands2] = useState<any>();
 
@@ -82,7 +71,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
       : linkOne.name === "Süt, Kahvaltılık"
       ? setFilteredBrands(linkOne?.sublinks[2]?.product)
       : console.log(filteredBrands);
-  }, []);
+  }, [linkOne]);
 
   useEffect(() => {
     linkOne.name === "Meyve, Sebze"
@@ -90,9 +79,17 @@ const SelectedCategory = ({ id }: { id: any }) => {
       : linkOne.name === "Süt, Kahvaltılık"
       ? setFilteredBrands2(linkOne?.sublinks[2]?.product)
       : console.log(filteredBrands);
-  }, []);
+  }, [filterBrands, selectedFilter]);
 
-  const handleRemoveFilterOne = () => {};
+  const handleRemoveFilterOne = (index: any) => {
+    selectedFilter.splice(index, 1);
+    setSelectedFilter(Array.from(selectedFilter));
+  };
+
+  const handleRemoveFilter = (index: any) => {
+    selectedFilter.splice(index);
+    setSelectedFilter(Array.from(selectedFilter));
+  };
   // useEffect(() => {
   //   getProduct(id)
   //     .then((res: any) => {
@@ -132,6 +129,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
   //       // .includes(brandInput)
   //     );
   // }, []);
+  console.log(selectedFilter);
 
   return (
     <div className="">
@@ -194,26 +192,48 @@ const SelectedCategory = ({ id }: { id: any }) => {
                 onChange={(e) => filterBrands(e.target.value)}
               ></input>
               <ul className="ml-6 mt-6  flex flex-col  h-40 w-[250px]  overflow-y-auto  justify-start">
-                {filteredBrands?.map(
-                  (item: any) => (
-                    <div className="flex items-center mb-2">
-                      <input
-                        id="default-checkbox"
-                        className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
-                        type="checkbox"
-                        key={item.brand}
-                        // checked={checkedState}
-                        // onChange={(index) => {
-                        //   handleOnChange(index);
-                        // }}
-                        onChange={() => setSelectedFilter(item.brand)}
-                      />
-
-                      <label>{item.brand}</label>
-                    </div>
+                {filteredBrands
+                  ?.filter(
+                    (x: any, index: any) =>
+                      filteredBrands.findIndex(
+                        (data: any) =>
+                          data.brand === x.brand &&
+                          data.brand_Comp === x.brand_Comp
+                      ) === index
                   )
-                  // .includes(brandInput)
-                )}
+                  .map(
+                    (item: any) => (
+                      <div className="flex items-center mb-2">
+                        <input
+                          id="default-checkbox"
+                          className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
+                          type="checkbox"
+                          key={item.brand}
+                          checked={selectedFilter.find(
+                            (x: any) => x.isChecked === item.isChecked
+                          )}
+                          value={item.brand}
+                          // onChange={(index) => {
+                          //   handleOnChange(index);
+                          // }}
+
+                          onChange={(e) =>
+                            setSelectedFilter([
+                              ...selectedFilter,
+                              {
+                                brand: e.target.value,
+                                isChecked: item.isChecked,
+                              },
+                            ])
+                          }
+                          onClick={() => {}}
+                        />
+
+                        <label>{item.brand}</label>
+                      </div>
+                    )
+                    // .includes(brandInput)
+                  )}
                 {/* {linkOne?.sublinks
                   ?.filter((item: any) => item.Head === "Kahvaltılıklar ")
                   .map((item: any) => {
@@ -242,28 +262,42 @@ const SelectedCategory = ({ id }: { id: any }) => {
               </ul>
             </div>
           </div>
-          <div className="ml-[378px] top-8 absolute z-0">
+          <div className="ml-[365px] top-8 absolute z-0">
             {" "}
-            {selectedFilter === null ? (
+            {selectedFilter.length === 0 ? (
               <SutSlides />
             ) : (
-              <div className="flex items-center ">
-                <div className="text-lg mr-6 flex justify-center items-center hover:bg-gray-100 border rounded-lg px-4">
-                  <div className="mr-3 cursor-pointer"> {selectedFilter} </div>
+              <div>
+                <div className="flex flex-wrap items-center mt-[20px] w-[750px] h-[100px] ">
+                  {selectedFilter?.map((item: any, index: any) => (
+                    <div className="text-lg mr-2 flex justify-center items-center hover:bg-gray-200 border border-gray-400 rounded-lg px-4">
+                      <div className="mr-3 cursor-default flex">
+                        {" "}
+                        {selectedFilter.length !== 0 ? item.brand : ""}{" "}
+                      </div>
+                      <div
+                        className="text-primary font-normal cursor-pointer"
+                        onClick={() => handleRemoveFilterOne(index)}
+                      >
+                        <AiOutlineCloseCircle />
+                      </div>
+                    </div>
+                  ))}
                   <div
-                    className="text-primary cursor-pointer"
-                    onClick={handleRemoveFilterOne}
+                    className="text-primary font-semibold text-sm ml-3  w-[140px] cursor-pointer"
+                    onClick={(index) => handleRemoveFilter(index)}
                   >
-                    <AiOutlineCloseCircle />
+                    Filtreleri Temizle ({selectedFilter.length})
                   </div>
-                </div>
-                <div className="text-primary font-semibold text-sm w-[140px] cursor-pointer">
-                  Filtreleri Temizle ({selectedFilter.length})
                 </div>
               </div>
             )}
           </div>
-          <div className="w-[260px] h-[55px]   border-black absolute ml-[1190px] rounded mt-[170px] cursor-pointer">
+          <div
+            className={`w-[260px] h-[55px] ${
+              selectedFilter.length !== 0 ? "mt-[0px]  " : ""
+            }  border-black absolute ml-[1190px] rounded mt-[170px] cursor-pointer`}
+          >
             <div>
               <div
                 onClick={() => {
@@ -304,14 +338,26 @@ const SelectedCategory = ({ id }: { id: any }) => {
               </ul>
             </div>
           </div>
-          <div className="text-black font-bold ml-[1205px] mt-[187px] ">
+          <div
+            className={`text-black font-bold ml-[1205px] mt-[187px] ${
+              selectedFilter.length !== 0 ? "mt-[18px]" : ""
+            }  `}
+          >
             <TbArrowsDownUp size={22} />
           </div>
-          <div className="text-gray-400  ml-[1400px] absolute top-[280px]">
+          <div
+            className={`text-gray-400  ml-[1400px] absolute top-[280px] ${
+              selectedFilter.length !== 0 ? "top-[110px]" : ""
+            }`}
+          >
             <BiChevronDown size={38} />
           </div>
         </div>
-        <div className="ml-[420px] mt-[380px] ">
+        <div
+          className={`ml-[420px] mt-[380px] ${
+            selectedFilter.length !== 0 ? "mt-[210px]" : ""
+          } `}
+        >
           {linkOne?.sublinks?.map((mysublinks: any) => (
             <div
               key={mysublinks.uniqueId}
