@@ -7,6 +7,7 @@ import { TbArrowsDownUp } from "react-icons/tb";
 import { BiChevronDown } from "react-icons/bi";
 import { fetchOneProduct } from "./actions/oneProductAction";
 import { useAppDispatch, useAppSelector } from "../index";
+import { prepareCssVars } from "@mui/system";
 
 const SelectedCategory = ({ id }: { id: any }) => {
   const dispatch = useAppDispatch();
@@ -387,158 +388,314 @@ const SelectedCategory = ({ id }: { id: any }) => {
             selectedFilter.length !== 0 ? "mt-[210px]" : ""
           } `}
         >
-          {linkOne?.sublinks?.map((mysublinks: any) => (
-            <div
-              key={mysublinks.uniqueId}
-              className="grid grid-cols-5  w-[1100px] gap-0 p-0 "
-            >
-              {selectedItem === "Önce En Düşük Fiyat"
-                ? mysublinks.product
-                    ?.sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
-                    .map((plink: any) => (
-                      <div key={plink.uniqueId} className=" p-0">
-                        <div
-                          key={plink.uniqueId}
-                          className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
-                        >
-                          <Link
-                            to={`/details/${plink.id}`}
-                            key={plink.uniqueId}
-                          >
-                            <img
-                              key={plink.uniqueId}
-                              alt=""
-                              className="mt-2 cursor-pointer"
-                              src={plink.img}
-                            />
+          {selectedFilter.length !== 0
+            ? linkOne?.sublinks?.map((mysublinks: any) => (
+                <div
+                  key={mysublinks.uniqueId}
+                  className="grid grid-cols-5  w-[1100px] gap-0 p-0 "
+                >
+                  {selectedItem === "Önce En Düşük Fiyat"
+                    ? mysublinks?.product
+                        ?.filter((x: any) => selectedFilter.includes(x?.brand))
+                        .sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
+                        .map((plink: any) => (
+                          <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
-                              className="font-semibold mx-2 text-sm cursor-pointer"
+                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
                             >
-                              {plink.name}
+                              <Link
+                                to={`/details/${plink.id}`}
+                                key={plink.uniqueId}
+                              >
+                                <img
+                                  key={plink.uniqueId}
+                                  alt=""
+                                  className="mt-2 cursor-pointer"
+                                  src={plink.img}
+                                />
+                                <div
+                                  key={plink.uniqueId}
+                                  className="font-semibold mx-2 text-sm cursor-pointer"
+                                >
+                                  {plink.name}
+                                </div>
+                              </Link>
+                              <br></br>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
+                              >
+                                {plink.price}TL
+                              </div>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                              >
+                                <AiOutlinePlus
+                                  className="text-white  mt-1  ml-[5px]"
+                                  size={30}
+                                />
+                              </div>
                             </div>
-                          </Link>
-                          <br></br>
-
-                          <div
-                            key={plink.uniqueId}
-                            className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
-                          >
-                            {plink.price}TL
                           </div>
-
-                          <div
-                            key={plink.uniqueId}
-                            className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
-                          >
-                            <AiOutlinePlus
-                              className="text-white  mt-1  ml-[5px]"
-                              size={30}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                : selectedItem === "Önce En Yüksek Fiyat"
-                ? mysublinks.product
-                    ?.sort((a: any, b: any) => (a.price > b.price ? -1 : 1))
-                    .map((plink: any) => (
-                      <div key={plink.uniqueId} className=" p-0">
-                        <div
-                          key={plink.uniqueId}
-                          className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
-                        >
-                          <Link
-                            to={`/details/${plink.id}`}
-                            key={plink.uniqueId}
-                          >
-                            <img
-                              key={plink.uniqueId}
-                              alt=""
-                              className="mt-2 cursor-pointer"
-                              src={plink.img}
-                            />
+                        ))
+                    : selectedItem === "Önce En Yüksek Fiyat"
+                    ? mysublinks.product
+                        ?.filter((x: any) => selectedFilter.includes(x?.brand))
+                        .sort((a: any, b: any) => (a.price > b.price ? -1 : 1))
+                        .map((plink: any) => (
+                          <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
-                              className="font-semibold mx-2 text-sm cursor-pointer"
+                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
                             >
-                              {plink.name}
+                              <Link
+                                to={`/details/${plink.id}`}
+                                key={plink.uniqueId}
+                              >
+                                <img
+                                  key={plink.uniqueId}
+                                  alt=""
+                                  className="mt-2 cursor-pointer"
+                                  src={plink.img}
+                                />
+                                <div
+                                  key={plink.uniqueId}
+                                  className="font-semibold mx-2 text-sm cursor-pointer"
+                                >
+                                  {plink.name}
+                                </div>
+                              </Link>
+                              <br></br>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
+                              >
+                                {" "}
+                                {plink.price}{" "}
+                              </div>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                              >
+                                <AiOutlinePlus
+                                  className="text-white  mt-1  ml-[5px]"
+                                  size={30}
+                                />
+                              </div>
                             </div>
-                          </Link>
-                          <br></br>
-
-                          <div
-                            key={plink.uniqueId}
-                            className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
-                          >
-                            {" "}
-                            {plink.price}{" "}
                           </div>
-
-                          <div
-                            key={plink.uniqueId}
-                            className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
-                          >
-                            <AiOutlinePlus
-                              className="text-white  mt-1  ml-[5px]"
-                              size={30}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                : selectedItem === "Önerilenler"
-                ? mysublinks.product
-                    ?.sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
-                    .map((plink: any) => (
-                      <div key={plink.uniqueId} className=" p-0">
-                        <div
-                          key={plink.uniqueId}
-                          className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
-                        >
-                          <Link
-                            to={`/details/${plink.id}`}
-                            key={plink.uniqueId}
-                          >
-                            <img
-                              key={plink.uniqueId}
-                              alt=""
-                              className="mt-2 cursor-pointer"
-                              src={plink.img}
-                            />
+                        ))
+                    : selectedItem === "Önerilenler"
+                    ? mysublinks.product
+                        ?.filter((x: any) => selectedFilter.includes(x?.brand))
+                        .sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
+                        .map((plink: any) => (
+                          <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
-                              className="font-semibold mx-2 text-sm cursor-pointer"
+                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
                             >
-                              {plink.name}
+                              <Link
+                                to={`/details/${plink.id}`}
+                                key={plink.uniqueId}
+                              >
+                                <img
+                                  key={plink.uniqueId}
+                                  alt=""
+                                  className="mt-2 cursor-pointer"
+                                  src={plink.img}
+                                />
+                                <div
+                                  key={plink.uniqueId}
+                                  className="font-semibold mx-2 text-sm cursor-pointer"
+                                >
+                                  {plink.name}
+                                </div>
+                              </Link>
+                              <br></br>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="text-primary absolute bottom-16 text-lg font-semibold ml-2 cursor-default"
+                              >
+                                {" "}
+                                {plink.price}
+                                {`\u00A0TL`}
+                              </div>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                              >
+                                <AiOutlinePlus
+                                  className="text-white  mt-1  ml-[5px]"
+                                  size={30}
+                                />
+                              </div>
                             </div>
-                          </Link>
-                          <br></br>
-
-                          <div
-                            key={plink.uniqueId}
-                            className="text-primary absolute bottom-16 text-lg font-semibold ml-2 cursor-default"
-                          >
-                            {" "}
-                            {plink.price}
-                            {`\u00A0TL`}
                           </div>
+                        ))
+                    : ""}
+                </div>
+              ))
+            : linkOne?.sublinks?.map((mysublinks: any) => (
+                <div
+                  key={mysublinks.uniqueId}
+                  className="grid grid-cols-5  w-[1100px] gap-0 p-0 "
+                >
+                  {selectedItem === "Önce En Düşük Fiyat"
+                    ? mysublinks.product
+                        ?.sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
+                        .map((plink: any) => (
+                          <div key={plink.uniqueId} className=" p-0">
+                            <div
+                              key={plink.uniqueId}
+                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
+                            >
+                              <Link
+                                to={`/details/${plink.id}`}
+                                key={plink.uniqueId}
+                              >
+                                <img
+                                  key={plink.uniqueId}
+                                  alt=""
+                                  className="mt-2 cursor-pointer"
+                                  src={plink.img}
+                                />
+                                <div
+                                  key={plink.uniqueId}
+                                  className="font-semibold mx-2 text-sm cursor-pointer"
+                                >
+                                  {plink.name}
+                                </div>
+                              </Link>
+                              <br></br>
 
-                          <div
-                            key={plink.uniqueId}
-                            className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
-                          >
-                            <AiOutlinePlus
-                              className="text-white  mt-1  ml-[5px]"
-                              size={30}
-                            />
+                              <div
+                                key={plink.uniqueId}
+                                className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
+                              >
+                                {plink.price}TL
+                              </div>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                              >
+                                <AiOutlinePlus
+                                  className="text-white  mt-1  ml-[5px]"
+                                  size={30}
+                                />
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    ))
-                : ""}
-            </div>
-          ))}
+                        ))
+                    : selectedItem === "Önce En Yüksek Fiyat"
+                    ? mysublinks.product
+                        ?.sort((a: any, b: any) => (a.price > b.price ? -1 : 1))
+                        .map((plink: any) => (
+                          <div key={plink.uniqueId} className=" p-0">
+                            <div
+                              key={plink.uniqueId}
+                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
+                            >
+                              <Link
+                                to={`/details/${plink.id}`}
+                                key={plink.uniqueId}
+                              >
+                                <img
+                                  key={plink.uniqueId}
+                                  alt=""
+                                  className="mt-2 cursor-pointer"
+                                  src={plink.img}
+                                />
+                                <div
+                                  key={plink.uniqueId}
+                                  className="font-semibold mx-2 text-sm cursor-pointer"
+                                >
+                                  {plink.name}
+                                </div>
+                              </Link>
+                              <br></br>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
+                              >
+                                {" "}
+                                {plink.price}{" "}
+                              </div>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                              >
+                                <AiOutlinePlus
+                                  className="text-white  mt-1  ml-[5px]"
+                                  size={30}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                    : selectedItem === "Önerilenler"
+                    ? mysublinks.product
+                        ?.sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
+                        .map((plink: any) => (
+                          <div key={plink.uniqueId} className=" p-0">
+                            <div
+                              key={plink.uniqueId}
+                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
+                            >
+                              <Link
+                                to={`/details/${plink.id}`}
+                                key={plink.uniqueId}
+                              >
+                                <img
+                                  key={plink.uniqueId}
+                                  alt=""
+                                  className="mt-2 cursor-pointer"
+                                  src={plink.img}
+                                />
+                                <div
+                                  key={plink.uniqueId}
+                                  className="font-semibold mx-2 text-sm cursor-pointer"
+                                >
+                                  {plink.name}
+                                </div>
+                              </Link>
+                              <br></br>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="text-primary absolute bottom-16 text-lg font-semibold ml-2 cursor-default"
+                              >
+                                {" "}
+                                {plink.price}
+                                {`\u00A0TL`}
+                              </div>
+
+                              <div
+                                key={plink.uniqueId}
+                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                              >
+                                <AiOutlinePlus
+                                  className="text-white  mt-1  ml-[5px]"
+                                  size={30}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                    : ""}
+                </div>
+              ))}
         </div>
       </div>
     </div>
