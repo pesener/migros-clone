@@ -129,6 +129,40 @@ const SelectedCategory = ({ id }: { id: any }) => {
   //       // .includes(brandInput)
   //     );
   // }, []);
+  // useEffect(() => {
+  //   selectedFilter === 0
+  //     ? filteredBrands
+  //         ?.filter(
+  //           (x: any, index: any) =>
+  //             filteredBrands.findIndex(
+  //               (data: any) =>
+  //                 data.brand === x.brand && data.brand_Comp === x.brand_Comp
+  //             ) === index
+  //         )
+  //         .map((item: any) =>
+  //           setSelectedFilter([
+  //             ...selectedFilter,
+  //             {
+  //               brand: item.brand,
+  //               isChecked: item.isChecked,
+  //             },
+  //           ])
+  //         )
+  //     : console.log(selectedFilter);
+  // });
+  // console.log(selectedFilter);
+
+  const handleChangeCheck = (event: any) => {
+    const { value, checked } = event.target;
+
+    if (checked) {
+      setSelectedFilter((pre: any) => [...pre, value]);
+    } else
+      setSelectedFilter((pre: any) => {
+        return [...pre.filter((x: any) => x !== value)];
+      });
+  };
+
   console.log(selectedFilter);
 
   return (
@@ -205,28 +239,23 @@ const SelectedCategory = ({ id }: { id: any }) => {
                     (item: any) => (
                       <div className="flex items-center mb-2">
                         <input
-                          id="default-checkbox"
+                          id={item.brand}
                           className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
                           type="checkbox"
                           key={item.brand}
-                          checked={selectedFilter.find(
-                            (x: any) => x.isChecked === item.isChecked
-                          )}
                           value={item.brand}
                           // onChange={(index) => {
                           //   handleOnChange(index);
                           // }}
+                          onChange={(event) => {
+                            handleChangeCheck(event);
+                            // const objIndex = selectedFilter?.findIndex(
+                            //   (obj: any) => obj?.brand === item?.brand
+                            // );
 
-                          onChange={(e) =>
-                            setSelectedFilter([
-                              ...selectedFilter,
-                              {
-                                brand: e.target.value,
-                                isChecked: item.isChecked,
-                              },
-                            ])
-                          }
-                          onClick={() => {}}
+                            // selectedFilter[objIndex].isChecked = !false;
+                            // console.log(selectedFilter);
+                          }}
                         />
 
                         <label>{item.brand}</label>
@@ -273,7 +302,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
                     <div className="text-lg mr-2 flex justify-center items-center hover:bg-gray-200 border border-gray-400 rounded-lg px-4">
                       <div className="mr-3 cursor-default flex">
                         {" "}
-                        {selectedFilter.length !== 0 ? item.brand : ""}{" "}
+                        {selectedFilter.length !== 0 ? item : ""}
                       </div>
                       <div
                         className="text-primary font-normal cursor-pointer"

@@ -19,3 +19,5 @@ export const getProduct = async (id) => await HTTP.get("/home/products/" + id);
 ///detail
 export const getProductDetail = async (id) =>
   await HTTP.get("/home/details/" + id);
+
+///
