@@ -9,6 +9,7 @@ import ProductDetail from "./components/Screens/ProductDetail";
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [sid, setSid] = useState<any>();
+  const [countProduct, setCountProduct] = useState<any>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -28,7 +29,10 @@ function App() {
         </div>
       ) : (
         <div>
-          <Navbar />
+          <Navbar
+            countProduct={countProduct}
+            setCountProduct={setCountProduct}
+          />
         </div>
       )}
       <main className="py-10">
@@ -37,7 +41,13 @@ function App() {
 
           <Route
             path="/products/:id"
-            element={<SelectedCategoryScreen setSid={setSid} />}
+            element={
+              <SelectedCategoryScreen
+                setSid={setSid}
+                countProduct={countProduct}
+                setCountProduct={setCountProduct}
+              />
+            }
           />
           <Route path="/details/:id" element={<ProductDetail sid={sid} />} />
         </Routes>

@@ -1,8 +1,16 @@
 import { useState } from "react";
 import Adress from "./Adress";
+import Basket from "./Basket";
 import CategoriesDropdown from "./CategoriesDropdown";
+import Search from "./Search";
 
-const Navbar = () => {
+const Navbar = ({
+  countProduct,
+  setCountProduct,
+}: {
+  countProduct: any;
+  setCountProduct: any;
+}) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
@@ -76,6 +84,8 @@ const Navbar = () => {
 
       <Adress />
       <CategoriesDropdown />
+      <Search />
+      <Basket countProduct={countProduct} setCountProduct={setCountProduct} />
     </div>
   );
 };

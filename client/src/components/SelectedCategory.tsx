@@ -2,14 +2,27 @@ import { useEffect, useState } from "react";
 import SutSlides from "./slides/sutSlides";
 import { BiChevronRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { AiOutlinePlus, AiOutlineCloseCircle } from "react-icons/ai";
+import {
+  AiOutlinePlus,
+  AiOutlineCloseCircle,
+  AiOutlineMinus,
+} from "react-icons/ai";
 import { TbArrowsDownUp } from "react-icons/tb";
 import { BiChevronDown } from "react-icons/bi";
+import { BsTrash3 } from "react-icons/bs";
 import { fetchOneProduct } from "./actions/oneProductAction";
 import { useAppDispatch, useAppSelector } from "../index";
-import { prepareCssVars } from "@mui/system";
+import { IndeterminateCheckBoxTwoTone } from "@mui/icons-material";
 
-const SelectedCategory = ({ id }: { id: any }) => {
+const SelectedCategory = ({
+  id,
+  countProduct,
+  setCountProduct,
+}: {
+  id: any;
+  countProduct: any;
+  setCountProduct: any;
+}) => {
   const dispatch = useAppDispatch();
   const linkOne = useAppSelector((state) => state.linkOne);
 
@@ -22,6 +35,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
   const [selectedFilter, setSelectedFilter] = useState<any>([]);
   const [filteredBrands, setFilteredBrands] = useState<any>();
   const [filteredBrands2, setFilteredBrands2] = useState<any>();
+  const [openPlus, setOpenPlus] = useState<boolean>(false);
 
   const filterBrands = (input: any) => {
     const inputter = filteredBrands2.filter((item: any) =>
@@ -33,32 +47,6 @@ const SelectedCategory = ({ id }: { id: any }) => {
     console.log(inputter, "ddd");
     console.log(selectedFilter);
   };
-
-  //   console.log("inputValue", input);
-  //   console.log("inputValue", selectedFilt);
-  // };
-
-  // useState(() => {
-  //   const filto = links?.sublinks?.map(
-  //     (mysublinks: any) => mysublinks?.product
-  //   );
-  //   setSelectedFilt(filto);
-
-  //   console.log(selectedFilt.length);
-  // });
-  // const [checkedState, setCheckedState] = useState<any>(
-  //   new Array(
-  //     links?.sublinks
-  //       ?.map((mysublinks: any) => mysublinks.product?.length)
-  //       .fill(false)
-  //   )
-  // );
-  // const handleOnChange = (position: any) => {
-  //   const updatedCheckedState = checkedState.map((item: any, index: any) =>
-  //     index === position ? !item : item
-  //   );
-  //   setCheckedState(updatedCheckedState);
-  // };
 
   const sortData = [
     { name: "Önerilenler" },
@@ -91,67 +79,6 @@ const SelectedCategory = ({ id }: { id: any }) => {
     selectedFilter.splice(index);
     setSelectedFilter(Array.from(selectedFilter));
   };
-  // useEffect(() => {
-  //   getProduct(id)
-  //     .then((res: any) => {
-  //       setLinks(res.data);
-  //       setSelectedFilt2(
-  //         res.data?.sublinks?.filter((item: any) => item.product)
-  //       );
-
-  //       console.log(selectedFilt2);
-
-  //       console.log(res.data);
-  //     })
-  //     .catch((err: any) => {
-  //       console.log(err);
-  //     });
-  // }, [id]);
-
-  // useEffect(() => {
-  //   console.log("filteredBrands:: ", filteredBrands);
-  // }, [filteredBrands]);
-
-  // const brandCounts: any = {};
-
-  // useEffect(() => {
-  //   linkOne?.sublinks
-  //     ?.filter((item: any) => item.Head === "Kahvaltılıklar ")
-  //     ?.map(
-  //       (mysublinks: any) =>
-  //         mysublinks.product?.map((item: any) => {
-  //           const brand = item.brand;
-  //           if (brandCounts.hasOwnProperty(brand)) {
-  //             brandCounts[brand]++;
-  //           } else {
-  //             brandCounts[brand] = 1;
-  //           }
-  //         })
-  //       // .includes(brandInput)
-  //     );
-  // }, []);
-  // useEffect(() => {
-  //   selectedFilter === 0
-  //     ? filteredBrands
-  //         ?.filter(
-  //           (x: any, index: any) =>
-  //             filteredBrands.findIndex(
-  //               (data: any) =>
-  //                 data.brand === x.brand && data.brand_Comp === x.brand_Comp
-  //             ) === index
-  //         )
-  //         .map((item: any) =>
-  //           setSelectedFilter([
-  //             ...selectedFilter,
-  //             {
-  //               brand: item.brand,
-  //               isChecked: item.isChecked,
-  //             },
-  //           ])
-  //         )
-  //     : console.log(selectedFilter);
-  // });
-  // console.log(selectedFilter);
 
   const handleChangeCheck = (event: any) => {
     const { value, checked } = event.target;
@@ -162,6 +89,14 @@ const SelectedCategory = ({ id }: { id: any }) => {
       setSelectedFilter((pre: any) => {
         return [...pre.filter((x: any) => x !== value)];
       });
+  };
+
+  const handleProductCount = (index: any) => {
+    setCountProduct(countProduct + 1);
+  };
+
+  const handleProductCountMinus = (index: any) => {
+    setCountProduct(countProduct - 1);
   };
 
   console.log(selectedFilter);
@@ -245,17 +180,8 @@ const SelectedCategory = ({ id }: { id: any }) => {
                           type="checkbox"
                           key={item.brand}
                           value={item.brand}
-                          // onChange={(index) => {
-                          //   handleOnChange(index);
-                          // }}
                           onChange={(event) => {
                             handleChangeCheck(event);
-                            // const objIndex = selectedFilter?.findIndex(
-                            //   (obj: any) => obj?.brand === item?.brand
-                            // );
-
-                            // selectedFilter[objIndex].isChecked = !false;
-                            // console.log(selectedFilter);
                           }}
                         />
 
@@ -264,31 +190,6 @@ const SelectedCategory = ({ id }: { id: any }) => {
                     )
                     // .includes(brandInput)
                   )}
-                {/* {linkOne?.sublinks
-                  ?.filter((item: any) => item.Head === "Kahvaltılıklar ")
-                  .map((item: any) => {
-                    item?.product.map((item: any) => {
-                      return (
-                        <div className="flex items-center mb-2">
-                          <input
-                            id="default-checkbox"
-                            className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
-                            type="checkbox"
-                            key={item.brand}
-                            // checked={checkedState}
-                            // onChange={(index) => {
-                            //   handleOnChange(index);
-                            // }}
-                            // onChange={() => {
-                            //   setSelectedFilter(e2.brand);
-                            // }}
-                          />
-
-                          <label>{item.brand}</label>
-                        </div>
-                      );
-                    });
-                  })} */}
               </ul>
             </div>
           </div>
@@ -398,7 +299,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
                     ? mysublinks?.product
                         ?.filter((x: any) => selectedFilter.includes(x?.brand))
                         .sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
-                        .map((plink: any) => (
+                        .map((plink: any, index: any) => (
                           <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
@@ -432,12 +333,65 @@ const SelectedCategory = ({ id }: { id: any }) => {
 
                               <div
                                 key={plink.uniqueId}
-                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
+                                  openPlus ? "hidden" : ""
+                                }`}
+                                onClick={() => {
+                                  setOpenPlus(!openPlus);
+                                  console.log(openPlus);
+                                }}
                               >
                                 <AiOutlinePlus
-                                  className="text-white  mt-1  ml-[5px]"
+                                  className={`text-white  mt-1  ml-[5px] ${
+                                    openPlus ? "hidden" : ""
+                                  } `}
                                   size={30}
+                                  onClick={(index) => {
+                                    handleProductCount(index);
+                                  }}
                                 />
+                              </div>
+                              <div
+                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
+                                  openPlus ? "flex" : "hidden"
+                                }`}
+                              >
+                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
+                                  {" "}
+                                  <BsTrash3
+                                    className={` ${
+                                      countProduct > 1
+                                        ? "hidden"
+                                        : "text-primary w-5 h-5 "
+                                    }  `}
+                                    onClick={() => {
+                                      setOpenPlus(false);
+                                      setCountProduct(null);
+                                    }}
+                                  />{" "}
+                                  <AiOutlineMinus
+                                    className={`${
+                                      countProduct > 2 || countProduct === 2
+                                        ? "text-primary"
+                                        : "hidden"
+                                    } `}
+                                    onClick={(index) => {
+                                      handleProductCountMinus(index);
+                                    }}
+                                  />
+                                </div>
+                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
+                                  {countProduct} Adet
+                                </div>
+                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
+                                  {" "}
+                                  <AiOutlinePlus
+                                    className="text-primary   w-5 h-5 "
+                                    onClick={(index) => {
+                                      handleProductCount(index);
+                                    }}
+                                  />{" "}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -446,7 +400,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
                     ? mysublinks.product
                         ?.filter((x: any) => selectedFilter.includes(x?.brand))
                         .sort((a: any, b: any) => (a.price > b.price ? -1 : 1))
-                        .map((plink: any) => (
+                        .map((plink: any, index: any) => (
                           <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
@@ -481,12 +435,65 @@ const SelectedCategory = ({ id }: { id: any }) => {
 
                               <div
                                 key={plink.uniqueId}
-                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
+                                  openPlus ? "hidden" : ""
+                                }`}
+                                onClick={() => {
+                                  setOpenPlus(!openPlus);
+                                  console.log(openPlus);
+                                }}
                               >
                                 <AiOutlinePlus
-                                  className="text-white  mt-1  ml-[5px]"
+                                  className={`text-white  mt-1  ml-[5px] ${
+                                    openPlus ? "hidden" : ""
+                                  } `}
                                   size={30}
+                                  onClick={(index) => {
+                                    handleProductCount(index);
+                                  }}
                                 />
+                              </div>
+                              <div
+                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
+                                  openPlus ? "flex" : "hidden"
+                                }`}
+                              >
+                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
+                                  {" "}
+                                  <BsTrash3
+                                    className={` ${
+                                      countProduct > 1
+                                        ? "hidden"
+                                        : "text-primary w-5 h-5 "
+                                    }  `}
+                                    onClick={() => {
+                                      setOpenPlus(false);
+                                      setCountProduct(null);
+                                    }}
+                                  />{" "}
+                                  <AiOutlineMinus
+                                    className={`${
+                                      countProduct > 2 || countProduct === 2
+                                        ? "text-primary"
+                                        : "hidden"
+                                    } `}
+                                    onClick={(index) => {
+                                      handleProductCountMinus(index);
+                                    }}
+                                  />
+                                </div>
+                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
+                                  {countProduct} Adet
+                                </div>
+                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
+                                  {" "}
+                                  <AiOutlinePlus
+                                    className="text-primary   w-5 h-5 "
+                                    onClick={(index) => {
+                                      handleProductCount(index);
+                                    }}
+                                  />{" "}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -495,7 +502,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
                     ? mysublinks.product
                         ?.filter((x: any) => selectedFilter.includes(x?.brand))
                         .sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
-                        .map((plink: any) => (
+                        .map((plink: any, index: any) => (
                           <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
@@ -531,12 +538,65 @@ const SelectedCategory = ({ id }: { id: any }) => {
 
                               <div
                                 key={plink.uniqueId}
-                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
+                                  openPlus ? "hidden" : ""
+                                }`}
+                                onClick={() => {
+                                  setOpenPlus(!openPlus);
+                                  console.log(openPlus);
+                                }}
                               >
                                 <AiOutlinePlus
-                                  className="text-white  mt-1  ml-[5px]"
+                                  className={`text-white  mt-1  ml-[5px] ${
+                                    openPlus ? "hidden" : ""
+                                  } `}
                                   size={30}
+                                  onClick={(index) => {
+                                    handleProductCount(index);
+                                  }}
                                 />
+                              </div>
+                              <div
+                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
+                                  openPlus ? "flex" : "hidden"
+                                }`}
+                              >
+                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
+                                  {" "}
+                                  <BsTrash3
+                                    className={` ${
+                                      countProduct > 1
+                                        ? "hidden"
+                                        : "text-primary w-5 h-5 "
+                                    }  `}
+                                    onClick={() => {
+                                      setOpenPlus(false);
+                                      setCountProduct(null);
+                                    }}
+                                  />{" "}
+                                  <AiOutlineMinus
+                                    className={`${
+                                      countProduct > 2 || countProduct === 2
+                                        ? "text-primary"
+                                        : "hidden"
+                                    } `}
+                                    onClick={(index) => {
+                                      handleProductCountMinus(index);
+                                    }}
+                                  />
+                                </div>
+                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
+                                  {countProduct} Adet
+                                </div>
+                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
+                                  {" "}
+                                  <AiOutlinePlus
+                                    className="text-primary   w-5 h-5 "
+                                    onClick={(index) => {
+                                      handleProductCount(index);
+                                    }}
+                                  />{" "}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -552,7 +612,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
                   {selectedItem === "Önce En Düşük Fiyat"
                     ? mysublinks.product
                         ?.sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
-                        .map((plink: any) => (
+                        .map((plink: any, index: any) => (
                           <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
@@ -586,12 +646,67 @@ const SelectedCategory = ({ id }: { id: any }) => {
 
                               <div
                                 key={plink.uniqueId}
-                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
+                                  openPlus ? "hidden" : ""
+                                }`}
+                                onClick={() => {
+                                  setOpenPlus(!openPlus);
+                                  console.log(openPlus);
+                                }}
                               >
                                 <AiOutlinePlus
-                                  className="text-white  mt-1  ml-[5px]"
+                                  className={`text-white  mt-1  ml-[5px] ${
+                                    openPlus ? "hidden" : ""
+                                  } `}
                                   size={30}
+                                  onClick={(index) => {
+                                    handleProductCount(
+                                      IndeterminateCheckBoxTwoTone
+                                    );
+                                  }}
                                 />
+                              </div>
+                              <div
+                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
+                                  openPlus ? "flex" : "hidden"
+                                }`}
+                              >
+                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
+                                  {" "}
+                                  <BsTrash3
+                                    className={` ${
+                                      countProduct > 1
+                                        ? "hidden"
+                                        : "text-primary w-5 h-5 "
+                                    }  `}
+                                    onClick={() => {
+                                      setOpenPlus(false);
+                                      setCountProduct(null);
+                                    }}
+                                  />{" "}
+                                  <AiOutlineMinus
+                                    className={`${
+                                      countProduct > 2 || countProduct === 2
+                                        ? "text-primary"
+                                        : "hidden"
+                                    } `}
+                                    onClick={(index) => {
+                                      handleProductCountMinus(index);
+                                    }}
+                                  />
+                                </div>
+                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
+                                  {countProduct} Adet
+                                </div>
+                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
+                                  {" "}
+                                  <AiOutlinePlus
+                                    className="text-primary   w-5 h-5 "
+                                    onClick={(index) => {
+                                      handleProductCount(index);
+                                    }}
+                                  />{" "}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -599,7 +714,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
                     : selectedItem === "Önce En Yüksek Fiyat"
                     ? mysublinks.product
                         ?.sort((a: any, b: any) => (a.price > b.price ? -1 : 1))
-                        .map((plink: any) => (
+                        .map((plink: any, index: any) => (
                           <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
@@ -634,12 +749,65 @@ const SelectedCategory = ({ id }: { id: any }) => {
 
                               <div
                                 key={plink.uniqueId}
-                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
+                                  openPlus ? "hidden" : ""
+                                }`}
+                                onClick={() => {
+                                  setOpenPlus(!openPlus);
+                                  console.log(openPlus);
+                                }}
                               >
                                 <AiOutlinePlus
-                                  className="text-white  mt-1  ml-[5px]"
+                                  className={`text-white  mt-1  ml-[5px] ${
+                                    openPlus ? "hidden" : ""
+                                  } `}
                                   size={30}
+                                  onClick={(index) => {
+                                    handleProductCount(index);
+                                  }}
                                 />
+                              </div>
+                              <div
+                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
+                                  openPlus ? "flex" : "hidden"
+                                }`}
+                              >
+                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
+                                  {" "}
+                                  <BsTrash3
+                                    className={` ${
+                                      countProduct > 1
+                                        ? "hidden"
+                                        : "text-primary w-5 h-5 "
+                                    }  `}
+                                    onClick={() => {
+                                      setOpenPlus(false);
+                                      setCountProduct(null);
+                                    }}
+                                  />{" "}
+                                  <AiOutlineMinus
+                                    className={`${
+                                      countProduct > 2 || countProduct === 2
+                                        ? "text-primary"
+                                        : "hidden"
+                                    } `}
+                                    onClick={(index) => {
+                                      handleProductCountMinus(index);
+                                    }}
+                                  />
+                                </div>
+                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
+                                  {countProduct} Adet
+                                </div>
+                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
+                                  {" "}
+                                  <AiOutlinePlus
+                                    className="text-primary   w-5 h-5 "
+                                    onClick={(index) => {
+                                      handleProductCount(index);
+                                    }}
+                                  />{" "}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -647,7 +815,7 @@ const SelectedCategory = ({ id }: { id: any }) => {
                     : selectedItem === "Önerilenler"
                     ? mysublinks.product
                         ?.sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
-                        .map((plink: any) => (
+                        .map((plink: any, index: any) => (
                           <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
@@ -683,12 +851,65 @@ const SelectedCategory = ({ id }: { id: any }) => {
 
                               <div
                                 key={plink.uniqueId}
-                                className="w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer"
+                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
+                                  openPlus ? "hidden" : ""
+                                }`}
+                                onClick={() => {
+                                  setOpenPlus(!openPlus);
+                                  console.log(openPlus);
+                                }}
                               >
                                 <AiOutlinePlus
-                                  className="text-white  mt-1  ml-[5px]"
+                                  className={`text-white  mt-1  ml-[5px] ${
+                                    openPlus ? "hidden" : ""
+                                  } `}
                                   size={30}
+                                  onClick={(index) => {
+                                    handleProductCount(index);
+                                  }}
                                 />
+                              </div>
+                              <div
+                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
+                                  openPlus ? "flex" : "hidden"
+                                }`}
+                              >
+                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
+                                  {" "}
+                                  <BsTrash3
+                                    className={` ${
+                                      countProduct > 1
+                                        ? "hidden"
+                                        : "text-primary w-5 h-5 "
+                                    }  `}
+                                    onClick={() => {
+                                      setOpenPlus(false);
+                                      setCountProduct(null);
+                                    }}
+                                  />{" "}
+                                  <AiOutlineMinus
+                                    className={`${
+                                      countProduct > 2 || countProduct === 2
+                                        ? "text-primary"
+                                        : "hidden"
+                                    } `}
+                                    onClick={(index) => {
+                                      handleProductCountMinus(index);
+                                    }}
+                                  />
+                                </div>
+                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
+                                  {countProduct} Adet
+                                </div>
+                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
+                                  {" "}
+                                  <AiOutlinePlus
+                                    className="text-primary   w-5 h-5 "
+                                    onClick={(index) => {
+                                      handleProductCount(index);
+                                    }}
+                                  />{" "}
+                                </div>
                               </div>
                             </div>
                           </div>
