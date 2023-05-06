@@ -5,11 +5,13 @@ import CategoriesDropdown from "./CategoriesDropdown";
 import Search from "./Search";
 
 const Navbar = ({
-  countProduct,
-  setCountProduct,
+  cardItems,
+  setCardItems,
+  sid,
 }: {
-  countProduct: any;
-  setCountProduct: any;
+  cardItems: any;
+  setCardItems: any;
+  sid: any;
 }) => {
   const [isActive, setIsActive] = useState(false);
 
@@ -85,7 +87,7 @@ const Navbar = ({
       <Adress />
       <CategoriesDropdown />
       <Search />
-      <Basket countProduct={countProduct} setCountProduct={setCountProduct} />
+      <Basket cardItems={cardItems} setCardItems={setCardItems} />
     </div>
   );
 };

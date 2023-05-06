@@ -12,13 +12,16 @@ import { BiChevronDown } from "react-icons/bi";
 import { BsTrash3 } from "react-icons/bs";
 import { fetchOneProduct } from "./actions/oneProductAction";
 import { useAppDispatch, useAppSelector } from "../index";
-import { IndeterminateCheckBoxTwoTone } from "@mui/icons-material";
 
 const SelectedCategory = ({
   id,
   countProduct,
   setCountProduct,
+  cardItems,
+  setCardItems,
 }: {
+  cardItems: any;
+  setCardItems: any;
   id: any;
   countProduct: any;
   setCountProduct: any;
@@ -35,7 +38,11 @@ const SelectedCategory = ({
   const [selectedFilter, setSelectedFilter] = useState<any>([]);
   const [filteredBrands, setFilteredBrands] = useState<any>();
   const [filteredBrands2, setFilteredBrands2] = useState<any>();
-  const [openPlus, setOpenPlus] = useState<boolean>(false);
+  // const [openPlus, setOpenPlus] = useState<boolean>(false);
+  const [quantId, setQuantId] = useState<any>();
+  const [quantName, setQuantName] = useState<any>();
+  const [quantPrice, setQuantPrice] = useState<any>();
+  const [quantImg, setQuantImg] = useState<any>();
 
   const filterBrands = (input: any) => {
     const inputter = filteredBrands2.filter((item: any) =>
@@ -90,16 +97,102 @@ const SelectedCategory = ({
         return [...pre.filter((x: any) => x !== value)];
       });
   };
+  const quantity = getItemQuantity(quantId);
 
-  const handleProductCount = (index: any) => {
-    setCountProduct(countProduct + 1);
+  function getItemQuantity(quantId: any) {
+    return (
+      cardItems.find((item: any) => item.quantId === quantId)?.quantity || 0
+    );
+  }
+  function handleProductCount(quantId: any) {
+    setCardItems((currItems: any) => {
+      if (currItems.find((item: any) => item.quantId === quantId) == null) {
+        return [
+          ...currItems,
+          { quantName, quantImg, quantPrice, quantId, quantity: 1 },
+        ];
+      } else {
+        return currItems.map((item: any) => {
+          if (item.quantId === quantId) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  }
+  const handleProductCountMinus = (quantId: any) => {
+    setCardItems((currItem: any) => {
+      if (
+        currItem.find((item: any) => item.quantId === quantId)?.quantity === 1
+      ) {
+        return currItem.filter((item: any) => item.quantId !== quantId);
+      } else {
+        return currItem.map((item: any) => {
+          if (item.quantId === quantId) {
+            return { ...item, quantity: item.quantity - 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
   };
 
-  const handleProductCountMinus = (index: any) => {
-    setCountProduct(countProduct - 1);
+  const removeFromCard = (quantId: any) => {
+    setCardItems((currItem: any) => {
+      return currItem.filter((item: any) => item.quantId !== quantId);
+    });
   };
 
-  console.log(selectedFilter);
+  // const handleProductCount = (index: any) => {
+  //   setCountProduct(countProduct + 1);
+  // };
+
+  // const handleProductCount = (id: any) => {
+  //   return cardItems.find((item) => item.id === id)?.quantity || 0;
+  // };
+
+  // const handleProductCount = (id: any) => {
+  //   setCardItems((currItem) => {
+  //     if (currItem.find((item) => item.id === id) == null) {
+  //       return [...currItem, { id, quantity: 1 }];
+  //     } else {
+  //       return currItem.map((item) => {
+  //         if (item.id === id) {
+  //           return { ...item, quantity: item.quantity + 1 };
+  //         } else {
+  //           return item;
+  //         }
+  //       });
+  //     }
+  //   });
+  // };
+
+  // const handleProductCountMinus = (id: any) => {
+  //   setCardItems((currItem) => {
+  //     if (currItem.find((item) => item.id === id)?.quantity === 1) {
+  //       return currItem.filter((item) => item.id !== id);
+  //     } else {
+  //       return currItem.map((item) => {
+  //         if (item.id === id) {
+  //           return { ...item, quantity: item.quantity - 1 };
+  //         } else {
+  //           return item;
+  //         }
+  //       });
+  //     }
+  //   });
+  // };
+  // const handleProductCountMinus = (index: any) => {
+  //   setCountProduct(countProduct - 1);
+  // };
+  console.log(cardItems);
+
+  console.log(quantId);
+
+  console.log(quantity);
 
   return (
     <div className="">
@@ -270,7 +363,7 @@ const SelectedCategory = ({
             </div>
           </div>
           <div
-            className={`text-black font-bold ml-[1205px] mt-[187px] ${
+            className={`text-black font-bold ml-[1205px] mt-[190px] absolute ${
               selectedFilter.length !== 0 ? "mt-[18px]" : ""
             }  `}
           >
@@ -298,8 +391,8 @@ const SelectedCategory = ({
                   {selectedItem === "Önce En Düşük Fiyat"
                     ? mysublinks?.product
                         ?.filter((x: any) => selectedFilter.includes(x?.brand))
-                        .sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
-                        .map((plink: any, index: any) => (
+                        ?.sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
+                        ?.map((plink: any, index: any) => (
                           <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
@@ -334,61 +427,69 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  openPlus ? "hidden" : ""
+                                  quantId === plink.id && quantity > 0
+                                    ? "hidden"
+                                    : ""
                                 }`}
                                 onClick={() => {
-                                  setOpenPlus(!openPlus);
-                                  console.log(openPlus);
+                                  setQuantId(plink?.id);
+                                  setQuantName(plink?.name);
+                                  setQuantPrice(plink?.price);
+                                  setQuantImg(plink?.img);
                                 }}
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    openPlus ? "hidden" : ""
+                                    quantId === plink.id && quantity > 0
+                                      ? "hidden"
+                                      : ""
                                   } `}
                                   size={30}
-                                  onClick={(index) => {
-                                    handleProductCount(index);
+                                  onClick={() => {
+                                    handleProductCount(plink.id);
                                   }}
                                 />
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  openPlus ? "flex" : "hidden"
+                                  quantId === plink.id && quantity > 0
+                                    ? "flex"
+                                    : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
                                   {" "}
                                   <BsTrash3
                                     className={` ${
-                                      countProduct > 1
+                                      quantity > 1
                                         ? "hidden"
                                         : "text-primary w-5 h-5 "
                                     }  `}
                                     onClick={() => {
-                                      setOpenPlus(false);
-                                      setCountProduct(null);
+                                      // setOpenPlus(false);
+                                      removeFromCard(plink.id);
                                     }}
                                   />{" "}
                                   <AiOutlineMinus
                                     className={`${
-                                      countProduct > 2 || countProduct === 2
+                                      quantity > 2 || quantity === 2
                                         ? "text-primary"
                                         : "hidden"
                                     } `}
-                                    onClick={(index) => {
-                                      handleProductCountMinus(index);
+                                    onClick={() => {
+                                      handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {countProduct} Adet
+                                  {quantity} Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
                                   <AiOutlinePlus
                                     className="text-primary   w-5 h-5 "
-                                    onClick={(index) => {
-                                      handleProductCount(index);
+                                    onClick={() => {
+                                      handleProductCount(plink.id);
                                     }}
                                   />{" "}
                                 </div>
@@ -436,61 +537,68 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  openPlus ? "hidden" : ""
+                                  quantId === plink.id && quantity > 0
+                                    ? "hidden"
+                                    : ""
                                 }`}
                                 onClick={() => {
-                                  setOpenPlus(!openPlus);
-                                  console.log(openPlus);
+                                  setQuantId(plink.id);
+                                  setQuantName(plink.name);
+                                  setQuantPrice(plink.price);
+                                  setQuantImg(plink.img);
                                 }}
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    openPlus ? "hidden" : ""
+                                    quantId === plink.id && quantity > 0
+                                      ? "hidden"
+                                      : ""
                                   } `}
                                   size={30}
-                                  onClick={(index) => {
-                                    handleProductCount(index);
+                                  onClick={() => {
+                                    handleProductCount(plink.id);
                                   }}
                                 />
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  openPlus ? "flex" : "hidden"
+                                  quantId === plink.id && quantity > 0
+                                    ? "flex"
+                                    : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
                                   {" "}
                                   <BsTrash3
                                     className={` ${
-                                      countProduct > 1
+                                      quantity > 1
                                         ? "hidden"
                                         : "text-primary w-5 h-5 "
                                     }  `}
                                     onClick={() => {
-                                      setOpenPlus(false);
-                                      setCountProduct(null);
+                                      removeFromCard(plink.id);
                                     }}
                                   />{" "}
                                   <AiOutlineMinus
                                     className={`${
-                                      countProduct > 2 || countProduct === 2
+                                      quantity > 2 || quantity === 2
                                         ? "text-primary"
                                         : "hidden"
                                     } `}
-                                    onClick={(index) => {
-                                      handleProductCountMinus(index);
+                                    onClick={() => {
+                                      handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {countProduct} Adet
+                                  {quantity} Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
                                   <AiOutlinePlus
                                     className="text-primary   w-5 h-5 "
-                                    onClick={(index) => {
-                                      handleProductCount(index);
+                                    onClick={() => {
+                                      handleProductCount(plink.id);
                                     }}
                                   />{" "}
                                 </div>
@@ -502,7 +610,7 @@ const SelectedCategory = ({
                     ? mysublinks.product
                         ?.filter((x: any) => selectedFilter.includes(x?.brand))
                         .sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
-                        .map((plink: any, index: any) => (
+                        .map((plink: any) => (
                           <div key={plink.uniqueId} className=" p-0">
                             <div
                               key={plink.uniqueId}
@@ -539,61 +647,69 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  openPlus ? "hidden" : ""
+                                  quantId === plink.id && quantity > 0
+                                    ? "hidden"
+                                    : ""
                                 }`}
                                 onClick={() => {
-                                  setOpenPlus(!openPlus);
-                                  console.log(openPlus);
+                                  setQuantId(plink.id);
+                                  setQuantName(plink.name);
+                                  setQuantPrice(plink.price);
+                                  setQuantImg(plink.img);
                                 }}
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    openPlus ? "hidden" : ""
+                                    quantId === plink.id && quantity > 0
+                                      ? "hidden"
+                                      : ""
                                   } `}
                                   size={30}
-                                  onClick={(index) => {
-                                    handleProductCount(index);
+                                  onClick={() => {
+                                    handleProductCount(plink.id);
                                   }}
                                 />
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  openPlus ? "flex" : "hidden"
+                                  quantId === plink.id && quantity > 0
+                                    ? "flex"
+                                    : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
                                   {" "}
                                   <BsTrash3
                                     className={` ${
-                                      countProduct > 1
+                                      quantity > 1
                                         ? "hidden"
                                         : "text-primary w-5 h-5 "
                                     }  `}
                                     onClick={() => {
-                                      setOpenPlus(false);
-                                      setCountProduct(null);
+                                      // setOpenPlus(false);
+                                      removeFromCard(plink.id);
                                     }}
                                   />{" "}
                                   <AiOutlineMinus
                                     className={`${
-                                      countProduct > 2 || countProduct === 2
+                                      quantity > 2 || quantity === 2
                                         ? "text-primary"
                                         : "hidden"
                                     } `}
-                                    onClick={(index) => {
-                                      handleProductCountMinus(index);
+                                    onClick={() => {
+                                      handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {countProduct} Adet
+                                  {quantity} Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
                                   <AiOutlinePlus
                                     className="text-primary   w-5 h-5 "
-                                    onClick={(index) => {
-                                      handleProductCount(index);
+                                    onClick={() => {
+                                      handleProductCount(plink.id);
                                     }}
                                   />{" "}
                                 </div>
@@ -647,63 +763,68 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  openPlus ? "hidden" : ""
+                                  quantId === plink.id && quantity > 0
+                                    ? "hidden"
+                                    : ""
                                 }`}
                                 onClick={() => {
-                                  setOpenPlus(!openPlus);
-                                  console.log(openPlus);
+                                  setQuantId(plink.id);
+                                  setQuantName(plink.name);
+                                  setQuantPrice(plink.price);
+                                  setQuantImg(plink.img);
                                 }}
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    openPlus ? "hidden" : ""
+                                    quantId === plink.id && quantity > 0
+                                      ? "hidden"
+                                      : ""
                                   } `}
                                   size={30}
-                                  onClick={(index) => {
-                                    handleProductCount(
-                                      IndeterminateCheckBoxTwoTone
-                                    );
+                                  onClick={() => {
+                                    handleProductCount(plink.id);
                                   }}
                                 />
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  openPlus ? "flex" : "hidden"
+                                  quantId === plink.id && quantity > 0
+                                    ? "flex"
+                                    : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
                                   {" "}
                                   <BsTrash3
                                     className={` ${
-                                      countProduct > 1
+                                      quantity > 1
                                         ? "hidden"
                                         : "text-primary w-5 h-5 "
                                     }  `}
                                     onClick={() => {
-                                      setOpenPlus(false);
-                                      setCountProduct(null);
+                                      removeFromCard(plink.id);
                                     }}
                                   />{" "}
                                   <AiOutlineMinus
                                     className={`${
-                                      countProduct > 2 || countProduct === 2
+                                      quantity > 2 || quantity === 2
                                         ? "text-primary"
                                         : "hidden"
                                     } `}
-                                    onClick={(index) => {
-                                      handleProductCountMinus(index);
+                                    onClick={() => {
+                                      handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {countProduct} Adet
+                                  {quantity} Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
                                   <AiOutlinePlus
                                     className="text-primary   w-5 h-5 "
-                                    onClick={(index) => {
-                                      handleProductCount(index);
+                                    onClick={() => {
+                                      handleProductCount(plink.id);
                                     }}
                                   />{" "}
                                 </div>
@@ -750,61 +871,68 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  openPlus ? "hidden" : ""
+                                  quantId === plink.id && quantity > 0
+                                    ? "hidden"
+                                    : ""
                                 }`}
                                 onClick={() => {
-                                  setOpenPlus(!openPlus);
-                                  console.log(openPlus);
+                                  setQuantId(plink.id);
+                                  setQuantName(plink.name);
+                                  setQuantPrice(plink.price);
+                                  setQuantImg(plink.img);
                                 }}
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    openPlus ? "hidden" : ""
+                                    quantId === plink.id && quantity > 0
+                                      ? "hidden"
+                                      : ""
                                   } `}
                                   size={30}
-                                  onClick={(index) => {
-                                    handleProductCount(index);
+                                  onClick={() => {
+                                    handleProductCount(plink.id);
                                   }}
                                 />
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  openPlus ? "flex" : "hidden"
+                                  quantId === plink.id && quantity > 0
+                                    ? "flex"
+                                    : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
                                   {" "}
                                   <BsTrash3
                                     className={` ${
-                                      countProduct > 1
+                                      quantity > 1
                                         ? "hidden"
                                         : "text-primary w-5 h-5 "
                                     }  `}
                                     onClick={() => {
-                                      setOpenPlus(false);
-                                      setCountProduct(null);
+                                      removeFromCard(plink.id);
                                     }}
                                   />{" "}
                                   <AiOutlineMinus
                                     className={`${
-                                      countProduct > 2 || countProduct === 2
+                                      quantity > 2 || quantity === 2
                                         ? "text-primary"
                                         : "hidden"
                                     } `}
-                                    onClick={(index) => {
-                                      handleProductCountMinus(index);
+                                    onClick={() => {
+                                      handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {countProduct} Adet
+                                  {quantity} Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
                                   <AiOutlinePlus
                                     className="text-primary   w-5 h-5 "
-                                    onClick={(index) => {
-                                      handleProductCount(index);
+                                    onClick={() => {
+                                      handleProductCount(plink.id);
                                     }}
                                   />{" "}
                                 </div>
@@ -852,61 +980,68 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  openPlus ? "hidden" : ""
+                                  quantId === plink.id && quantity > 0
+                                    ? "hidden"
+                                    : ""
                                 }`}
                                 onClick={() => {
-                                  setOpenPlus(!openPlus);
-                                  console.log(openPlus);
+                                  setQuantId(plink.id);
+                                  setQuantName(plink.name);
+                                  setQuantPrice(plink.price);
+                                  setQuantImg(plink.img);
                                 }}
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    openPlus ? "hidden" : ""
+                                    quantId === plink.id && quantity > 0
+                                      ? "hidden"
+                                      : ""
                                   } `}
                                   size={30}
-                                  onClick={(index) => {
-                                    handleProductCount(index);
+                                  onClick={() => {
+                                    handleProductCount(plink.id);
                                   }}
                                 />
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  openPlus ? "flex" : "hidden"
+                                  quantId === plink.id && quantity > 0
+                                    ? "flex"
+                                    : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
                                   {" "}
                                   <BsTrash3
                                     className={` ${
-                                      countProduct > 1
+                                      quantity > 1
                                         ? "hidden"
                                         : "text-primary w-5 h-5 "
                                     }  `}
                                     onClick={() => {
-                                      setOpenPlus(false);
-                                      setCountProduct(null);
+                                      removeFromCard(plink.id);
                                     }}
                                   />{" "}
                                   <AiOutlineMinus
                                     className={`${
-                                      countProduct > 2 || countProduct === 2
+                                      quantity > 2 || quantity === 2
                                         ? "text-primary"
                                         : "hidden"
                                     } `}
-                                    onClick={(index) => {
-                                      handleProductCountMinus(index);
+                                    onClick={() => {
+                                      handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {countProduct} Adet
+                                  {quantity} Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
                                   <AiOutlinePlus
                                     className="text-primary   w-5 h-5 "
-                                    onClick={(index) => {
-                                      handleProductCount(index);
+                                    onClick={() => {
+                                      handleProductCount(plink.id);
                                     }}
                                   />{" "}
                                 </div>

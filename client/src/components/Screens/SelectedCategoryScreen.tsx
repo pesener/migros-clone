@@ -6,10 +6,14 @@ const SelectedCategoryScreen = ({
   setSid,
   countProduct,
   setCountProduct,
+  cardItems,
+  setCardItems,
 }: {
   setSid: any;
   countProduct: any;
   setCountProduct: any;
+  cardItems: any;
+  setCardItems: any;
 }) => {
   const { id } = useParams();
   useEffect(() => {
@@ -21,6 +25,8 @@ const SelectedCategoryScreen = ({
         id={id}
         countProduct={countProduct}
         setCountProduct={setCountProduct}
+        cardItems={cardItems}
+        setCardItems={setCardItems}
       />
     </div>
   );
