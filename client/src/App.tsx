@@ -9,7 +9,7 @@ import { useLocalStorage } from "./components/hooks/useLocalStorage";
 
 type CartItem = {
   id: any;
-  quantity: any;
+  quantity: number;
   img: any;
   price: any;
   name: any;

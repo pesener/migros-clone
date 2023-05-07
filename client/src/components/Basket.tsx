@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { BiChevronDown } from "react-icons/bi";
+import { BsTrash3 } from "react-icons/bs";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 const Basket = ({
   cardItems,
@@ -9,6 +11,55 @@ const Basket = ({
   cardItems: any;
   setCardItems: any;
 }) => {
+  const removeFromCard = (quantId: any) => {
+    setCardItems((currItem: any) => {
+      return currItem.filter((item: any) => item.quantId !== quantId);
+    });
+  };
+  function handleProductCount(quantId: any) {
+    setCardItems((currItems: any) => {
+      if (currItems.find((item: any) => item.quantId === quantId) == null) {
+        return [...currItems, { quantId, quantity: 1 }];
+      } else {
+        return currItems.map((item: any) => {
+          if (item.quantId === quantId) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  }
+
+  const handleProductCountMinus = (quantId: any) => {
+    setCardItems((currItem: any) => {
+      if (
+        currItem.find((item: any) => item.quantId === quantId)?.quantity === 1
+      ) {
+        return currItem.filter((item: any) => item.quantId !== quantId);
+      } else {
+        return currItem.map((item: any) => {
+          if (item.quantId === quantId) {
+            return { ...item, quantity: item.quantity - 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  };
+  useEffect(() => {
+    const quantity = getItemQuantity(
+      cardItems?.map((item: any) => item.quantId)
+    );
+  });
+
+  function getItemQuantity(quantId: any) {
+    return (
+      cardItems.find((item: any) => item.quantId === quantId)?.quantity || 0
+    );
+  }
   return (
     <div className="absolute top-[90px] right-[125px] group/basket cursor-pointer">
       <div className="border-[1.6px] border-gray-300 w-[200px] h-[54px] rounded-lg ">
@@ -31,8 +82,17 @@ const Basket = ({
         </div>
 
         <div className="font-bold top-2 absolute left-[68px]">Sepetim</div>
-        <div className=" top-[28px] text-primary font-bold absolute left-[72px]">
-          0,00 TL
+        <div className=" top-[30px] text-primary font-bold absolute left-[68px] w-[70px]">
+          {cardItems?.map((item: any) =>
+            cardItems.reduce((total: any, cartItem: any) => {
+              cardItems?.find((i: any) => i.quantId === cartItem.quantId);
+              const itemsCount: any = (total =
+                total + (item?.quantPrice || 0) * cartItem.quantity);
+              console.log(total, "www", itemsCount);
+
+              return itemsCount;
+            }, 0)
+          )}
         </div>
         <div className=" top-[14px] font-bold absolute right-[12px]">
           <BiChevronDown size={30} />
@@ -53,28 +113,76 @@ const Basket = ({
             <div className="bg-white w-[410px] border-2 rounded bottom-[0px] mt-[20px]   shadow-[20px_5px_60px_-15px_rgba(0,0,0,0.3)] ">
               {" "}
               <div className="grid grid-cols-1 p-0 gap-0  w-[410px]  max-h-[520px]   ">
-                {cardItems?.map((item: any) => (
-                  <ul className="w-[410px] h-[95px] overflow-y-auto ">
-                    <div className="border absolute rounded w-[75px] h-[75px] ml-2 mt-2">
-                      {" "}
-                      <img alt="" src={item.quantImg}></img>
-                    </div>
-                    <div className="absolute w-[320px]  h-[80px]">
-                      <div className="font-bold text-black text-sm absolute ml-[90px] flex flex-wrap mt-2">
-                        {item.quantName}{" "}
+                <ul className="w-[410px] max-h-[520px] overflow-y-auto ">
+                  {cardItems?.map((item: any) => (
+                    <div className="flex flex-wrap mt-4">
+                      <div className="border  rounded w-[70px] h-[80px] ml-2 mt-2">
+                        {" "}
+                        <img alt="" src={item.quantImg}></img>
+                      </div>
+                      <div className=" w-[320px]  h-[130px] ">
+                        <div className="flex justify-between">
+                          {" "}
+                          <div className="font-bold   text-black text-sm  ml-[10px]  flex flex-wrap mt-3">
+                            {item.quantName}{" "}
+                          </div>
+                          <div>
+                            {" "}
+                            <BsTrash3
+                              className="text-gray-300 mr-6 mt-3"
+                              size={20}
+                              onClick={() => {
+                                removeFromCard(item.quantId);
+                              }}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="flex border-gray-500 border rounded w-[80px] justify-between ml-4 mt-4">
+                          {" "}
+                          <AiOutlineMinus
+                            className={`${
+                              item.quantity > 2 || item.quantity === 2
+                                ? "text-gray-500 bg-gray-200  rounded-tl rounded-bl  w-[24px] h-[24px] "
+                                : "hidden"
+                            } `}
+                            onClick={() => {
+                              handleProductCountMinus(item.quantId);
+                            }}
+                          />
+                          <BsTrash3
+                            className={`${
+                              item.quantity < 2 || item.quantity === 1
+                                ? "text-gray-500 bg-gray-200 rounded-tl rounded-bl  w-[24px] h-[24px]  "
+                                : "hidden"
+                            } `}
+                            onClick={() => {
+                              removeFromCard(item.quantId);
+                            }}
+                          />{" "}
+                          <div>{item.quantity}</div>
+                          <AiOutlinePlus
+                            className="text-gray-500 bg-gray-200   w-[24px] h-[24px] rounded-tr rounded-br "
+                            onClick={() => {
+                              handleProductCount(item.quantId);
+                            }}
+                          />{" "}
+                        </div>
+                        <div className="bg-hemen font-bold  w-[80px] rounded-tl-lg rounded-tr-lg rounded-br-lg items-center justify-center h-[40px] text-black text-sm  ml-[220px]   flex   ">
+                          {item.quantity > 1
+                            ? (item.quantPrice * item.quantity).toFixed(2)
+                            : item.quantPrice}
+                          {" TL"}
+                        </div>
                       </div>
                     </div>
-                    <div className="bg-hemen font-bold w-[80px] rounded-tl-lg rounded-tr-lg rounded-br-lg items-center justify-center h-[40px] text-black text-sm absolute ml-[290px] mt-[40px] flex flex-wrap ">
-                      {item.quantPrice}
-                      {"TL "}
+                  ))}
+                  <div className="bg-white flex justify-center items-center w-[407px] shadow-lg    bottom-0  h-[80px]">
+                    <div className="bg-primary text-white w-[380px] flex justify-center items-center text-center rounded font-semibold  bottom-4 h-[50px]">
+                      Sepete Git
                     </div>
-                    <div className="bg-white flex justify-center items-center w-[407px] shadow-lg absolute bottom-0  h-[80px]">
-                      <div className="bg-primary text-white w-[380px] flex justify-center items-center text-center rounded font-semibold absolute bottom-4 h-[50px]">
-                        Sepete Git
-                      </div>
-                    </div>
-                  </ul>
-                ))}
+                  </div>
+                </ul>
               </div>
             </div>
           )}
