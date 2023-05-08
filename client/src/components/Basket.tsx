@@ -3,6 +3,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { BiChevronDown } from "react-icons/bi";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Basket = ({
   cardItems,
@@ -83,16 +84,18 @@ const Basket = ({
 
         <div className="font-bold top-2 absolute left-[68px]">Sepetim</div>
         <div className=" top-[30px] text-primary font-bold absolute left-[68px] w-[70px]">
-          {cardItems?.map((item: any) =>
-            cardItems.reduce((total: any, cartItem: any) => {
-              cardItems?.find((i: any) => i.quantId === cartItem.quantId);
-              const itemsCount: any = (total =
-                total + (item?.quantPrice || 0) * cartItem.quantity);
-              console.log(total, "www", itemsCount);
+          {cardItems.length === 0
+            ? "0,00 TL"
+            : cardItems?.map((item: any) =>
+                cardItems.reduce((total: any, cartItem: any) => {
+                  cardItems?.find((i: any) => i.quantId === cartItem.quantId);
+                  const itemsCount: Number =
+                    total + (item?.quantPrice || 0) * cartItem.quantity;
+                  console.log(total, "www", itemsCount);
 
-              return itemsCount;
-            }, 0)
-          )}
+                  return itemsCount;
+                }, 0)
+              )}
         </div>
         <div className=" top-[14px] font-bold absolute right-[12px]">
           <BiChevronDown size={30} />
@@ -168,7 +171,7 @@ const Basket = ({
                             }}
                           />{" "}
                         </div>
-                        <div className="bg-hemen font-bold  w-[80px] rounded-tl-lg rounded-tr-lg rounded-br-lg items-center justify-center h-[40px] text-black text-sm  ml-[220px]   flex   ">
+                        <div className="bg-[#fce24d] font-bold  w-[80px] rounded-tl-lg rounded-tr-lg rounded-br-lg items-center justify-center h-[40px] text-black text-sm  ml-[220px]   flex   ">
                           {item.quantity > 1
                             ? (item.quantPrice * item.quantity).toFixed(2)
                             : item.quantPrice}
@@ -178,9 +181,11 @@ const Basket = ({
                     </div>
                   ))}
                   <div className="bg-white flex justify-center items-center w-[407px] shadow-lg    bottom-0  h-[80px]">
-                    <div className="bg-primary text-white w-[380px] flex justify-center items-center text-center rounded font-semibold  bottom-4 h-[50px]">
-                      Sepete Git
-                    </div>
+                    <Link to={"/basket"}>
+                      <div className="bg-primary text-white w-[380px] flex justify-center items-center text-center rounded font-semibold  bottom-4 h-[50px]">
+                        Sepete Git
+                      </div>
+                    </Link>
                   </div>
                 </ul>
               </div>

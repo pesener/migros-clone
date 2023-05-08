@@ -6,6 +6,7 @@ import SelectedCategoryScreen from "./components/Screens/SelectedCategoryScreen"
 import HomeScreen from "./components/Screens/HomeScreen";
 import ProductDetail from "./components/Screens/ProductDetail";
 import { useLocalStorage } from "./components/hooks/useLocalStorage";
+import BasketDetail from "./components/BasketDetail";
 
 type CartItem = {
   id: any;
@@ -47,7 +48,6 @@ function App() {
       <main className="py-10">
         <Routes>
           <Route path="/" element={<HomeScreen />} />
-
           <Route
             path="/products/:id"
             element={
@@ -61,6 +61,12 @@ function App() {
             }
           />
           <Route path="/details/:id" element={<ProductDetail sid={sid} />} />
+          <Route
+            path="/basket"
+            element={
+              <BasketDetail cardItems={cardItems} setCardItems={setCardItems} />
+            }
+          ></Route>{" "}
         </Routes>
       </main>
     </Router>
