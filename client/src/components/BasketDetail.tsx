@@ -194,16 +194,14 @@ const BasketDetail = ({
                 Toplam Tutar
               </div>{" "}
               <div className="mr-4 text-md font-semibold text-gray-900">
-                {cardItems?.map((item: any) =>
-                  cardItems.reduce((total: any, cartItem: any) => {
-                    cardItems?.find((i: any) => i.quantId === cartItem.quantId);
-                    const itemsCount: Number =
-                      total + (item?.quantPrice || 0) * cartItem.quantity;
-                    console.log(total, "www", itemsCount);
+                {cardItems.reduce((total: any, cartItem: any) => {
+                  const itemsCount: any =
+                    total + cartItem?.quantPrice * cartItem?.quantity;
 
-                    return itemsCount;
-                  }, 0)
-                )}{" "}
+                  console.log(total, "www", itemsCount);
+
+                  return +parseFloat(itemsCount).toFixed(2);
+                }, 0)}{" "}
                 TL
               </div>
             </div>
@@ -217,16 +215,14 @@ const BasketDetail = ({
               <div className="text-lg  font-bold ">Ödenecek Tutar</div>{" "}
               <div className="mr-4 text-md font-semibold  ">
                 {" "}
-                {cardItems?.map((item: any) =>
-                  cardItems.reduce((total: any, cartItem: any) => {
-                    cardItems?.find((i: any) => i.quantId === cartItem.quantId);
-                    const itemsCount: Number =
-                      total + (item?.quantPrice || 0) * cartItem.quantity;
-                    console.log(total, "www", itemsCount);
+                {cardItems.reduce((total: any, cartItem: any) => {
+                  const itemsCount: any =
+                    total + cartItem?.quantPrice * cartItem?.quantity;
 
-                    return itemsCount;
-                  }, 0)
-                )}{" "}
+                  console.log(total, "www", itemsCount);
+
+                  return +parseFloat(itemsCount).toFixed(2);
+                }, 0)}{" "}
                 TL
               </div>
             </div>

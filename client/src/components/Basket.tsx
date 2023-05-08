@@ -86,16 +86,17 @@ const Basket = ({
         <div className=" top-[30px] text-primary font-bold absolute left-[68px] w-[70px]">
           {cardItems.length === 0
             ? "0,00 TL"
-            : cardItems?.map((item: any) =>
-                cardItems.reduce((total: any, cartItem: any) => {
-                  cardItems?.find((i: any) => i.quantId === cartItem.quantId);
-                  const itemsCount: Number =
-                    total + (item?.quantPrice || 0) * cartItem.quantity;
-                  console.log(total, "www", itemsCount);
+            : cardItems.reduce((total: any, cartItem: any) => {
+                const itemsCount: any = Math.round(
+                  ((total + cartItem?.quantPrice * cartItem?.quantity) * 1000) /
+                    1000
+                );
 
-                  return itemsCount;
-                }, 0)
-              )}
+                console.log(total, "www", itemsCount);
+
+                return +parseFloat(itemsCount).toFixed(1);
+              }, 0)}{" "}
+          TL
         </div>
         <div className=" top-[14px] font-bold absolute right-[12px]">
           <BiChevronDown size={30} />
