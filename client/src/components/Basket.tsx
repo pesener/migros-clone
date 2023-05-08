@@ -87,10 +87,8 @@ const Basket = ({
           {cardItems.length === 0
             ? "0,00 TL"
             : cardItems.reduce((total: any, cartItem: any) => {
-                const itemsCount: any = Math.round(
-                  ((total + cartItem?.quantPrice * cartItem?.quantity) * 1000) /
-                    1000
-                );
+                const itemsCount: any =
+                  total + cartItem?.quantPrice * cartItem?.quantity;
 
                 console.log(total, "www", itemsCount);
 
