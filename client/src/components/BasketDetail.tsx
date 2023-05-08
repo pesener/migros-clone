@@ -95,7 +95,7 @@ const BasketDetail = ({
           </div>
           <div>
             {cardItems?.map((item: any) => (
-              <div className="border border-gray-300 ml-[120px] rounded-lg w-[870px] h-[165px] mb-4 flex">
+              <div className="border border-gray-300 ml-[120px] rounded-lg w-[870px] h-[170px] mb-4 mt-[32px] flex">
                 {" "}
                 <div>
                   {" "}
