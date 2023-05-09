@@ -85,7 +85,7 @@ const Basket = ({
         <div className="font-bold top-2 absolute left-[68px]">Sepetim</div>
         <div className=" top-[30px] text-primary font-bold absolute left-[68px] w-[70px]">
           {cardItems.length === 0
-            ? "0,00"
+            ? "0,00 "
             : cardItems.reduce((total: any, cartItem: any) => {
                 const itemsCount: any =
                   total + cartItem?.quantPrice * cartItem?.quantity;

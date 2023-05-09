@@ -112,6 +112,16 @@ const BasketDetail = ({
                     {" "}
                     İndirimli ürün{" "}
                   </div>
+                  <div>
+                    {" "}
+                    <BsTrash3
+                      className="text-gray-300 ml-6 mt-14 cursor-pointer"
+                      size={20}
+                      onClick={() => {
+                        removeFromCard(item.quantId);
+                      }}
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-col ml-[200px]">
                   <div className="bg-[#fce24d] font-bold  w-[120px] rounded-tl-full rounded-r-full items-center  justify-center h-[48px] text-black text-[19px]   mt-4  flex   ">
