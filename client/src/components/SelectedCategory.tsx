@@ -15,16 +15,13 @@ import { useAppDispatch, useAppSelector } from "../index";
 
 const SelectedCategory = ({
   id,
-  countProduct,
-  setCountProduct,
+
   cardItems,
   setCardItems,
 }: {
   cardItems: any;
   setCardItems: any;
   id: any;
-  countProduct: any;
-  setCountProduct: any;
 }) => {
   const dispatch = useAppDispatch();
   const linkOne = useAppSelector((state) => state.linkOne);
@@ -34,15 +31,15 @@ const SelectedCategory = ({
   }, [id]);
 
   const [open, setOpen] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<any>("Önerilenler");
+  const [selectedItem, setSelectedItem] = useState<string>("Önerilenler");
   const [selectedFilter, setSelectedFilter] = useState<any>([]);
   const [filteredBrands, setFilteredBrands] = useState<any>();
   const [filteredBrands2, setFilteredBrands2] = useState<any>();
   // const [openPlus, setOpenPlus] = useState<boolean>(false);
   const [quantId, setQuantId] = useState<any>();
-  const [quantName, setQuantName] = useState<any>();
+  const [quantName, setQuantName] = useState<string>();
   const [quantPrice, setQuantPrice] = useState<any>();
-  const [quantImg, setQuantImg] = useState<any>();
+  const [quantImg, setQuantImg] = useState<string>();
 
   const filterBrands = (input: any) => {
     const inputter = filteredBrands2.filter((item: any) =>
@@ -99,12 +96,12 @@ const SelectedCategory = ({
   };
   const quantity = getItemQuantity(quantId);
 
-  function getItemQuantity(quantId: any) {
+  function getItemQuantity(quantId: string) {
     return (
       cardItems.find((item: any) => item.quantId === quantId)?.quantity || 0
     );
   }
-  function handleProductCount(id: any) {
+  function handleProductCount(id: string) {
     setCardItems((currItems: any) => {
       if (
         currItems.find((item: any) => item.quantId === id) == null &&
@@ -125,8 +122,7 @@ const SelectedCategory = ({
         ];
       } else {
         return currItems.map((item: any) => {
-          if (item.quantId === quantId) {
-            console.log(item.quantId);
+          if (item.quantId === id) {
             return { ...item, quantity: item.quantity + 1 };
           } else {
             return item;

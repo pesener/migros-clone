@@ -4,14 +4,10 @@ import { useParams } from "react-router-dom";
 
 const SelectedCategoryScreen = ({
   setSid,
-  countProduct,
-  setCountProduct,
   cardItems,
   setCardItems,
 }: {
   setSid: any;
-  countProduct: any;
-  setCountProduct: any;
   cardItems: any;
   setCardItems: any;
 }) => {
@@ -23,8 +19,6 @@ const SelectedCategoryScreen = ({
     <div>
       <SelectedCategory
         id={id}
-        countProduct={countProduct}
-        setCountProduct={setCountProduct}
         cardItems={cardItems}
         setCardItems={setCardItems}
       />

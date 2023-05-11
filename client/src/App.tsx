@@ -18,7 +18,6 @@ type CartItem = {
 function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [sid, setSid] = useState<any>();
-  const [countProduct, setCountProduct] = useState<any>(null);
   const [cardItems, setCardItems] = useLocalStorage<CartItem[]>(
     "shopping-cart",
     []
@@ -53,8 +52,6 @@ function App() {
             element={
               <SelectedCategoryScreen
                 setSid={setSid}
-                countProduct={countProduct}
-                setCountProduct={setCountProduct}
                 cardItems={cardItems}
                 setCardItems={setCardItems}
               />
