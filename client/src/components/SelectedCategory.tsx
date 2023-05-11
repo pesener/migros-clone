@@ -78,14 +78,20 @@ const SelectedCategory = ({
       : console.log(filteredBrands);
   }, [filterBrands, selectedFilter]);
 
-  const handleRemoveFilterOne = (index: any) => {
+  const handleRemoveFilterOne = (index: any, checkboxValue: string) => {
     selectedFilter.splice(index, 1);
     setSelectedFilter(Array.from(selectedFilter));
+    setCheckboxes((prevCheckboxes) =>
+      prevCheckboxes.filter((checkbox) => checkbox.value !== checkboxValue)
+    );
   };
 
   const handleRemoveFilter = (index: any) => {
     selectedFilter.splice(index);
     setSelectedFilter(Array.from(selectedFilter));
+    setCheckboxes((prevCheckboxes) =>
+      prevCheckboxes.filter((checkbox) => checkbox.value === false)
+    );
   };
 
   const handleChangeCheck = (event: any, checkboxValue: string) => {
@@ -215,7 +221,7 @@ const SelectedCategory = ({
   console.log(cardItems);
 
   console.log(quantId);
-  console.log(quantImg);
+  console.log(selectedFilter);
   console.log(quantPrice);
   console.log(quantName);
 
@@ -331,7 +337,7 @@ const SelectedCategory = ({
                       </div>
                       <div
                         className="text-primary font-normal cursor-pointer"
-                        onClick={() => handleRemoveFilterOne(index)}
+                        onClick={() => handleRemoveFilterOne(index, item)}
                       >
                         <AiOutlineCloseCircle />
                       </div>
