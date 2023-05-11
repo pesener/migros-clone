@@ -30,16 +30,27 @@ const SelectedCategory = ({
     dispatch(fetchOneProduct(id));
   }, [id]);
 
+  ///FILTERING STATES
   const [open, setOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<string>("Önerilenler");
   const [selectedFilter, setSelectedFilter] = useState<any>([]);
   const [filteredBrands, setFilteredBrands] = useState<any>();
   const [filteredBrands2, setFilteredBrands2] = useState<any>();
   // const [openPlus, setOpenPlus] = useState<boolean>(false);
+  const [checkboxes, setCheckboxes] = useState<any[]>([]);
+  ///BASKET STATES
   const [quantId, setQuantId] = useState<any>();
   const [quantName, setQuantName] = useState<string>();
   const [quantPrice, setQuantPrice] = useState<any>();
   const [quantImg, setQuantImg] = useState<string>();
+
+  const sortData = [
+    { name: "Önerilenler" },
+    { name: "Önce En Düşük Fiyat" },
+    { name: "Önce En Yüksek Fiyat" },
+  ];
+
+  ///FILTERING FUNCTIONS
 
   const filterBrands = (input: any) => {
     const inputter = filteredBrands2.filter((item: any) =>
@@ -51,13 +62,6 @@ const SelectedCategory = ({
     console.log(inputter, "ddd");
     console.log(selectedFilter);
   };
-
-  const sortData = [
-    { name: "Önerilenler" },
-    { name: "Önce En Düşük Fiyat" },
-    { name: "Önce En Yüksek Fiyat" },
-  ];
-
   useEffect(() => {
     linkOne.name === "Meyve, Sebze"
       ? setFilteredBrands(linkOne?.sublinks[0]?.product)
@@ -84,16 +88,26 @@ const SelectedCategory = ({
     setSelectedFilter(Array.from(selectedFilter));
   };
 
-  const handleChangeCheck = (event: any) => {
+  const handleChangeCheck = (event: any, checkboxValue: string) => {
     const { value, checked } = event.target;
 
     if (checked) {
       setSelectedFilter((pre: any) => [...pre, value]);
-    } else
+      setCheckboxes((prevCheckboxes) => [
+        ...prevCheckboxes,
+        { value: checkboxValue, checked: true },
+      ]);
+    } else {
       setSelectedFilter((pre: any) => {
         return [...pre.filter((x: any) => x !== value)];
       });
+      setCheckboxes((prevCheckboxes) =>
+        prevCheckboxes.filter((checkbox) => checkbox.value !== checkboxValue)
+      );
+    }
   };
+
+  ///BASKET FUNCTIONS
   const quantity = getItemQuantity(quantId);
 
   function getItemQuantity(quantId: string) {
@@ -154,6 +168,7 @@ const SelectedCategory = ({
       return currItem.filter((item: any) => item.quantId !== quantId);
     });
   };
+  /////
 
   // const handleProductCount = (index: any) => {
   //   setCountProduct(countProduct + 1);
@@ -280,13 +295,16 @@ const SelectedCategory = ({
                     (item: any) => (
                       <div className="flex items-center mb-2">
                         <input
-                          id={item.brand}
+                          id={`checkbox_${item.id}`}
                           className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
                           type="checkbox"
                           key={item.brand}
+                          checked={checkboxes.some(
+                            (checkbox: any) => checkbox.value === item.brand
+                          )}
                           value={item.brand}
                           onChange={(event) => {
-                            handleChangeCheck(event);
+                            handleChangeCheck(event, item.brand);
                           }}
                         />
 
