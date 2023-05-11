@@ -111,6 +111,7 @@ const CategoriesDropdown = () => {
                     <div
                       key={link.name}
                       className="hover:bg-primary  z-10 group/edit hover:bg-opacity-20 h-10 w-[300px] relative flex  "
+                      onClick={() => setOpen(false)}
                     >
                       <div className="absolute group-hover/edit:bg-primary h-[38px] w-[6px] rounded-br-lg rounded-tr-lg"></div>
                       <Link
