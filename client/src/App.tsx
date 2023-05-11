@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import SelectedCategoryScreen from "./components/Screens/SelectedCategoryScreen";
-import HomeScreen from "./components/Screens/HomeScreen";
-import ProductDetail from "./components/Screens/ProductDetail";
+import SelectedCategoryScreen from "./Screens/SelectedCategoryScreen";
+import HomeScreen from "./Screens/HomeScreen";
+import ProductDetail from "./Screens/ProductDetail";
 import { useLocalStorage } from "./components/hooks/useLocalStorage";
 import BasketDetail from "./components/BasketDetail";
 

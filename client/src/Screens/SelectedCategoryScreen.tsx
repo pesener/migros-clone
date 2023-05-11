@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SelectedCategory from "../SelectedCategory";
+import SelectedCategory from "../components/SelectedCategory";
 import { useParams } from "react-router-dom";
 
 const SelectedCategoryScreen = ({
