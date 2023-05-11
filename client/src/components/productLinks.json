@@ -135,7 +135,7 @@
           {
             "name": " Helva, Tahin, Pekmez",
 
-            "link": "/"
+            "subId": "Tahin"
           },
           { "name": " Kahvaltılık Gevrek", "link": "/" },
           { "name": " Krem Çikolata", "link": "/" },
@@ -151,7 +151,8 @@
             "img": "https://images.migrosone.com/sanalmarket/product/07085750/07085750-c7c32b.jpg",
             "price": 79.9,
             "brand": "Migros",
-            "isChecked": false
+            "isChecked": false,
+            "subId": "Tahin"
           },
           {
             "id": "Helva1",
@@ -159,7 +160,8 @@
             "img": "https://images.migrosone.com/sanalmarket/product/07089976/koska-kakaolu-helva-paket-500-gr-d3fef7.jpg",
             "price": 62.9,
             "brand": "Koska",
-            "isChecked": false
+            "isChecked": false,
+            "subId": "Tahin"
           },
           {
             "id": "Tahin2",
@@ -167,7 +169,8 @@
             "img": "https://images.migrosone.com/sanalmarket/product/07080167/07080167-3f4876.jpg",
             "price": 49.9,
             "brand": "Migros",
-            "isChecked": false
+            "isChecked": false,
+            "subId": "Tahin"
           },
           {
             "id": "Bal1",

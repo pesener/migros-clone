@@ -67,8 +67,6 @@ const CategoriesDropdown = () => {
           </div>
 
           <div className="group/close ">
-            <div className="bg-blue  absolute w-[124px] h-[700px]  left-0 "></div>
-
             <div className="hidden group-hover:flex inset-x-0 g absolute z-0  h-[700px] mt-[35px] group/delete  ">
               <div
                 className={`${
@@ -135,37 +133,55 @@ const CategoriesDropdown = () => {
                             ></div>
                           </div>
                           <div className="bg-white  ml-[100px] z-10 grid grid-cols-2">
-                            {link.sublinks.map((mysublinks: any) => (
-                              <div key={mysublinks.Head}>
-                                <h1
-                                  key={mysublinks.Head}
-                                  className="text-sm flex items-center text-primary hover:underline decoration-primary p-5 h-[10px] w-[300px]"
-                                >
-                                  {mysublinks.Head}
-                                </h1>
-                                <div className="    items-center w-[420px] flex-wrap flex ml-[20px] ">
-                                  {mysublinks.sublink.map(
-                                    (slink: any, i: any) => (
-                                      <div
-                                        key={slink.name}
-                                        className="text-xs text-gray-900 items-center h-[30px] "
-                                      >
-                                        {" "}
-                                        <span
+                            {link.sublinks.map((mysublinks: any) =>
+                              mysublinks.product?.map((plink: any) => (
+                                <div key={mysublinks.Head}>
+                                  <h1
+                                    key={mysublinks.Head}
+                                    className="text-sm flex items-center text-primary hover:underline decoration-primary p-5 h-[10px] w-[300px]"
+                                  >
+                                    {mysublinks.Head}
+                                  </h1>
+                                  <div className="    items-center w-[420px] flex-wrap flex ml-[20px] ">
+                                    {mysublinks.sublink.map(
+                                      (slink: any, i: any) => (
+                                        <div
                                           key={slink.name}
-                                          className="hover:text-primary  items-center font-normal  "
+                                          className="text-xs text-gray-900 items-center h-[30px] "
                                         >
-                                          {slink.name}
-                                          {i === mysublinks.sublink.length - 1
-                                            ? " "
-                                            : `${","}\u00A0`}
-                                        </span>
-                                      </div>
-                                    )
-                                  )}
+                                          {" "}
+                                          {slink.subId === plink.id ? (
+                                            <Link to={`/products/${link._id}`}>
+                                              <span
+                                                key={slink.name}
+                                                className="hover:text-primary  items-center font-normal  "
+                                              >
+                                                {slink.name}
+                                                {i ===
+                                                mysublinks.sublink.length - 1
+                                                  ? " "
+                                                  : `${","}\u00A0`}
+                                              </span>
+                                            </Link>
+                                          ) : (
+                                            <span
+                                              key={slink.name}
+                                              className="hover:text-primary  items-center font-normal  "
+                                            >
+                                              {slink.name}
+                                              {i ===
+                                              mysublinks.sublink.length - 1
+                                                ? " "
+                                                : `${","}\u00A0`}
+                                            </span>
+                                          )}
+                                        </div>
+                                      )
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
-                            ))}
+                              ))
+                            )}
                           </div>
                         </div>
                       </div>

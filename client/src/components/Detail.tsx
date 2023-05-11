@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BiChevronRight } from "react-icons/bi";
 import { BsHeart } from "react-icons/bs";
-
+import { BsTrash3 } from "react-icons/bs";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 import { fetchOneProduct } from "./actions/oneProductAction";
@@ -20,18 +21,70 @@ const Detail = ({
 }) => {
   const dispatch = useAppDispatch();
   const linkOne = useAppSelector((state) => state.linkOne);
-
+  const [quantId, setQuantId] = useState<any>();
+  const [quantName, setQuantName] = useState<any>();
+  const [quantPrice, setQuantPrice] = useState<any>();
+  const [quantImg, setQuantImg] = useState<any>();
   useEffect(() => {
     dispatch(fetchOneProduct(sid));
     console.log(sid, " başarı id");
   }, [sid]);
+
+  const quantity = getItemQuantity(quantId);
+
+  function getItemQuantity(quantId: any) {
+    return (
+      cardItems.find((item: any) => item.quantId === quantId)?.quantity || 0
+    );
+  }
+  function handleProductCount(quantId: any) {
+    setCardItems((currItems: any) => {
+      if (currItems.find((item: any) => item.quantId === quantId) == null) {
+        return [
+          ...currItems,
+          { quantName, quantImg, quantPrice, quantId, quantity: 1 },
+        ];
+      } else {
+        return currItems.map((item: any) => {
+          if (item.quantId === quantId) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  }
+  const handleProductCountMinus = (quantId: any) => {
+    setCardItems((currItem: any) => {
+      if (
+        currItem.find((item: any) => item.quantId === quantId)?.quantity === 1
+      ) {
+        return currItem.filter((item: any) => item.quantId !== quantId);
+      } else {
+        return currItem.map((item: any) => {
+          if (item.quantId === quantId) {
+            return { ...item, quantity: item.quantity - 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  };
+
+  const removeFromCard = (quantId: any) => {
+    setCardItems((currItem: any) => {
+      return currItem.filter((item: any) => item.quantId !== quantId);
+    });
+  };
 
   return (
     <div className="relative flex w-full h-full">
       {" "}
       <div>
         <div className="relative flex">
-          <div className=" w-[470px] ml-[129px] absolute -top-6 flex items-center  text-sm">
+          <div className=" w-[900px] ml-[129px] absolute -top-6 flex items-center  text-sm">
             <Link to={`/`}>
               <div className="cursor-pointer mr-2">Anasayfa</div>{" "}
             </Link>
@@ -101,9 +154,66 @@ const Detail = ({
                           </div>
                           <div className="flex">
                             {" "}
-                            <button className="font-bold text-white ml-4 mt-4 bg-primary w-[190px] h-[60px] rounded">
+                            <div
+                              className={`font-bold text-white ml-4 mt-4 bg-primary w-[190px] h-[60px] rounded flex items-center justify-center cursor-pointer ${
+                                quantId === plink.id && quantity > 0
+                                  ? "hidden"
+                                  : ""
+                              }`}
+                              onClick={() => {
+                                setQuantId(plink?.id);
+                                setQuantName(plink?.name);
+                                setQuantPrice(plink?.price);
+                                setQuantImg(plink?.img);
+                                handleProductCount(plink.id);
+                              }}
+                            >
                               Sepete Ekle
-                            </button>
+                            </div>
+                            <div
+                              className={`w-[190px] h-[60px]  border-gray-500 border mt-[14px]   mx-[10px] rounded cursor-pointer ${
+                                quantId === plink.id && quantity > 0
+                                  ? "flex"
+                                  : "hidden"
+                              }`}
+                            >
+                              <div className="w-[65px] rounded-tl rounded-bl h-[58.8px]  bg-gray-100 flex items-center justify-center">
+                                {" "}
+                                <BsTrash3
+                                  className={` ${
+                                    quantity > 1
+                                      ? "hidden"
+                                      : "text-gray w-8 h-8 "
+                                  }  `}
+                                  onClick={() => {
+                                    // setOpenPlus(false);
+                                    removeFromCard(plink.id);
+                                  }}
+                                />{" "}
+                                <AiOutlineMinus
+                                  className={`${
+                                    quantity > 2 || quantity === 2
+                                      ? "text-gray w-8 h-8 "
+                                      : "hidden"
+                                  } `}
+                                  onClick={() => {
+                                    handleProductCountMinus(plink.id);
+                                  }}
+                                />
+                              </div>
+                              <div className="w-[55px] h-[58.8px] flex items-center ml-4  justify-center text-center font-semibold">
+                                {quantity} Adet
+                              </div>
+                              <div className="w-[65px] rounded-tr rounded-br h-[58.8px]   bg-gray-100 flex items-center justify-center ml-4">
+                                {" "}
+                                <AiOutlinePlus
+                                  className="text-gray  w-8 h-8  "
+                                  onClick={() => {
+                                    handleProductCount(plink.id);
+                                  }}
+                                />{" "}
+                              </div>
+                            </div>
                             <div className="w-[60px] text-gray-300 h-[60px] border mt-4 ml-4 rounded border-gray-300 flex items-center justify-center">
                               <BsHeart size={30} />
                             </div>
