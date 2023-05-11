@@ -60,7 +60,16 @@ function App() {
               />
             }
           />
-          <Route path="/details/:id" element={<ProductDetail sid={sid} />} />
+          <Route
+            path="/details/:id"
+            element={
+              <ProductDetail
+                sid={sid}
+                cardItems={cardItems}
+                setCardItems={setCardItems}
+              />
+            }
+          />
           <Route
             path="/basket"
             element={

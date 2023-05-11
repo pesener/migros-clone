@@ -24,7 +24,7 @@ const Navbar = ({
   };
 
   return (
-    <div className="border-b-2 h-[198px] ">
+    <div className="border-b-2 h-[197px] ">
       {!isActive ? (
         <div className="flex justify-items-start relative  ">
           <div className="bg-primary overflow-hidden h-[68px]  w-full">

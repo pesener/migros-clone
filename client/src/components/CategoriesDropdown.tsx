@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "./actions/productActions";
 import { useAppDispatch, useAppSelector } from "../index";
@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from "../index";
 const CategoriesDropdown = () => {
   const dispatch = useAppDispatch();
   const links = useAppSelector((state) => state.links);
+
+  const [open, setOpen] = useState<Boolean>(false);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -46,21 +48,44 @@ const CategoriesDropdown = () => {
         </div>
       </div>
       <div className="relative flex z-20">
-        <div className="ml-[125px]     w-[140px] mt-4 group  font-bold p-1   cursor-pointer text-sm   flex  ">
-          <div className="flex group/underline ">
+        <div className="ml-[125px]     w-[140px] mt-4 group group/linedown font-bold p-1   cursor-pointer text-sm   flex  ">
+          <div
+            className={`
+             
+            flex group/underline `}
+            onMouseEnter={() => setOpen(true)}
+          >
             {" "}
             <img
               src="https://www.migros.com.tr/assets/icons/categories.svg"
               alt="categories"
               className="mr-4 w-5 h-5 "
             />
-            <div className=" "> KATEGORİLER </div>
+            <div className="h-[28px] "> KATEGORİLER </div>
             <div className="group-hover/underline:bg-primary   absolute mt-[26px]  w-[140px] h-[7px] rounded-tr-lg rounded-tl-lg"></div>
+            <div className="group-hover/underline:bg-black z-0    group-hover/underline:bg-opacity-10 hidden group-hover/underline:flex inset-x-0   absolute   h-[700px] mt-[34px]  "></div>
           </div>
 
           <div className="group/close ">
-            <div className="group-hover:bg-black z-0   group-hover:bg-opacity-20 hidden group-hover:flex inset-x-0   absolute   h-[700px] mt-[32px]  ">
-              <div className="group-hover:bg-white group/info z-10 absolute  w-[230px]   h-[600px] ml-32 rounded-bl-lg flex-col">
+            <div className="bg-blue  absolute w-[124px] h-[700px]  left-0 "></div>
+
+            <div className="hidden group-hover:flex inset-x-0 g absolute z-0  h-[700px] mt-[35px] group/delete  ">
+              <div
+                className={`${
+                  open
+                    ? "group-hover/close:bg-black z-0    group-hover/close:bg-opacity-10 inset-x-0   absolute   h-[700px] mb-[2px] "
+                    : "hidden"
+                } `}
+              ></div>
+
+              <div
+                className={`${
+                  open
+                    ? "bg-white group/info   z-10 absolute  w-[230px]   h-[600px] ml-32 rounded-bl-lg flex-col"
+                    : "hidden"
+                }`}
+                onMouseLeave={() => setOpen(false)}
+              >
                 <div className="group-hover/info:bg-white  ml-[230px] absolute rounded-br-lg  z-1 w-[1080px] h-[600px]"></div>
 
                 <div className="hover:bg-primary z-10 group/edit  hover:bg-opacity-20 h-10 w-[300px] flex  relative ">
