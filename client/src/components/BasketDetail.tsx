@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BiChevronDown } from "react-icons/bi";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+
 const BasketDetail = ({
   cardItems,
   setCardItems,

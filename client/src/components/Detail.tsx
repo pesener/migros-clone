@@ -40,10 +40,7 @@ const Detail = ({
   function handleProductCount(quantId: any) {
     setCardItems((currItems: any) => {
       if (currItems.find((item: any) => item.quantId === quantId) == null) {
-        return [
-          ...currItems,
-          { quantName, quantImg, quantPrice, quantId, quantity: 1 },
-        ];
+        return [...currItems, { quantId, quantity: 1 }];
       } else {
         return currItems.map((item: any) => {
           if (item.quantId === quantId) {
@@ -161,10 +158,6 @@ const Detail = ({
                                   : ""
                               }`}
                               onClick={() => {
-                                setQuantId(plink?.id);
-                                setQuantName(plink?.name);
-                                setQuantPrice(plink?.price);
-                                setQuantImg(plink?.img);
                                 handleProductCount(plink.id);
                               }}
                             >

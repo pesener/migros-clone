@@ -104,16 +104,29 @@ const SelectedCategory = ({
       cardItems.find((item: any) => item.quantId === quantId)?.quantity || 0
     );
   }
-  function handleProductCount(quantId: any) {
+  function handleProductCount(id: any) {
     setCardItems((currItems: any) => {
-      if (currItems.find((item: any) => item.quantId === quantId) == null) {
+      if (
+        currItems.find((item: any) => item.quantId === id) == null &&
+        quantName !== undefined &&
+        quantImg !== undefined &&
+        quantPrice !== undefined &&
+        quantId === id
+      ) {
         return [
           ...currItems,
-          { quantName, quantImg, quantPrice, quantId, quantity: 1 },
+          {
+            quantName,
+            quantImg,
+            quantPrice,
+            quantId,
+            quantity: 1,
+          },
         ];
       } else {
         return currItems.map((item: any) => {
           if (item.quantId === quantId) {
+            console.log(item.quantId);
             return { ...item, quantity: item.quantity + 1 };
           } else {
             return item;
@@ -191,6 +204,9 @@ const SelectedCategory = ({
   console.log(cardItems);
 
   console.log(quantId);
+  console.log(quantImg);
+  console.log(quantPrice);
+  console.log(quantName);
 
   console.log(quantity);
 
@@ -432,10 +448,16 @@ const SelectedCategory = ({
                                     : ""
                                 }`}
                                 onClick={() => {
-                                  setQuantId(plink?.id);
-                                  setQuantName(plink?.name);
-                                  setQuantPrice(plink?.price);
-                                  setQuantImg(plink?.img);
+                                  setQuantId(plink.id);
+                                  quantId === plink.id
+                                    ? setQuantName(plink.name)
+                                    : quantId === plink.id
+                                    ? setQuantPrice(plink.price)
+                                    : quantId === plink.id
+                                    ? setQuantImg(plink.img)
+                                    : quantId === plink.id
+                                    ? handleProductCount(plink.id)
+                                    : setQuantId(null);
                                 }}
                               >
                                 <AiOutlinePlus
@@ -445,9 +467,6 @@ const SelectedCategory = ({
                                       : ""
                                   } `}
                                   size={30}
-                                  onClick={() => {
-                                    handleProductCount(plink.id);
-                                  }}
                                 />
                               </div>
                               <div
@@ -542,10 +561,32 @@ const SelectedCategory = ({
                                     : ""
                                 }`}
                                 onClick={() => {
-                                  setQuantId(plink.id);
-                                  setQuantName(plink.name);
-                                  setQuantPrice(plink.price);
-                                  setQuantImg(plink.img);
+                                  if (
+                                    plink.name?.toLocaleUpperCase("tr-TR") !==
+                                    quantName?.toLocaleUpperCase("tr-TR")
+                                  ) {
+                                    setQuantName(plink.name);
+                                  }
+                                  if (
+                                    plink.id?.toLocaleUpperCase("tr-TR") !==
+                                    quantId?.toLocaleUpperCase("tr-TR")
+                                  ) {
+                                    setQuantId(plink.id);
+                                  }
+                                  if (
+                                    plink.price?.toLocaleUpperCase("tr-TR") !==
+                                    quantPrice?.toLocaleUpperCase("tr-TR")
+                                  ) {
+                                    setQuantPrice(plink.price);
+                                  }
+                                  if (
+                                    plink.img?.toLocaleUpperCase("tr-TR") !==
+                                    quantImg?.toLocaleUpperCase("tr-TR")
+                                  ) {
+                                    setQuantImg(plink.img);
+                                  }
+
+                                  handleProductCount(quantId);
                                 }}
                               >
                                 <AiOutlinePlus
@@ -555,9 +596,6 @@ const SelectedCategory = ({
                                       : ""
                                   } `}
                                   size={30}
-                                  onClick={() => {
-                                    handleProductCount(plink.id);
-                                  }}
                                 />
                               </div>
                               <div
@@ -656,6 +694,7 @@ const SelectedCategory = ({
                                   setQuantName(plink.name);
                                   setQuantPrice(plink.price);
                                   setQuantImg(plink.img);
+                                  handleProductCount(plink.id);
                                 }}
                               >
                                 <AiOutlinePlus
@@ -665,9 +704,6 @@ const SelectedCategory = ({
                                       : ""
                                   } `}
                                   size={30}
-                                  onClick={() => {
-                                    handleProductCount(plink.id);
-                                  }}
                                 />
                               </div>
                               <div
@@ -772,6 +808,8 @@ const SelectedCategory = ({
                                   setQuantName(plink.name);
                                   setQuantPrice(plink.price);
                                   setQuantImg(plink.img);
+
+                                  handleProductCount(plink.id);
                                 }}
                               >
                                 <AiOutlinePlus
@@ -781,9 +819,6 @@ const SelectedCategory = ({
                                       : ""
                                   } `}
                                   size={30}
-                                  onClick={() => {
-                                    handleProductCount(plink.id);
-                                  }}
                                 />
                               </div>
                               <div
@@ -880,6 +915,7 @@ const SelectedCategory = ({
                                   setQuantName(plink.name);
                                   setQuantPrice(plink.price);
                                   setQuantImg(plink.img);
+                                  handleProductCount(plink.id);
                                 }}
                               >
                                 <AiOutlinePlus
@@ -889,9 +925,6 @@ const SelectedCategory = ({
                                       : ""
                                   } `}
                                   size={30}
-                                  onClick={() => {
-                                    handleProductCount(plink.id);
-                                  }}
                                 />
                               </div>
                               <div
@@ -989,6 +1022,7 @@ const SelectedCategory = ({
                                   setQuantName(plink.name);
                                   setQuantPrice(plink.price);
                                   setQuantImg(plink.img);
+                                  handleProductCount(plink.id);
                                 }}
                               >
                                 <AiOutlinePlus
@@ -998,9 +1032,6 @@ const SelectedCategory = ({
                                       : ""
                                   } `}
                                   size={30}
-                                  onClick={() => {
-                                    handleProductCount(plink.id);
-                                  }}
                                 />
                               </div>
                               <div
