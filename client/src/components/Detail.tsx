@@ -31,19 +31,30 @@ const Detail = ({
   }, [sid]);
 
   const quantity = getItemQuantity(quantId);
+  console.log(quantity);
+  console.log(quantId);
 
-  function getItemQuantity(quantId: any) {
+  function getItemQuantity(quantId: string) {
     return (
       cardItems.find((item: any) => item.quantId === quantId)?.quantity || 0
     );
   }
-  function handleProductCount(quantId: any) {
+  function handleProductCount(id: string) {
     setCardItems((currItems: any) => {
-      if (currItems.find((item: any) => item.quantId === quantId) == null) {
-        return [...currItems, { quantId, quantity: 1 }];
+      if (
+        currItems.find((item: any) => item.quantId === id) == null &&
+        quantName !== undefined &&
+        quantImg !== undefined &&
+        quantPrice !== undefined &&
+        quantId === id
+      ) {
+        return [
+          ...currItems,
+          { quantName, quantImg, quantPrice, quantId, quantity: 1 },
+        ];
       } else {
         return currItems.map((item: any) => {
-          if (item.quantId === quantId) {
+          if (item.quantId === id) {
             return { ...item, quantity: item.quantity + 1 };
           } else {
             return item;
@@ -52,15 +63,13 @@ const Detail = ({
       }
     });
   }
-  const handleProductCountMinus = (quantId: any) => {
+  const handleProductCountMinus = (id: string) => {
     setCardItems((currItem: any) => {
-      if (
-        currItem.find((item: any) => item.quantId === quantId)?.quantity === 1
-      ) {
-        return currItem.filter((item: any) => item.quantId !== quantId);
+      if (currItem.find((item: any) => item.quantId === id)?.quantity === 1) {
+        return currItem.filter((item: any) => item.quantId !== id);
       } else {
         return currItem.map((item: any) => {
-          if (item.quantId === quantId) {
+          if (item.quantId === id) {
             return { ...item, quantity: item.quantity - 1 };
           } else {
             return item;
@@ -158,6 +167,10 @@ const Detail = ({
                                   : ""
                               }`}
                               onClick={() => {
+                                setQuantId(plink.id);
+                                setQuantName(plink.name);
+                                setQuantPrice(plink.price);
+                                setQuantImg(plink.img);
                                 handleProductCount(plink.id);
                               }}
                             >

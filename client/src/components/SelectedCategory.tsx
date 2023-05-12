@@ -469,15 +469,10 @@ const SelectedCategory = ({
                                 }`}
                                 onClick={() => {
                                   setQuantId(plink.id);
-                                  quantId === plink.id
-                                    ? setQuantName(plink.name)
-                                    : quantId === plink.id
-                                    ? setQuantPrice(plink.price)
-                                    : quantId === plink.id
-                                    ? setQuantImg(plink.img)
-                                    : quantId === plink.id
-                                    ? handleProductCount(plink.id)
-                                    : setQuantId(null);
+                                  setQuantName(plink.name);
+                                  setQuantPrice(plink.price);
+                                  setQuantImg(plink.img);
+                                  handleProductCount(plink.id);
                                 }}
                               >
                                 <AiOutlinePlus
@@ -581,32 +576,11 @@ const SelectedCategory = ({
                                     : ""
                                 }`}
                                 onClick={() => {
-                                  if (
-                                    plink.name?.toLocaleUpperCase("tr-TR") !==
-                                    quantName?.toLocaleUpperCase("tr-TR")
-                                  ) {
-                                    setQuantName(plink.name);
-                                  }
-                                  if (
-                                    plink.id?.toLocaleUpperCase("tr-TR") !==
-                                    quantId?.toLocaleUpperCase("tr-TR")
-                                  ) {
-                                    setQuantId(plink.id);
-                                  }
-                                  if (
-                                    plink.price?.toLocaleUpperCase("tr-TR") !==
-                                    quantPrice?.toLocaleUpperCase("tr-TR")
-                                  ) {
-                                    setQuantPrice(plink.price);
-                                  }
-                                  if (
-                                    plink.img?.toLocaleUpperCase("tr-TR") !==
-                                    quantImg?.toLocaleUpperCase("tr-TR")
-                                  ) {
-                                    setQuantImg(plink.img);
-                                  }
-
-                                  handleProductCount(quantId);
+                                  setQuantId(plink.id);
+                                  setQuantName(plink.name);
+                                  setQuantPrice(plink.price);
+                                  setQuantImg(plink.img);
+                                  handleProductCount(plink.id);
                                 }}
                               >
                                 <AiOutlinePlus
