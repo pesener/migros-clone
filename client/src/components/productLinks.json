@@ -133,9 +133,7 @@
         "sublink": [
           { "name": " Bal", "link": "/" },
           {
-            "name": " Helva, Tahin, Pekmez",
-
-            "subId": "Tahin"
+            "name": " Helva, Tahin, Pekmez"
           },
           { "name": " Kahvaltılık Gevrek", "link": "/" },
           { "name": " Krem Çikolata", "link": "/" },
