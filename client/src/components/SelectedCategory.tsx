@@ -463,7 +463,11 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.some(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "hidden"
                                     : ""
                                 }`}
@@ -477,7 +481,11 @@ const SelectedCategory = ({
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    quantId === plink.id && quantity > 0
+                                    cardItems.some(
+                                      (finder: any) =>
+                                        finder.quantId === plink.id &&
+                                        finder.quantity > 0
+                                    )
                                       ? "hidden"
                                       : ""
                                   } `}
@@ -486,37 +494,55 @@ const SelectedCategory = ({
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.find(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "flex"
                                     : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  {" "}
-                                  <BsTrash3
-                                    className={` ${
-                                      quantity > 1
-                                        ? "hidden"
-                                        : "text-primary w-5 h-5 "
-                                    }  `}
-                                    onClick={() => {
-                                      // setOpenPlus(false);
-                                      removeFromCard(plink.id);
-                                    }}
-                                  />{" "}
+                                  <div>
+                                    <BsTrash3
+                                      className={`text-primary w-5 h-5 ${
+                                        cardItems.find(
+                                          (item: any) =>
+                                            item.quantId === plink.id &&
+                                            item.quantity === 1
+                                        )
+                                          ? "text-primary w-5 h-5"
+                                          : "hidden"
+                                      }`}
+                                      onClick={() => {
+                                        removeFromCard(plink.id);
+                                      }}
+                                    />
+                                  </div>
                                   <AiOutlineMinus
-                                    className={`${
-                                      quantity > 2 || quantity === 2
+                                    className={`text-primary ${
+                                      cardItems.find(
+                                        (item: any) =>
+                                          item.quantId === plink.id &&
+                                          item.quantity > 1
+                                      )
                                         ? "text-primary"
                                         : "hidden"
-                                    } `}
+                                    }`}
                                     onClick={() => {
                                       handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
+
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {quantity} Adet
+                                  {cardItems.map((item: any) =>
+                                    item.quantId === plink.id
+                                      ? item.quantity
+                                      : ""
+                                  )}{" "}
+                                  Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
@@ -571,7 +597,11 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.some(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "hidden"
                                     : ""
                                 }`}
@@ -585,7 +615,11 @@ const SelectedCategory = ({
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    quantId === plink.id && quantity > 0
+                                    cardItems.some(
+                                      (finder: any) =>
+                                        finder.quantId === plink.id &&
+                                        finder.quantity > 0
+                                    )
                                       ? "hidden"
                                       : ""
                                   } `}
@@ -594,36 +628,54 @@ const SelectedCategory = ({
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.find(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "flex"
                                     : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  {" "}
-                                  <BsTrash3
-                                    className={` ${
-                                      quantity > 1
-                                        ? "hidden"
-                                        : "text-primary w-5 h-5 "
-                                    }  `}
-                                    onClick={() => {
-                                      removeFromCard(plink.id);
-                                    }}
-                                  />{" "}
+                                  <div>
+                                    <BsTrash3
+                                      className={`text-primary w-5 h-5 ${
+                                        cardItems.find(
+                                          (item: any) =>
+                                            item.quantId === plink.id &&
+                                            item.quantity === 1
+                                        )
+                                          ? "text-primary w-5 h-5"
+                                          : "hidden"
+                                      }`}
+                                      onClick={() => {
+                                        removeFromCard(plink.id);
+                                      }}
+                                    />
+                                  </div>
                                   <AiOutlineMinus
-                                    className={`${
-                                      quantity > 2 || quantity === 2
+                                    className={`text-primary ${
+                                      cardItems.find(
+                                        (item: any) =>
+                                          item.quantId === plink.id &&
+                                          item.quantity > 1
+                                      )
                                         ? "text-primary"
                                         : "hidden"
-                                    } `}
+                                    }`}
                                     onClick={() => {
                                       handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {quantity} Adet
+                                  {cardItems.map((item: any) =>
+                                    item.quantId === plink.id
+                                      ? item.quantity
+                                      : ""
+                                  )}{" "}
+                                  Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
@@ -679,7 +731,11 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.some(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "hidden"
                                     : ""
                                 }`}
@@ -693,7 +749,11 @@ const SelectedCategory = ({
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    quantId === plink.id && quantity > 0
+                                    cardItems.some(
+                                      (finder: any) =>
+                                        finder.quantId === plink.id &&
+                                        finder.quantity > 0
+                                    )
                                       ? "hidden"
                                       : ""
                                   } `}
@@ -702,37 +762,54 @@ const SelectedCategory = ({
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.find(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "flex"
                                     : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  {" "}
-                                  <BsTrash3
-                                    className={` ${
-                                      quantity > 1
-                                        ? "hidden"
-                                        : "text-primary w-5 h-5 "
-                                    }  `}
-                                    onClick={() => {
-                                      // setOpenPlus(false);
-                                      removeFromCard(plink.id);
-                                    }}
-                                  />{" "}
+                                  <div>
+                                    <BsTrash3
+                                      className={`text-primary w-5 h-5 ${
+                                        cardItems.find(
+                                          (item: any) =>
+                                            item.quantId === plink.id &&
+                                            item.quantity === 1
+                                        )
+                                          ? "text-primary w-5 h-5"
+                                          : "hidden"
+                                      }`}
+                                      onClick={() => {
+                                        removeFromCard(plink.id);
+                                      }}
+                                    />
+                                  </div>
                                   <AiOutlineMinus
-                                    className={`${
-                                      quantity > 2 || quantity === 2
+                                    className={`text-primary ${
+                                      cardItems.find(
+                                        (item: any) =>
+                                          item.quantId === plink.id &&
+                                          item.quantity > 1
+                                      )
                                         ? "text-primary"
                                         : "hidden"
-                                    } `}
+                                    }`}
                                     onClick={() => {
                                       handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {quantity} Adet
+                                  {cardItems.map((item: any) =>
+                                    item.quantId === plink.id
+                                      ? item.quantity
+                                      : ""
+                                  )}{" "}
+                                  Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
@@ -793,7 +870,11 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.some(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "hidden"
                                     : ""
                                 }`}
@@ -808,7 +889,11 @@ const SelectedCategory = ({
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    quantId === plink.id && quantity > 0
+                                    cardItems.some(
+                                      (finder: any) =>
+                                        finder.quantId === plink.id &&
+                                        finder.quantity > 0
+                                    )
                                       ? "hidden"
                                       : ""
                                   } `}
@@ -817,36 +902,54 @@ const SelectedCategory = ({
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.find(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "flex"
                                     : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  {" "}
-                                  <BsTrash3
-                                    className={` ${
-                                      quantity > 1
-                                        ? "hidden"
-                                        : "text-primary w-5 h-5 "
-                                    }  `}
-                                    onClick={() => {
-                                      removeFromCard(plink.id);
-                                    }}
-                                  />{" "}
+                                  <div>
+                                    <BsTrash3
+                                      className={`text-primary w-5 h-5 ${
+                                        cardItems.find(
+                                          (item: any) =>
+                                            item.quantId === plink.id &&
+                                            item.quantity === 1
+                                        )
+                                          ? "text-primary w-5 h-5"
+                                          : "hidden"
+                                      }`}
+                                      onClick={() => {
+                                        removeFromCard(plink.id);
+                                      }}
+                                    />
+                                  </div>
                                   <AiOutlineMinus
-                                    className={`${
-                                      quantity > 2 || quantity === 2
+                                    className={`text-primary ${
+                                      cardItems.find(
+                                        (item: any) =>
+                                          item.quantId === plink.id &&
+                                          item.quantity > 1
+                                      )
                                         ? "text-primary"
                                         : "hidden"
-                                    } `}
+                                    }`}
                                     onClick={() => {
                                       handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {quantity} Adet
+                                  {cardItems.map((item: any) =>
+                                    item.quantId === plink.id
+                                      ? item.quantity
+                                      : ""
+                                  )}{" "}
+                                  Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
@@ -900,7 +1003,11 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.some(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "hidden"
                                     : ""
                                 }`}
@@ -914,7 +1021,11 @@ const SelectedCategory = ({
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    quantId === plink.id && quantity > 0
+                                    cardItems.some(
+                                      (finder: any) =>
+                                        finder.quantId === plink.id &&
+                                        finder.quantity > 0
+                                    )
                                       ? "hidden"
                                       : ""
                                   } `}
@@ -923,36 +1034,54 @@ const SelectedCategory = ({
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.find(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "flex"
                                     : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  {" "}
-                                  <BsTrash3
-                                    className={` ${
-                                      quantity > 1
-                                        ? "hidden"
-                                        : "text-primary w-5 h-5 "
-                                    }  `}
-                                    onClick={() => {
-                                      removeFromCard(plink.id);
-                                    }}
-                                  />{" "}
+                                  <div>
+                                    <BsTrash3
+                                      className={`text-primary w-5 h-5 ${
+                                        cardItems.find(
+                                          (item: any) =>
+                                            item.quantId === plink.id &&
+                                            item.quantity === 1
+                                        )
+                                          ? "text-primary w-5 h-5"
+                                          : "hidden"
+                                      }`}
+                                      onClick={() => {
+                                        removeFromCard(plink.id);
+                                      }}
+                                    />
+                                  </div>
                                   <AiOutlineMinus
-                                    className={`${
-                                      quantity > 2 || quantity === 2
+                                    className={`text-primary ${
+                                      cardItems.find(
+                                        (item: any) =>
+                                          item.quantId === plink.id &&
+                                          item.quantity > 1
+                                      )
                                         ? "text-primary"
                                         : "hidden"
-                                    } `}
+                                    }`}
                                     onClick={() => {
                                       handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {quantity} Adet
+                                  {cardItems.map((item: any) =>
+                                    item.quantId === plink.id
+                                      ? item.quantity
+                                      : ""
+                                  )}{" "}
+                                  Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
@@ -1007,7 +1136,11 @@ const SelectedCategory = ({
                               <div
                                 key={plink.uniqueId}
                                 className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.some(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "hidden"
                                     : ""
                                 }`}
@@ -1021,7 +1154,11 @@ const SelectedCategory = ({
                               >
                                 <AiOutlinePlus
                                   className={`text-white  mt-1  ml-[5px] ${
-                                    quantId === plink.id && quantity > 0
+                                    cardItems.some(
+                                      (finder: any) =>
+                                        finder.quantId === plink.id &&
+                                        finder.quantity > 0
+                                    )
                                       ? "hidden"
                                       : ""
                                   } `}
@@ -1030,36 +1167,54 @@ const SelectedCategory = ({
                               </div>
                               <div
                                 className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  quantId === plink.id && quantity > 0
+                                  cardItems.find(
+                                    (finder: any) =>
+                                      finder.quantId === plink.id &&
+                                      finder.quantity > 0
+                                  )
                                     ? "flex"
                                     : "hidden"
                                 }`}
                               >
                                 <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  {" "}
-                                  <BsTrash3
-                                    className={` ${
-                                      quantity > 1
-                                        ? "hidden"
-                                        : "text-primary w-5 h-5 "
-                                    }  `}
-                                    onClick={() => {
-                                      removeFromCard(plink.id);
-                                    }}
-                                  />{" "}
+                                  <div>
+                                    <BsTrash3
+                                      className={`text-primary w-5 h-5 ${
+                                        cardItems.find(
+                                          (item: any) =>
+                                            item.quantId === plink.id &&
+                                            item.quantity === 1
+                                        )
+                                          ? "text-primary w-5 h-5"
+                                          : "hidden"
+                                      }`}
+                                      onClick={() => {
+                                        removeFromCard(plink.id);
+                                      }}
+                                    />
+                                  </div>
                                   <AiOutlineMinus
-                                    className={`${
-                                      quantity > 2 || quantity === 2
+                                    className={`text-primary ${
+                                      cardItems.find(
+                                        (item: any) =>
+                                          item.quantId === plink.id &&
+                                          item.quantity > 1
+                                      )
                                         ? "text-primary"
                                         : "hidden"
-                                    } `}
+                                    }`}
                                     onClick={() => {
                                       handleProductCountMinus(plink.id);
                                     }}
                                   />
                                 </div>
                                 <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {quantity} Adet
+                                  {cardItems.map((item: any) =>
+                                    item.quantId === plink.id
+                                      ? item.quantity
+                                      : ""
+                                  )}{" "}
+                                  Adet
                                 </div>
                                 <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
                                   {" "}
