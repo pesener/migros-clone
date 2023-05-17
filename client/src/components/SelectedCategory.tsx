@@ -2,16 +2,12 @@ import { useEffect, useState } from "react";
 import SutSlides from "./slides/sutSlides";
 import { BiChevronRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import {
-  AiOutlinePlus,
-  AiOutlineCloseCircle,
-  AiOutlineMinus,
-} from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { TbArrowsDownUp } from "react-icons/tb";
 import { BiChevronDown } from "react-icons/bi";
-import { BsTrash3 } from "react-icons/bs";
 import { fetchOneProduct } from "./actions/oneProductAction";
 import { useAppDispatch, useAppSelector } from "../index";
+import SelectedCategoryCard from "./SelectedCategoryCard";
 
 const SelectedCategory = ({
   id,
@@ -174,58 +170,6 @@ const SelectedCategory = ({
       return currItem.filter((item: any) => item.quantId !== quantId);
     });
   };
-  /////
-
-  // const handleProductCount = (index: any) => {
-  //   setCountProduct(countProduct + 1);
-  // };
-
-  // const handleProductCount = (id: any) => {
-  //   return cardItems.find((item) => item.id === id)?.quantity || 0;
-  // };
-
-  // const handleProductCount = (id: any) => {
-  //   setCardItems((currItem) => {
-  //     if (currItem.find((item) => item.id === id) == null) {
-  //       return [...currItem, { id, quantity: 1 }];
-  //     } else {
-  //       return currItem.map((item) => {
-  //         if (item.id === id) {
-  //           return { ...item, quantity: item.quantity + 1 };
-  //         } else {
-  //           return item;
-  //         }
-  //       });
-  //     }
-  //   });
-  // };
-
-  // const handleProductCountMinus = (id: any) => {
-  //   setCardItems((currItem) => {
-  //     if (currItem.find((item) => item.id === id)?.quantity === 1) {
-  //       return currItem.filter((item) => item.id !== id);
-  //     } else {
-  //       return currItem.map((item) => {
-  //         if (item.id === id) {
-  //           return { ...item, quantity: item.quantity - 1 };
-  //         } else {
-  //           return item;
-  //         }
-  //       });
-  //     }
-  //   });
-  // };
-  // const handleProductCountMinus = (index: any) => {
-  //   setCountProduct(countProduct - 1);
-  // };
-  console.log(cardItems);
-
-  console.log(quantId);
-  console.log(selectedFilter);
-  console.log(quantPrice);
-  console.log(quantName);
-
-  console.log(quantity);
 
   return (
     <div className="">
@@ -297,28 +241,25 @@ const SelectedCategory = ({
                           data.brand_Comp === x.brand_Comp
                       ) === index
                   )
-                  .map(
-                    (item: any) => (
-                      <div className="flex items-center mb-2">
-                        <input
-                          id={`checkbox_${item.id}`}
-                          className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
-                          type="checkbox"
-                          key={item.brand}
-                          checked={checkboxes.some(
-                            (checkbox: any) => checkbox.value === item.brand
-                          )}
-                          value={item.brand}
-                          onChange={(event) => {
-                            handleChangeCheck(event, item.brand);
-                          }}
-                        />
+                  .map((item: any) => (
+                    <div className="flex items-center mb-2">
+                      <input
+                        id={`checkbox_${item.id}`}
+                        className="w-5 h-5 cursor-pointer text-orange-300 accent-orange-300  border-gray-300 hover:border-gray-800 rounded   mr-2  "
+                        type="checkbox"
+                        key={item.brand}
+                        checked={checkboxes.some(
+                          (checkbox: any) => checkbox.value === item.brand
+                        )}
+                        value={item.brand}
+                        onChange={(event) => {
+                          handleChangeCheck(event, item.brand);
+                        }}
+                      />
 
-                        <label>{item.brand}</label>
-                      </div>
-                    )
-                    // .includes(brandInput)
-                  )}
+                      <label>{item.brand}</label>
+                    </div>
+                  ))}
               </ul>
             </div>
           </div>
@@ -429,400 +370,51 @@ const SelectedCategory = ({
                         ?.filter((x: any) => selectedFilter.includes(x?.brand))
                         ?.sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
                         ?.map((plink: any, index: any) => (
-                          <div key={plink.uniqueId} className=" p-0">
-                            <div
-                              key={plink.uniqueId}
-                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
-                            >
-                              <Link
-                                to={`/details/${plink.id}`}
-                                key={plink.uniqueId}
-                              >
-                                <img
-                                  key={plink.uniqueId}
-                                  alt=""
-                                  className="mt-2 cursor-pointer"
-                                  src={plink.img}
-                                />
-                                <div
-                                  key={plink.uniqueId}
-                                  className="font-semibold mx-2 text-sm cursor-pointer"
-                                >
-                                  {plink.name}
-                                </div>
-                              </Link>
-                              <br></br>
-
-                              <div
-                                key={plink.uniqueId}
-                                className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
-                              >
-                                {plink.price}TL
-                              </div>
-
-                              <div
-                                key={plink.uniqueId}
-                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  cardItems.some(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "hidden"
-                                    : ""
-                                }`}
-                                onClick={() => {
-                                  setQuantId(plink.id);
-                                  setQuantName(plink.name);
-                                  setQuantPrice(plink.price);
-                                  setQuantImg(plink.img);
-                                  handleProductCount(plink.id);
-                                }}
-                              >
-                                <AiOutlinePlus
-                                  className={`text-white  mt-1  ml-[5px] ${
-                                    cardItems.some(
-                                      (finder: any) =>
-                                        finder.quantId === plink.id &&
-                                        finder.quantity > 0
-                                    )
-                                      ? "hidden"
-                                      : ""
-                                  } `}
-                                  size={30}
-                                />
-                              </div>
-                              <div
-                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  cardItems.find(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "flex"
-                                    : "hidden"
-                                }`}
-                              >
-                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  <div>
-                                    <BsTrash3
-                                      className={`text-primary w-5 h-5 ${
-                                        cardItems.find(
-                                          (item: any) =>
-                                            item.quantId === plink.id &&
-                                            item.quantity === 1
-                                        )
-                                          ? "text-primary w-5 h-5"
-                                          : "hidden"
-                                      }`}
-                                      onClick={() => {
-                                        removeFromCard(plink.id);
-                                      }}
-                                    />
-                                  </div>
-                                  <AiOutlineMinus
-                                    className={`text-primary ${
-                                      cardItems.find(
-                                        (item: any) =>
-                                          item.quantId === plink.id &&
-                                          item.quantity > 1
-                                      )
-                                        ? "text-primary"
-                                        : "hidden"
-                                    }`}
-                                    onClick={() => {
-                                      handleProductCountMinus(plink.id);
-                                    }}
-                                  />
-                                </div>
-
-                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {cardItems.map((item: any) =>
-                                    item.quantId === plink.id
-                                      ? item.quantity
-                                      : ""
-                                  )}{" "}
-                                  Adet
-                                </div>
-                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
-                                  {" "}
-                                  <AiOutlinePlus
-                                    className="text-primary   w-5 h-5 "
-                                    onClick={() => {
-                                      handleProductCount(plink.id);
-                                    }}
-                                  />{" "}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <SelectedCategoryCard
+                            plink={plink}
+                            cardItems={cardItems}
+                            setQuantId={setQuantId}
+                            setQuantImg={setQuantImg}
+                            setQuantPrice={setQuantImg}
+                            setQuantName={setQuantName}
+                            removeFromCard={removeFromCard}
+                            handleProductCount={handleProductCount}
+                            handleProductCountMinus={handleProductCountMinus}
+                          />
                         ))
                     : selectedItem === "Önce En Yüksek Fiyat"
                     ? mysublinks.product
                         ?.filter((x: any) => selectedFilter.includes(x?.brand))
                         .sort((a: any, b: any) => (a.price > b.price ? -1 : 1))
                         .map((plink: any, index: any) => (
-                          <div key={plink.uniqueId} className=" p-0">
-                            <div
-                              key={plink.uniqueId}
-                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
-                            >
-                              <Link
-                                to={`/details/${plink.id}`}
-                                key={plink.uniqueId}
-                              >
-                                <img
-                                  key={plink.uniqueId}
-                                  alt=""
-                                  className="mt-2 cursor-pointer"
-                                  src={plink.img}
-                                />
-                                <div
-                                  key={plink.uniqueId}
-                                  className="font-semibold mx-2 text-sm cursor-pointer"
-                                >
-                                  {plink.name}
-                                </div>
-                              </Link>
-                              <br></br>
-
-                              <div
-                                key={plink.uniqueId}
-                                className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
-                              >
-                                {" "}
-                                {plink.price}{" "}
-                              </div>
-
-                              <div
-                                key={plink.uniqueId}
-                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  cardItems.some(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "hidden"
-                                    : ""
-                                }`}
-                                onClick={() => {
-                                  setQuantId(plink.id);
-                                  setQuantName(plink.name);
-                                  setQuantPrice(plink.price);
-                                  setQuantImg(plink.img);
-                                  handleProductCount(plink.id);
-                                }}
-                              >
-                                <AiOutlinePlus
-                                  className={`text-white  mt-1  ml-[5px] ${
-                                    cardItems.some(
-                                      (finder: any) =>
-                                        finder.quantId === plink.id &&
-                                        finder.quantity > 0
-                                    )
-                                      ? "hidden"
-                                      : ""
-                                  } `}
-                                  size={30}
-                                />
-                              </div>
-                              <div
-                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  cardItems.find(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "flex"
-                                    : "hidden"
-                                }`}
-                              >
-                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  <div>
-                                    <BsTrash3
-                                      className={`text-primary w-5 h-5 ${
-                                        cardItems.find(
-                                          (item: any) =>
-                                            item.quantId === plink.id &&
-                                            item.quantity === 1
-                                        )
-                                          ? "text-primary w-5 h-5"
-                                          : "hidden"
-                                      }`}
-                                      onClick={() => {
-                                        removeFromCard(plink.id);
-                                      }}
-                                    />
-                                  </div>
-                                  <AiOutlineMinus
-                                    className={`text-primary ${
-                                      cardItems.find(
-                                        (item: any) =>
-                                          item.quantId === plink.id &&
-                                          item.quantity > 1
-                                      )
-                                        ? "text-primary"
-                                        : "hidden"
-                                    }`}
-                                    onClick={() => {
-                                      handleProductCountMinus(plink.id);
-                                    }}
-                                  />
-                                </div>
-                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {cardItems.map((item: any) =>
-                                    item.quantId === plink.id
-                                      ? item.quantity
-                                      : ""
-                                  )}{" "}
-                                  Adet
-                                </div>
-                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
-                                  {" "}
-                                  <AiOutlinePlus
-                                    className="text-primary   w-5 h-5 "
-                                    onClick={() => {
-                                      handleProductCount(plink.id);
-                                    }}
-                                  />{" "}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <SelectedCategoryCard
+                            plink={plink}
+                            cardItems={cardItems}
+                            setQuantId={setQuantId}
+                            setQuantImg={setQuantImg}
+                            setQuantPrice={setQuantImg}
+                            setQuantName={setQuantName}
+                            removeFromCard={removeFromCard}
+                            handleProductCount={handleProductCount}
+                            handleProductCountMinus={handleProductCountMinus}
+                          />
                         ))
                     : selectedItem === "Önerilenler"
                     ? mysublinks.product
                         ?.filter((x: any) => selectedFilter.includes(x?.brand))
                         .sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
                         .map((plink: any) => (
-                          <div key={plink.uniqueId} className=" p-0">
-                            <div
-                              key={plink.uniqueId}
-                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
-                            >
-                              <Link
-                                to={`/details/${plink.id}`}
-                                key={plink.uniqueId}
-                              >
-                                <img
-                                  key={plink.uniqueId}
-                                  alt=""
-                                  className="mt-2 cursor-pointer"
-                                  src={plink.img}
-                                />
-                                <div
-                                  key={plink.uniqueId}
-                                  className="font-semibold mx-2 text-sm cursor-pointer"
-                                >
-                                  {plink.name}
-                                </div>
-                              </Link>
-                              <br></br>
-
-                              <div
-                                key={plink.uniqueId}
-                                className="text-primary absolute bottom-16 text-lg font-semibold ml-2 cursor-default"
-                              >
-                                {" "}
-                                {plink.price}
-                                {`\u00A0TL`}
-                              </div>
-
-                              <div
-                                key={plink.uniqueId}
-                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  cardItems.some(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "hidden"
-                                    : ""
-                                }`}
-                                onClick={() => {
-                                  setQuantId(plink.id);
-                                  setQuantName(plink.name);
-                                  setQuantPrice(plink.price);
-                                  setQuantImg(plink.img);
-                                  handleProductCount(plink.id);
-                                }}
-                              >
-                                <AiOutlinePlus
-                                  className={`text-white  mt-1  ml-[5px] ${
-                                    cardItems.some(
-                                      (finder: any) =>
-                                        finder.quantId === plink.id &&
-                                        finder.quantity > 0
-                                    )
-                                      ? "hidden"
-                                      : ""
-                                  } `}
-                                  size={30}
-                                />
-                              </div>
-                              <div
-                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  cardItems.find(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "flex"
-                                    : "hidden"
-                                }`}
-                              >
-                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  <div>
-                                    <BsTrash3
-                                      className={`text-primary w-5 h-5 ${
-                                        cardItems.find(
-                                          (item: any) =>
-                                            item.quantId === plink.id &&
-                                            item.quantity === 1
-                                        )
-                                          ? "text-primary w-5 h-5"
-                                          : "hidden"
-                                      }`}
-                                      onClick={() => {
-                                        removeFromCard(plink.id);
-                                      }}
-                                    />
-                                  </div>
-                                  <AiOutlineMinus
-                                    className={`text-primary ${
-                                      cardItems.find(
-                                        (item: any) =>
-                                          item.quantId === plink.id &&
-                                          item.quantity > 1
-                                      )
-                                        ? "text-primary"
-                                        : "hidden"
-                                    }`}
-                                    onClick={() => {
-                                      handleProductCountMinus(plink.id);
-                                    }}
-                                  />
-                                </div>
-                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {cardItems.map((item: any) =>
-                                    item.quantId === plink.id
-                                      ? item.quantity
-                                      : ""
-                                  )}{" "}
-                                  Adet
-                                </div>
-                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
-                                  {" "}
-                                  <AiOutlinePlus
-                                    className="text-primary   w-5 h-5 "
-                                    onClick={() => {
-                                      handleProductCount(plink.id);
-                                    }}
-                                  />{" "}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <SelectedCategoryCard
+                            plink={plink}
+                            cardItems={cardItems}
+                            setQuantId={setQuantId}
+                            setQuantImg={setQuantImg}
+                            setQuantPrice={setQuantImg}
+                            setQuantName={setQuantName}
+                            removeFromCard={removeFromCard}
+                            handleProductCount={handleProductCount}
+                            handleProductCountMinus={handleProductCountMinus}
+                          />
                         ))
                     : ""}
                 </div>
@@ -836,398 +428,49 @@ const SelectedCategory = ({
                     ? mysublinks.product
                         ?.sort((a: any, b: any) => (a.price > b.price ? 1 : -1))
                         .map((plink: any, index: any) => (
-                          <div key={plink.uniqueId} className=" p-0">
-                            <div
-                              key={plink.uniqueId}
-                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
-                            >
-                              <Link
-                                to={`/details/${plink.id}`}
-                                key={plink.uniqueId}
-                              >
-                                <img
-                                  key={plink.uniqueId}
-                                  alt=""
-                                  className="mt-2 cursor-pointer"
-                                  src={plink.img}
-                                />
-                                <div
-                                  key={plink.uniqueId}
-                                  className="font-semibold mx-2 text-sm cursor-pointer"
-                                >
-                                  {plink.name}
-                                </div>
-                              </Link>
-                              <br></br>
-
-                              <div
-                                key={plink.uniqueId}
-                                className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
-                              >
-                                {plink.price}TL
-                              </div>
-
-                              <div
-                                key={plink.uniqueId}
-                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  cardItems.some(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "hidden"
-                                    : ""
-                                }`}
-                                onClick={() => {
-                                  setQuantId(plink.id);
-                                  setQuantName(plink.name);
-                                  setQuantPrice(plink.price);
-                                  setQuantImg(plink.img);
-
-                                  handleProductCount(plink.id);
-                                }}
-                              >
-                                <AiOutlinePlus
-                                  className={`text-white  mt-1  ml-[5px] ${
-                                    cardItems.some(
-                                      (finder: any) =>
-                                        finder.quantId === plink.id &&
-                                        finder.quantity > 0
-                                    )
-                                      ? "hidden"
-                                      : ""
-                                  } `}
-                                  size={30}
-                                />
-                              </div>
-                              <div
-                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  cardItems.find(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "flex"
-                                    : "hidden"
-                                }`}
-                              >
-                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  <div>
-                                    <BsTrash3
-                                      className={`text-primary w-5 h-5 ${
-                                        cardItems.find(
-                                          (item: any) =>
-                                            item.quantId === plink.id &&
-                                            item.quantity === 1
-                                        )
-                                          ? "text-primary w-5 h-5"
-                                          : "hidden"
-                                      }`}
-                                      onClick={() => {
-                                        removeFromCard(plink.id);
-                                      }}
-                                    />
-                                  </div>
-                                  <AiOutlineMinus
-                                    className={`text-primary ${
-                                      cardItems.find(
-                                        (item: any) =>
-                                          item.quantId === plink.id &&
-                                          item.quantity > 1
-                                      )
-                                        ? "text-primary"
-                                        : "hidden"
-                                    }`}
-                                    onClick={() => {
-                                      handleProductCountMinus(plink.id);
-                                    }}
-                                  />
-                                </div>
-                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {cardItems.map((item: any) =>
-                                    item.quantId === plink.id
-                                      ? item.quantity
-                                      : ""
-                                  )}{" "}
-                                  Adet
-                                </div>
-                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
-                                  {" "}
-                                  <AiOutlinePlus
-                                    className="text-primary   w-5 h-5 "
-                                    onClick={() => {
-                                      handleProductCount(plink.id);
-                                    }}
-                                  />{" "}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <SelectedCategoryCard
+                            plink={plink}
+                            cardItems={cardItems}
+                            setQuantId={setQuantId}
+                            setQuantImg={setQuantImg}
+                            setQuantPrice={setQuantImg}
+                            setQuantName={setQuantName}
+                            removeFromCard={removeFromCard}
+                            handleProductCount={handleProductCount}
+                            handleProductCountMinus={handleProductCountMinus}
+                          />
                         ))
                     : selectedItem === "Önce En Yüksek Fiyat"
                     ? mysublinks.product
                         ?.sort((a: any, b: any) => (a.price > b.price ? -1 : 1))
                         .map((plink: any, index: any) => (
-                          <div key={plink.uniqueId} className=" p-0">
-                            <div
-                              key={plink.uniqueId}
-                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
-                            >
-                              <Link
-                                to={`/details/${plink.id}`}
-                                key={plink.uniqueId}
-                              >
-                                <img
-                                  key={plink.uniqueId}
-                                  alt=""
-                                  className="mt-2 cursor-pointer"
-                                  src={plink.img}
-                                />
-                                <div
-                                  key={plink.uniqueId}
-                                  className="font-semibold mx-2 text-sm cursor-pointer"
-                                >
-                                  {plink.name}
-                                </div>
-                              </Link>
-                              <br></br>
-
-                              <div
-                                key={plink.uniqueId}
-                                className="text-primary absolute bottom-16 text-xl font-semibold ml-2 cursor-default"
-                              >
-                                {" "}
-                                {plink.price}{" "}
-                              </div>
-
-                              <div
-                                key={plink.uniqueId}
-                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  cardItems.some(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "hidden"
-                                    : ""
-                                }`}
-                                onClick={() => {
-                                  setQuantId(plink.id);
-                                  setQuantName(plink.name);
-                                  setQuantPrice(plink.price);
-                                  setQuantImg(plink.img);
-                                  handleProductCount(plink.id);
-                                }}
-                              >
-                                <AiOutlinePlus
-                                  className={`text-white  mt-1  ml-[5px] ${
-                                    cardItems.some(
-                                      (finder: any) =>
-                                        finder.quantId === plink.id &&
-                                        finder.quantity > 0
-                                    )
-                                      ? "hidden"
-                                      : ""
-                                  } `}
-                                  size={30}
-                                />
-                              </div>
-                              <div
-                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  cardItems.find(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "flex"
-                                    : "hidden"
-                                }`}
-                              >
-                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  <div>
-                                    <BsTrash3
-                                      className={`text-primary w-5 h-5 ${
-                                        cardItems.find(
-                                          (item: any) =>
-                                            item.quantId === plink.id &&
-                                            item.quantity === 1
-                                        )
-                                          ? "text-primary w-5 h-5"
-                                          : "hidden"
-                                      }`}
-                                      onClick={() => {
-                                        removeFromCard(plink.id);
-                                      }}
-                                    />
-                                  </div>
-                                  <AiOutlineMinus
-                                    className={`text-primary ${
-                                      cardItems.find(
-                                        (item: any) =>
-                                          item.quantId === plink.id &&
-                                          item.quantity > 1
-                                      )
-                                        ? "text-primary"
-                                        : "hidden"
-                                    }`}
-                                    onClick={() => {
-                                      handleProductCountMinus(plink.id);
-                                    }}
-                                  />
-                                </div>
-                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {cardItems.map((item: any) =>
-                                    item.quantId === plink.id
-                                      ? item.quantity
-                                      : ""
-                                  )}{" "}
-                                  Adet
-                                </div>
-                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
-                                  {" "}
-                                  <AiOutlinePlus
-                                    className="text-primary   w-5 h-5 "
-                                    onClick={() => {
-                                      handleProductCount(plink.id);
-                                    }}
-                                  />{" "}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <SelectedCategoryCard
+                            plink={plink}
+                            cardItems={cardItems}
+                            setQuantId={setQuantId}
+                            setQuantImg={setQuantImg}
+                            setQuantPrice={setQuantImg}
+                            setQuantName={setQuantName}
+                            removeFromCard={removeFromCard}
+                            handleProductCount={handleProductCount}
+                            handleProductCountMinus={handleProductCountMinus}
+                          />
                         ))
                     : selectedItem === "Önerilenler"
                     ? mysublinks.product
                         ?.sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
                         .map((plink: any, index: any) => (
-                          <div key={plink.uniqueId} className=" p-0">
-                            <div
-                              key={plink.uniqueId}
-                              className=" h-[380px]   w-[210px] relative border mb-3 border-gray-400 rounded-lg "
-                            >
-                              <Link
-                                to={`/details/${plink.id}`}
-                                key={plink.uniqueId}
-                              >
-                                <img
-                                  key={plink.uniqueId}
-                                  alt=""
-                                  className="mt-2 cursor-pointer"
-                                  src={plink.img}
-                                />
-                                <div
-                                  key={plink.uniqueId}
-                                  className="font-semibold mx-2 text-sm cursor-pointer"
-                                >
-                                  {plink.name}
-                                </div>
-                              </Link>
-                              <br></br>
-
-                              <div
-                                key={plink.uniqueId}
-                                className="text-primary absolute bottom-16 text-lg font-semibold ml-2 cursor-default"
-                              >
-                                {" "}
-                                {plink.price}
-                                {`\u00A0TL`}
-                              </div>
-
-                              <div
-                                key={plink.uniqueId}
-                                className={`w-[40px] h-[40px] shadow-xl absolute bottom-3 bg-primary   ml-[150px] rounded cursor-pointer ${
-                                  cardItems.some(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "hidden"
-                                    : ""
-                                }`}
-                                onClick={() => {
-                                  setQuantId(plink.id);
-                                  setQuantName(plink.name);
-                                  setQuantPrice(plink.price);
-                                  setQuantImg(plink.img);
-                                  handleProductCount(plink.id);
-                                }}
-                              >
-                                <AiOutlinePlus
-                                  className={`text-white  mt-1  ml-[5px] ${
-                                    cardItems.some(
-                                      (finder: any) =>
-                                        finder.quantId === plink.id &&
-                                        finder.quantity > 0
-                                    )
-                                      ? "hidden"
-                                      : ""
-                                  } `}
-                                  size={30}
-                                />
-                              </div>
-                              <div
-                                className={`w-[190px] h-[35px]  absolute bottom-3 border-primary border   mx-[10px] rounded cursor-pointer ${
-                                  cardItems.find(
-                                    (finder: any) =>
-                                      finder.quantId === plink.id &&
-                                      finder.quantity > 0
-                                  )
-                                    ? "flex"
-                                    : "hidden"
-                                }`}
-                              >
-                                <div className="w-[35px] rounded-tl rounded-bl h-[33.8px]  bg-orange-100 flex items-center justify-center">
-                                  <div>
-                                    <BsTrash3
-                                      className={`text-primary w-5 h-5 ${
-                                        cardItems.find(
-                                          (item: any) =>
-                                            item.quantId === plink.id &&
-                                            item.quantity === 1
-                                        )
-                                          ? "text-primary w-5 h-5"
-                                          : "hidden"
-                                      }`}
-                                      onClick={() => {
-                                        removeFromCard(plink.id);
-                                      }}
-                                    />
-                                  </div>
-                                  <AiOutlineMinus
-                                    className={`text-primary ${
-                                      cardItems.find(
-                                        (item: any) =>
-                                          item.quantId === plink.id &&
-                                          item.quantity > 1
-                                      )
-                                        ? "text-primary"
-                                        : "hidden"
-                                    }`}
-                                    onClick={() => {
-                                      handleProductCountMinus(plink.id);
-                                    }}
-                                  />
-                                </div>
-                                <div className="w-[55px] h-[20px] flex items-center ml-8 mt-2 font-semibold">
-                                  {cardItems.map((item: any) =>
-                                    item.quantId === plink.id
-                                      ? item.quantity
-                                      : ""
-                                  )}{" "}
-                                  Adet
-                                </div>
-                                <div className="w-[35px] rounded-tr rounded-br h-[33.8px]   bg-orange-100 flex items-center justify-center right-0 absolute">
-                                  {" "}
-                                  <AiOutlinePlus
-                                    className="text-primary   w-5 h-5 "
-                                    onClick={() => {
-                                      handleProductCount(plink.id);
-                                    }}
-                                  />{" "}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <SelectedCategoryCard
+                            plink={plink}
+                            cardItems={cardItems}
+                            setQuantId={setQuantId}
+                            setQuantImg={setQuantImg}
+                            setQuantPrice={setQuantImg}
+                            setQuantName={setQuantName}
+                            removeFromCard={removeFromCard}
+                            handleProductCount={handleProductCount}
+                            handleProductCountMinus={handleProductCountMinus}
+                          />
                         ))
                     : ""}
                 </div>
