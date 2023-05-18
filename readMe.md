@@ -37,9 +37,9 @@ Choosing an address, browsing the products on the site via filtering brands, sor
     <td><img src="https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square"/></td>
   </tr>
   <tr>
-    <td><img src="https://img.shields.io/badge/-FluentValidation-CC2927?style=flat-square&logo=.net&logoColor=ffffff"/></td>
-    <td><img src="https://img.shields.io/badge/-AutoMapper-5C2D91?style=flat&logo=.net&logoColor=white"/></td>
-    <td><img src="https://img.shields.io/badge/-EntityFramework-5C2D91?style=flat&logo=.net&logoColor=white"/><img src="https://img.shields.io/badge/-ASP.NET-5C2D91?style=flat&logo=.net&logoColor=white"/></td>
+    <td><img src="https://img.shields.io/badge/-React-blue"/></td>
+    <td><img src="https://img.shields.io/badge/-Node.js-orange"/></td>
+    <td><img src="https://img.shields.io/badge/-Redux-lightgrey"/></td>
   </tr>
   <tr>
     <td><img src="https://img.shields.io/badge/-MongoDB-FCA121?style=flat&logo=mongodb"/><img src="https://img.shields.io/badge/-Github-black?style=flat&logo=github"/></td>
@@ -47,9 +47,9 @@ Choosing an address, browsing the products on the site via filtering brands, sor
     <td><img src="https://img.shields.io/badge/-json-02569B?style=flat&logo=json"/></td>
   </tr>
   <tr>
-    <td><img src="https://img.shields.io/badge/-Tailwind-563D7C?style=flat&logo=tailwind"/></td>
- 		<td><img src="https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3"/></td>
-    <td><img src="https://img.shields.io/badge/-Sql%20Server-CC2927?style=flat-square&logo=microsoft-sql-server&logoColor=ffffff"/></td>
+    <td><img src="https://img.shields.io/badge/-Tailwind%20Css-blue"/></td>
+ 		<td><img src="https://img.shields.io/badge/-Express.js-yellow"/></td>
+    <td><img src="https://img.shields.io/badge/-Axios-blueviolet"/></td>
   </tr>
 </table>
 
