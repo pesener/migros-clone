@@ -47,7 +47,7 @@ Choosing an address, browsing the products on the site via filtering brands, sor
     <td><img src="https://img.shields.io/badge/-json-02569B?style=flat&logo=json"/></td>
   </tr>
   <tr>
-    <td><img src="https://img.shields.io/badge/-Bootstrap-563D7C?style=flat&logo=bootstrap"/></td>
+    <td><img src="https://img.shields.io/badge/-Tailwind-563D7C?style=flat&logo=tailwind"/></td>
  		<td><img src="https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3"/></td>
     <td><img src="https://img.shields.io/badge/-Sql%20Server-CC2927?style=flat-square&logo=microsoft-sql-server&logoColor=ffffff"/></td>
   </tr>
@@ -64,7 +64,7 @@ Choosing an address, browsing the products on the site via filtering brands, sor
    <b><h2 style="color: #fc6203">Onur &nbsp; Hakan &nbsp; PESENER</h2></b>
    <img src="https://media.giphy.com/media/zhJR6HbK4fthC/giphy.gif" width="200"/>
      <br>
-     Projects Link: <a href="https://github.com/pesener/migros-clone">Migros Clone</a>
+     Project Link: <a href="https://github.com/pesener/migros-clone">Migros Clone</a>
      <br>
      <br>
      LinkedIn: <a href="https://www.linkedin.com/in/hakan-p-2713b576/"> LinkedIn Account</a>
