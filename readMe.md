@@ -1,15 +1,16 @@
 ![](images/migros1.png)
-With this project, I was aiming to clone Migros's website, which is the most famous supermarket in Turkey, by using TypeScript, React, Redux, TailwindCss, Node.js, MongoDB.
+With this project, I was aiming to replicate Migros's website, which is the most famous supermarket in Turkey, by using TypeScript, React, Redux, TailwindCss, Node.js, MongoDB.
 
-In this project, there are two main files named server and client. The server file was created to use Mongo DB Express.js and Node.js.
+The project is divided into two main sections: 'server' and 'client'.The server part was built with MongoDB, Express.js, and Node.js, and it handles the back-end operations.
 
-On the other hand , the client file has been created to use React, Redux TailwindCss and TypeScript processes, which will create the design and functionality of the site.
+On the other hand, the client part was developed with React, Redux, TailwindCSS, and TypeScript.  
+Its primary purpose is to provide a user interface, enabling interaction with the site's features and functionalities in a visually appealing and user-friendly manner.
 
 ![](images/migros3.png)
 
-### 2- User Role
+### User Role
 
-Choosing an address, browsing the products on the site via filtering brands, sorting products and adding them to the shopping cart.
+The user's role includes selecting an address, exploring products on the site by filtering according to brands, sorting products based on preferences, and adding desired items to the shopping cart.
 
 ![](images/migros2.png)
 
@@ -66,7 +67,6 @@ Choosing an address, browsing the products on the site via filtering brands, sor
    <b><h2 style="color: #fc6203">Onur &nbsp; Hakan &nbsp; PESENER</h2></b>
    <img src="https://media.giphy.com/media/zhJR6HbK4fthC/giphy.gif" width="200"/>
      <br>
-     Project Link: <a href="https://github.com/pesener/migros-clone">Migros Clone</a>
      <br>
      <br>
      LinkedIn: <a href="https://www.linkedin.com/in/hakan-p-2713b576/"> LinkedIn Account</a>
