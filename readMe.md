@@ -1,5 +1,5 @@
 ![](images/migros1.png)
-With this project, I was aiming to clone the most famous supermarket website in Turkey with using TypeScript, React, Redux, TailwindCss, Node.js , MongoDB.
+With this project, I was aiming to clone the most famous supermarket's (Migros) website in Turkey with using TypeScript, React, Redux, TailwindCss, Node.js , MongoDB.
 
 In this project, there are two main files named server and client. The server file was created to use Mongo DB Express.js and Node.js.
 
