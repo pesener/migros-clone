@@ -19,6 +19,8 @@ Choosing an address, browsing the products on the site via filtering brands, sor
 
 ![](images/migros4.png)
 
+![](images/migros6.png)
+
 ## :computer: Project Setup
 
 1. Git clone / download the project
