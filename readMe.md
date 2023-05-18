@@ -28,7 +28,7 @@ Choosing an address, browsing the products on the site via filtering brands, sor
 
 <h2> 🛠 &nbsp;Kullanılan Teknolojiler</h2>
 
-<img alt="GIF" src="https://i.pinimg.com/originals/e4/26/70/e426702edf874b181aced1e2fa5c6cde.gif" />
+<img alt="GIF" src="https://media.giphy.com/media/Ws6T5PN7wHv3cY8xy8/giphy.gif" />
 
 <table style="float:right;">
   <tr>
