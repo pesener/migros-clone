@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { TbArrowsDownUp } from "react-icons/tb";
 import { BiChevronDown } from "react-icons/bi";
-import { fetchOneProduct } from "./actions/oneProductAction";
+import { fetchOneProduct } from "../actions/oneProductAction";
 import { useAppDispatch, useAppSelector } from "../index";
 import SelectedCategoryCard from "./SelectedCategoryCard";
 

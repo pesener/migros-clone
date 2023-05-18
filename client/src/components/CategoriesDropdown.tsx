@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "./actions/productActions";
+import { fetchProducts } from "../actions/productActions";
 import { useAppDispatch, useAppSelector } from "../index";
 
 const CategoriesDropdown = () => {

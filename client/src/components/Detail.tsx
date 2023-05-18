@@ -5,7 +5,7 @@ import { BsTrash3 } from "react-icons/bs";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-import { fetchOneProduct } from "./actions/oneProductAction";
+import { fetchOneProduct } from "../actions/oneProductAction";
 import { useAppDispatch, useAppSelector } from "../index";
 
 const Detail = ({

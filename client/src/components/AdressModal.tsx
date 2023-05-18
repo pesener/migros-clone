@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
-import { fetchCity } from "./actions/cityAction";
-import { fetchDistrict } from "./actions/distAction";
-import { fetchNeighbor } from "./actions/neighborAction";
+import { fetchCity } from "../actions/cityAction";
+import { fetchDistrict } from "../actions/distAction";
+import { fetchNeighbor } from "../actions/neighborAction";
 
 import { useAppDispatch, useAppSelector } from "../index";
 

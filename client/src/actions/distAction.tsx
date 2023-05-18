@@ -1,6 +1,6 @@
-import { FETCH_DISTRICT } from "../../constants/actionConstants";
+import { FETCH_DISTRICT } from "../constants/actionConstants";
 
-import * as api from "../../axios/indexAxios";
+import * as api from "../axios/indexAxios";
 
 export const fetchDistrict = (city_id: any) => async (dispatch: any) => {
   try {

@@ -1,6 +1,6 @@
-import { FETCH_ONE } from "../../constants/actionConstants";
+import { FETCH_ONE } from "../constants/actionConstants";
 
-import * as api from "../../axios/indexAxios";
+import * as api from "../axios/indexAxios";
 
 export const fetchOneProduct = (id: any) => async (dispatch: any) => {
   try {
