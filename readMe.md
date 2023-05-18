@@ -53,7 +53,7 @@ Choosing an address, browsing the products on the site via filtering brands, sor
   </tr>
 </table>
 
-## :phone: İletişim
+## :phone: To Contact
 
 <img src="https://media.giphy.com/media/8rSiGkyA4P1Cw/giphy.gif" width="200"/>
 
@@ -62,16 +62,16 @@ Choosing an address, browsing the products on the site via filtering brands, sor
    <br>
    <samp>
    <b><h2 style="color: #fc6203">Onur &nbsp; Hakan &nbsp; PESENER</h2></b>
-   <img src="https://raw.githubusercontent.com/TanZng/TanZng/master/assets/bonefire.gif" width="200"/>
+   <img src="https://media.giphy.com/media/zhJR6HbK4fthC/giphy.gif" width="200"/>
      <br>
-     Projenin Linki: <a href="https://github.com/bahabayar/HousingEstateManagement">Migros Clone</a>
-     <br>
-     <br>
-     LinkedIn: <a href="https://www.linkedin.com/in/hakan-p-2713b576/"> LinkedIn Hesabım</a>
-     <br>
-     Instagram: <a href="https://www.instagram.com/hakanpesener/"> Instagram Hesabım</a>
+     Projects Link: <a href="https://github.com/pesener/migros-clone">Migros Clone</a>
      <br>
      <br>
-     Mail Adresim: <a href="#"> hakanpesener@gmail.com</a>
+     LinkedIn: <a href="https://www.linkedin.com/in/hakan-p-2713b576/"> LinkedIn Account</a>
+     <br>
+     Instagram: <a href="https://www.instagram.com/hakanpesener/"> Instagram Account</a>
+     <br>
+     <br>
+     Mail Adress: <a href="#"> hakanpesener@gmail.com</a>
    </samp>
  </details>
