@@ -26,7 +26,7 @@ Choosing an address, browsing the products on the site via filtering brands, sor
 3. new terminal+ cd server -- npm start
 4. new terminal+ cd client -- npm start
 
-<h2> 🛠 &nbsp;Technologiess</h2>
+<h2> 🛠 &nbsp;Technologies</h2>
 
 <img alt="GIF" src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" />
 
