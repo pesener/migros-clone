@@ -22,9 +22,9 @@ const Detail = ({
   const dispatch = useAppDispatch();
   const linkOne = useAppSelector((state) => state.linkOne);
   const [quantId, setQuantId] = useState<any>();
-  const [quantName, setQuantName] = useState<any>();
-  const [quantPrice, setQuantPrice] = useState<any>();
-  const [quantImg, setQuantImg] = useState<any>();
+  const [quantName, setQuantName] = useState<string>();
+  const [quantPrice, setQuantPrice] = useState<number>();
+  const [quantImg, setQuantImg] = useState<string>();
   useEffect(() => {
     dispatch(fetchOneProduct(sid));
     console.log(sid, " başarı id");

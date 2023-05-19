@@ -11,12 +11,12 @@ const BasketDetail = ({
   cardItems: any;
   setCardItems: any;
 }) => {
-  const removeFromCard = (quantId: any) => {
+  const removeFromCard = (quantId: string) => {
     setCardItems((currItem: any) => {
       return currItem.filter((item: any) => item.quantId !== quantId);
     });
   };
-  function handleProductCount(quantId: any) {
+  function handleProductCount(quantId: string) {
     setCardItems((currItems: any) => {
       if (currItems.find((item: any) => item.quantId === quantId) == null) {
         return [...currItems, { quantId, quantity: 1 }];
@@ -32,7 +32,7 @@ const BasketDetail = ({
     });
   }
 
-  const handleProductCountMinus = (quantId: any) => {
+  const handleProductCountMinus = (quantId: string) => {
     setCardItems((currItem: any) => {
       if (
         currItem.find((item: any) => item.quantId === quantId)?.quantity === 1

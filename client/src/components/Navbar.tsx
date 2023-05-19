@@ -11,7 +11,7 @@ const Navbar = ({
 }: {
   cardItems: any;
   setCardItems: any;
-  sid: any;
+  sid: string;
 }) => {
   const [isActive, setIsActive] = useState(false);
 

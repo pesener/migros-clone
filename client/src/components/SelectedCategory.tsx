@@ -37,7 +37,7 @@ const SelectedCategory = ({
   ///BASKET STATES
   const [quantId, setQuantId] = useState<any>();
   const [quantName, setQuantName] = useState<string>();
-  const [quantPrice, setQuantPrice] = useState<any>();
+  const [quantPrice, setQuantPrice] = useState<number>();
   const [quantImg, setQuantImg] = useState<string>();
 
   const sortData = [
@@ -48,7 +48,7 @@ const SelectedCategory = ({
 
   ///FILTERING FUNCTIONS
 
-  const filterBrands = (input: any) => {
+  const filterBrands = (input: string) => {
     const inputter = filteredBrands2.filter((item: any) =>
       item.brand
         .toLocaleLowerCase("tr-TR")
@@ -147,7 +147,7 @@ const SelectedCategory = ({
       }
     });
   }
-  const handleProductCountMinus = (quantId: any) => {
+  const handleProductCountMinus = (quantId: string) => {
     setCardItems((currItem: any) => {
       if (
         currItem.find((item: any) => item.quantId === quantId)?.quantity === 1
@@ -165,7 +165,7 @@ const SelectedCategory = ({
     });
   };
 
-  const removeFromCard = (quantId: any) => {
+  const removeFromCard = (quantId: string) => {
     setCardItems((currItem: any) => {
       return currItem.filter((item: any) => item.quantId !== quantId);
     });
