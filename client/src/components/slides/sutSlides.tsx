@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsChevronDown } from "react-icons/bs";
 
 const SutSlides = () => {
@@ -32,6 +32,14 @@ const SutSlides = () => {
       url: "https://images.migrosone.com/sanalmarket/banner/category_page_top/39984/42018-webkategori1-51daaf.jpg",
     },
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
   return (
     <div className="w-[1070px] h-[205px]  m-auto relative z-0 group border-none outline-none">
       <div
